@@ -54,6 +54,9 @@
         <task path="$PROJECT_DIR$/Services">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <PATH>
@@ -65,8 +68,18 @@
                 <option name="myItemId" value="iss" />
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
               </PATH_ELEMENT>
+            </PATH>
+            <PATH>
               <PATH_ELEMENT>
-                <option name="myItemId" value=":Services" />
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="iss" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="iss" />
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
               </PATH_ELEMENT>
             </PATH>
@@ -80,7 +93,7 @@
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
               </PATH_ELEMENT>
               <PATH_ELEMENT>
-                <option name="myItemId" value=":Services" />
+                <option name="myItemId" value="iss" />
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
               </PATH_ELEMENT>
               <PATH_ELEMENT>
@@ -98,7 +111,7 @@
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
               </PATH_ELEMENT>
               <PATH_ELEMENT>
-                <option name="myItemId" value=":Services" />
+                <option name="myItemId" value="iss" />
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
               </PATH_ELEMENT>
               <PATH_ELEMENT>
@@ -110,28 +123,48 @@
                 <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode$1" />
               </PATH_ELEMENT>
             </PATH>
-            <PATH>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
-              </PATH_ELEMENT>
-              <PATH_ELEMENT>
-                <option name="myItemId" value="iss" />
-                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
-              </PATH_ELEMENT>
-            </PATH>
           </tree_state>
         </projects_view>
       </state>
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="StartClient.java" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="StartClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/src/main/java/iss/client/StartClient.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -147,6 +180,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
@@ -234,11 +270,6 @@
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Runs this project as a JVM application" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="run" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Generates Gradle wrapper files. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="wrapper" />
@@ -254,11 +285,6 @@
                 <option name="name" value="javadoc" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Creates OS specific scripts to run the project as a JVM application." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="startScripts" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Assembles a jar archive containing the main classes." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="jar" />
@@ -269,11 +295,6 @@
                 <option name="name" value="model" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Installs the project as a distribution as-is." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="installDist" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Processes main resources." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processResources" />
@@ -282,11 +303,6 @@
                 <option name="description" value="Displays the tasks runnable from root project 'iss' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles the main distributions" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assembleDist" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Initializes a new Gradle build. [incubating]" />
@@ -352,16 +368,6 @@
                 <option name="description" value="Assembles and tests this project and all projects it depends on." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildNeeded" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Bundles the project as a distribution." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="distTar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Bundles the project as a distribution." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="distZip" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the properties of root project 'iss'." />
@@ -1131,7 +1137,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="11959432390092" />
+        <entry key="$PROJECT_DIR$" value="11959439038433" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1343,7 +1349,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/Model/src/main/java/iss/model/User.java" />
         <option value="$PROJECT_DIR$/Persistence/build.gradle" />
         <option value="$PROJECT_DIR$/Model/build.gradle" />
@@ -1369,6 +1374,7 @@
         <option value="$PROJECT_DIR$/Networking/src/main/java/iss/networking/utils/ConfRpcConcurrentServer.java" />
         <option value="$PROJECT_DIR$/Networking/src/main/java/iss/networking/utils/AbsConcurrentServer.java" />
         <option value="$PROJECT_DIR$/Client/src/main/resources/view/apppage.fxml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -1407,7 +1413,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dektop_app" />
+              <option name="myItemId" value="ExplosiveButter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1417,93 +1423,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dektop_app" />
+              <option name="myItemId" value="ExplosiveButter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iss" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dektop_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iss" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dektop_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iss" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dektop_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
@@ -1512,45 +1448,9 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Networking/src/main/java/iss/networking" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Gradle.dektop_app:Services [build]">
-    <configuration default="false" name="dektop_app:Model [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/Model" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="false" name="dektop_app:Persistence [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/Persistence" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Gradle.ExplosiveButter [build]">
     <configuration default="false" name="dektop_app:Client [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -1591,6 +1491,42 @@
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/Services" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="false" name="ExplosiveButter [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="false" name="ExplosiveButter [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -1842,6 +1778,7 @@
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
       <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
@@ -1972,6 +1909,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -1988,19 +1931,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Gradle.dektop_app:Model [clean]" />
-      <item index="1" class="java.lang.String" itemvalue="Gradle.dektop_app:Persistence [build]" />
-      <item index="2" class="java.lang.String" itemvalue="Gradle.dektop_app:Client [build]" />
-      <item index="3" class="java.lang.String" itemvalue="Gradle.dektop_app:Server [build]" />
-      <item index="4" class="java.lang.String" itemvalue="Gradle.dektop_app:Services [build]" />
+      <item index="0" class="java.lang.String" itemvalue="Gradle.dektop_app:Client [build]" />
+      <item index="1" class="java.lang.String" itemvalue="Gradle.dektop_app:Server [build]" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.dektop_app:Services [build]" />
+      <item index="3" class="java.lang.String" itemvalue="Gradle.ExplosiveButter [clean]" />
+      <item index="4" class="java.lang.String" itemvalue="Gradle.ExplosiveButter [build]" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.dektop_app:Services [build]" />
-        <item index="1" class="java.lang.String" itemvalue="Gradle.dektop_app:Server [build]" />
-        <item index="2" class="java.lang.String" itemvalue="Gradle.dektop_app:Client [build]" />
-        <item index="3" class="java.lang.String" itemvalue="Gradle.dektop_app:Persistence [build]" />
-        <item index="4" class="java.lang.String" itemvalue="Gradle.dektop_app:Model [clean]" />
+        <item index="0" class="java.lang.String" itemvalue="Gradle.ExplosiveButter [build]" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.ExplosiveButter [clean]" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.dektop_app:Services [build]" />
+        <item index="3" class="java.lang.String" itemvalue="Gradle.dektop_app:Server [build]" />
+        <item index="4" class="java.lang.String" itemvalue="Gradle.dektop_app:Client [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -2015,45 +1958,46 @@
       <option name="presentableId" value="Default" />
       <updated>1494928255237</updated>
       <workItem from="1494928263193" duration="3744000" />
+      <workItem from="1494934800899" duration="589000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3744000" />
+    <option name="totallyTimeSpent" value="4333000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25340393" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2069,10 +2013,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/Client/src/main/java/iss/client/StartClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2081,7 +2025,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2089,23 +2032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2129,7 +2055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2137,28 +2062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding>
-            <element signature="e#738#739#0" expanded="true" />
-            <element signature="e#769#770#0" expanded="true" />
-            <element signature="e#804#805#0" expanded="true" />
-            <element signature="e#835#836#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
-            <element signature="e#893#894#0" expanded="true" />
-            <element signature="e#927#928#0" expanded="true" />
-            <element signature="e#957#958#0" expanded="true" />
-            <element signature="e#989#990#0" expanded="true" />
-            <element signature="e#1017#1018#0" expanded="true" />
-            <element signature="e#1092#1093#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1220#1221#0" expanded="true" />
-            <element signature="e#1260#1261#0" expanded="true" />
-            <element signature="e#1292#1293#0" expanded="true" />
-            <element signature="e#1338#1339#0" expanded="true" />
-            <element signature="e#1376#1377#0" expanded="true" />
-            <element signature="e#1418#1419#0" expanded="true" />
-            <element signature="e#1452#1453#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2166,7 +2069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2174,7 +2076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2182,7 +2083,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2190,18 +2090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
           <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <element signature="e#353#354#0" expanded="true" />
-            <element signature="e#380#381#0" expanded="true" />
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#435#436#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
-            <element signature="e#562#563#0" expanded="true" />
-            <element signature="e#594#595#0" expanded="true" />
-            <element signature="e#953#954#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2209,7 +2097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2217,18 +2104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#358#359#0" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-            <element signature="e#413#414#0" expanded="true" />
-            <element signature="e#440#441#0" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
-            <element signature="e#568#569#0" expanded="true" />
-            <element signature="e#600#601#0" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#1005#1006#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2236,7 +2111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2244,9 +2118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1054">
           <caret line="62" column="64" lean-forward="false" selection-start-line="62" selection-start-column="64" selection-end-line="62" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2254,9 +2125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2264,7 +2132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2272,7 +2139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2280,14 +2146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="19" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="e#159#160#0" expanded="true" />
-            <element signature="e#182#183#0" expanded="true" />
-            <element signature="e#228#229#0" expanded="true" />
-            <element signature="e#258#259#0" expanded="true" />
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#358#359#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2295,7 +2153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2303,11 +2160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#301#302#0" expanded="true" />
-            <element signature="e#331#332#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2315,7 +2167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2323,7 +2174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2331,7 +2181,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
@@ -2341,7 +2190,31 @@
     <entry file="file://$PROJECT_DIR$/Client/src/main/java/iss/client/StartClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding />
         </state>
       </provider>

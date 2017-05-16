@@ -1,0 +1,37 @@
+#borderpane {
+	-fx-background-color: #f0f3f5;
+}
+
+#labelUsername, #labelPassword, #labelEmail, #labelLastName, #labelFirstName{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill:#4ba9b4;
+    -fx-font-size: 21px;
+}
+
+#textfieldUsername, #textfieldPassword, #textfieldEmail, #textfieldFirstName, #textfieldLastName {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 17px;
+}
+
+#buttonSignup{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #eeb687;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 8 11 8 11;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+#buttonSignup:hover{
+    -fx-background-color:#f5d6bc;
+}
+#checkboxTerms{
+	-fx-font-family: "Times New Roman";
+	-fx-font-size: 14px;
+}
+#labelSignupPage{
+	-fx-font-family: "Times New Roman";
+    -fx-text-fill:#eeb687;
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}

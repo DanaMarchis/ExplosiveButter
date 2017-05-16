@@ -1,0 +1,50 @@
+#textfieldUsername, #textfieldPassword {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 17px;
+}
+
+#labelUsername, #labelPassword{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill:#4ba9b4;
+    -fx-font-size: 21px;
+}
+
+#labelWelcome{
+	-fx-font-family: "Times New Roman";
+    -fx-text-fill:#36667d;
+    -fx-font-size: 30px;
+}
+
+#buttonLogin{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #eeb687;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 8 11 8 11;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+#buttonLogin:hover{
+    -fx-background-color:#f5d6bc;
+}
+
+#choiceboxDontHaveAccount{
+	-fx-font-family: "Times New Roman";
+	-fx-font-size: 14px;
+}
+
+#buttonSignup{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #eeb687;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 5;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+#buttonSignup:hover{
+    -fx-background-color:#f5d6bc;
+}
+#borderpane {
+	-fx-background-color: #f0f3f5;
+}
