@@ -3,9 +3,9 @@ package iss.networking.rpcprotocol;
 import iss.model.User;
 import iss.networking.dto.DTOUtils;
 import iss.networking.dto.UserDTO;
-import iss.networking.services.ConfException;
-import iss.networking.services.IConfClient;
-import iss.networking.services.IConfServer;
+import iss.services.ConfException;
+import iss.services.IConfClient;
+import iss.services.IConfServer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,7 +1,7 @@
 package iss.networking.utils;
 
 import iss.networking.rpcprotocol.ConfClientRpcWorker;
-import iss.networking.services.IConfServer;
+import iss.services.IConfServer;
 
 import java.net.Socket;
 

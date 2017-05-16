@@ -1,4 +1,4 @@
-package iss.networking.services;
+package iss.services;
 
 import iss.model.User;
 

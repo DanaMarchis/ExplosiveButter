@@ -1,4 +1,4 @@
-package iss.networking.services;
+package iss.services;
 
 /**
  * Created by Bitten Apple on 15-May-17.
