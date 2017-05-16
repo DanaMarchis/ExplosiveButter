@@ -1,0 +1,52 @@
+#labelLoggedInAs, #comboboxType {
+	-fx-font-family: "Times New Roman";
+	-fx-font-size: 16px;
+}
+#buttonLogout{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #eeb687;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 5;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+#buttonLogout:hover{
+    -fx-background-color:#f5d6bc;
+}
+#borderpane {
+	-fx-background-color: #f0f3f5;
+}
+.tab-pane .tab{
+    /*-fx-background-color: #f2c8a6;*/
+    -fx-background-color: #b4e4dd;
+}
+
+.tab-pane .tab:selected{
+    -fx-background-color: #8fd6cc;
+    /*-fx-background-color: #eeb687;*/
+}
+
+.tab:selected .focus-indicator {
+    -fx-border-radius: 10 10 0 0, 10 10 0 0;
+    -fx-border-insets: -6 -9 -8 -8, -5 -8 -7 -7;
+}
+
+.tab-header-area .tab{
+    -fx-padding:4 10 4 10;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    /*-fx-text-fill: #e99f63;*/
+
+    -fx-text-fill: #1c4a44;
+    -fx-font-size: 17px;
+    -fx-font-family: "Times New Roman";
+}
+
+.tab:selected .tab-label {
+    /*-fx-font-weight: bold;*/
+    -fx-font-size: 19px;
+}

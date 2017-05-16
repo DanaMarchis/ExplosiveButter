@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client_main.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client_test.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Model/Model.iml" filepath="$PROJECT_DIR$/.idea/modules/Model/Model.iml" group="Model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Model/Model_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Model/Model_main.iml" group="Model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Model/Model_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Model/Model_test.iml" group="Model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Networking/Networking.iml" filepath="$PROJECT_DIR$/.idea/modules/Networking/Networking.iml" group="Networking" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Networking/Networking_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Networking/Networking_main.iml" group="Networking" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Networking/Networking_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Networking/Networking_test.iml" group="Networking" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Persistence/Persistence.iml" filepath="$PROJECT_DIR$/.idea/modules/Persistence/Persistence.iml" group="Persistence" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Persistence/Persistence_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Persistence/Persistence_main.iml" group="Persistence" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Persistence/Persistence_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Persistence/Persistence_test.iml" group="Persistence" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Services/Services.iml" filepath="$PROJECT_DIR$/.idea/modules/Services/Services.iml" group="Services" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Services/Services_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Services/Services_main.iml" group="Services" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Services/Services_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Services/Services_test.iml" group="Services" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/iss.iml" filepath="$PROJECT_DIR$/.idea/modules/iss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/iss_main.iml" filepath="$PROJECT_DIR$/.idea/modules/iss_main.iml" group="iss" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/iss_test.iml" filepath="$PROJECT_DIR$/.idea/modules/iss_test.iml" group="iss" />
+    </modules>
+  </component>
+</project>
