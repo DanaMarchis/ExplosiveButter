@@ -10,5 +10,7 @@ repositories {
 }
 
 dependencies {
+    compile project(":Model")
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

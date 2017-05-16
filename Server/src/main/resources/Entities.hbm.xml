@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="iss.model">
+    <class name="iss.model.User" table="Users">
+        <id name="username" column="username" type="string"/>
+        <property name="password" column="password" type="string"/>
+        <property name="nume" column="nume" type="string"/>
+        <property name="prenume" column="prenume" type="string"/>
+        <property name="email" column="email" type="string"/>
+    </class>
+</hibernate-mapping>
