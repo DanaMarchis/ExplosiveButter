@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" stylesheets="@../style/loginpage.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" stylesheets="@../style/loginpage.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iss.client.gui.AppViewController">
    <top>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="buttonLogin" layoutX="318.0" layoutY="409.0" mnemonicParsing="false" text="Login" />
+            <Button fx:id="buttonLogin" layoutX="318.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleButtonLogin" text="Login" />
             <Label fx:id="labelUsername" layoutX="195.0" layoutY="235.0" text="Username" />
             <Label fx:id="labelPassword" layoutX="198.0" layoutY="314.0" text="Password" />
             <PasswordField fx:id="textfieldPassword" layoutX="339.0" layoutY="310.0" />
             <TextField fx:id="textfieldUsername" layoutX="339.0" layoutY="231.0" />
             <Label fx:id="labelWelcome" layoutX="176.0" layoutY="75.0" text="Welcome!&#10;Conference Management System&#10;&#10;" textAlignment="CENTER" />
-            <Button fx:id="buttonSignup" disable="true" layoutX="580.0" layoutY="512.0" mnemonicParsing="false" text="Sign up" />
-            <CheckBox fx:id="choiceboxDontHaveAccount" layoutX="407.0" layoutY="517.0" mnemonicParsing="false" text="I don't have an account. " />
+            <Button fx:id="buttonSignup" disable="true" layoutX="580.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleSignUp" text="Sign up" />
+            <CheckBox fx:id="checkboxDontHaveAccount" layoutX="407.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleCheckbox" text="I don't have an account. " />
          </children>
       </AnchorPane>
    </top>

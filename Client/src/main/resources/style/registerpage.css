@@ -8,12 +8,12 @@
     -fx-font-size: 21px;
 }
 
-#textfieldUsername, #textfieldPassword, #textfieldEmail, #textfieldFirstName, #textfieldLastName {
+#textfieldUsernameR, #textfieldPasswordR, #textfieldEmailR, #textfieldFirstNameR, #textfieldLastNameR {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 17px;
 }
 
-#buttonSignup{
+#buttonSignupR{
     -fx-font-family: "Times New Roman";
     -fx-background-color: #eeb687;
     -fx-background-radius: 10;
@@ -22,7 +22,7 @@
     -fx-text-fill: black;
     -fx-font-size: 20px;
 }
-#buttonSignup:hover{
+#buttonSignupR:hover{
     -fx-background-color:#f5d6bc;
 }
 #checkboxTerms{

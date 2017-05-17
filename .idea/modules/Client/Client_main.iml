@@ -9,5 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Model_main" />
+    <orderEntry type="module" module-name="Services_main" />
+    <orderEntry type="module" module-name="Networking_main" />
   </component>
 </module>

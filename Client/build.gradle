@@ -10,5 +10,9 @@ repositories {
 }
 
 dependencies {
+    compile project (':Model')
+    compile project (':Services')
+    compile project (':Networking')
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
