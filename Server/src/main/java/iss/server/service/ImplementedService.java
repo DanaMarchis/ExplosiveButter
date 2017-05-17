@@ -9,6 +9,7 @@ import iss.services.IConfServer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +23,7 @@ public class ImplementedService implements IConfServer{
 
     public ImplementedService(UserRepository userRepo) {
         this.userRepo = userRepo;
+        loggedClients=new ConcurrentHashMap<>();
     }
 
     @Override

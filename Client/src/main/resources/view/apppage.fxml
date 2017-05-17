@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" stylesheets="@../style/apppage.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" stylesheets="@../style/apppage.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iss.client.gui.AppViewController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -107,7 +107,7 @@
    <top>
       <AnchorPane prefHeight="54.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="buttonLogout" layoutX="669.0" layoutY="15.0" mnemonicParsing="false" text="Log out" />
+            <Button fx:id="buttonLogout" layoutX="669.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleButtonLogout" text="Log out" />
             <ComboBox fx:id="comboboxType" layoutX="523.0" layoutY="15.0" prefHeight="25.0" prefWidth="106.0" />
             <Label fx:id="labelLoggedInAs" layoutX="433.0" layoutY="21.0" text="Logged in as" />
          </children>

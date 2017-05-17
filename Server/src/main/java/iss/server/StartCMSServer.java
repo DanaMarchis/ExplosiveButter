@@ -1,8 +1,12 @@
 package iss.server;
 
+import iss.networking.utils.AbstractServer;
+import iss.networking.utils.ConfRpcConcurrentServer;
+import iss.networking.utils.ServerException;
 import iss.persistence.UserRepository;
 import iss.server.service.ImplementedService;
 import iss.services.ConfException;
+import iss.services.IConfServer;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -20,6 +24,8 @@ import iss.model.User;
 public class StartCMSServer {
 
     static SessionFactory sessionFactory;
+    private static int defaultPort=55555;
+
     static void initialize() {
         // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -45,8 +51,16 @@ public class StartCMSServer {
 
     public static void main(String[] args) {
         initialize();
-        UserRepository userRepo=new UserRepository(sessionFactory);
-        ImplementedService service=new ImplementedService(userRepo);
+        UserRepository userRepo = new UserRepository(sessionFactory);
+        IConfServer serverImpl = new ImplementedService(userRepo);
+        int confPort = defaultPort;
+        System.out.println("Starting server on port: " + confPort);
+        AbstractServer server = new ConfRpcConcurrentServer(confPort, serverImpl);
+        try {
+            server.start();
+        } catch (ServerException e) {
+            System.err.println("Error starting the server" + e.getMessage());
+        }
         close();
     }
 }

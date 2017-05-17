@@ -3,6 +3,7 @@ package iss.networking.rpcprotocol;
 import iss.model.User;
 import iss.networking.dto.DTOUtils;
 import iss.networking.dto.UserDTO;
+import iss.networking.dto.UserDTO_up;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
@@ -22,6 +23,7 @@ public class ConfServerRpcProxy implements IConfServer {
     //connection details
     private String host;
     private int port;
+    User userLogat;
 
     //clientul (pt fiecare client se face cate un proxy)
     private IConfClient client;
@@ -36,7 +38,7 @@ public class ConfServerRpcProxy implements IConfServer {
     public ConfServerRpcProxy(String host, int port) {
         this.host = host;
         this.port = port;
-        qresponses = new LinkedBlockingQueue<Response>();
+        qresponses = new LinkedBlockingQueue<>();
     }
 
     @Override
@@ -50,8 +52,11 @@ public class ConfServerRpcProxy implements IConfServer {
 
         Response response = readResponse();
 
-        if (response.type() == ResponseType.OK)
-            System.out.println("user logat cu succes"); //s-a logat cu succes
+        if (response.type() == ResponseType.OK) {
+            System.out.println("User logat cu succes"); //s-a logat cu succes
+            this.userLogat = user;
+        }
+
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
             closeConnection();
@@ -61,7 +66,7 @@ public class ConfServerRpcProxy implements IConfServer {
 
     @Override
     public void logout(User user, IConfClient client) throws ConfException {
-        UserDTO userDTO = DTOUtils.getDTO(user);
+        UserDTO_up userDTO = DTOUtils.getDTO_up(userLogat);
         Request req = new Request.Builder().type(RequestType.LOGOUT).data(userDTO).build();
 
         sendRequest(req);
@@ -91,7 +96,7 @@ public class ConfServerRpcProxy implements IConfServer {
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            System.out.println("user inregistrat cu succes"); //s-a inregistrat cu succes
+            System.out.println("User inregistrat cu succes"); //s-a inregistrat cu succes
             closeConnection();
         }
         if (response.type() == ResponseType.ERROR) {
@@ -127,10 +132,6 @@ public class ConfServerRpcProxy implements IConfServer {
     private Response readResponse() throws ConfException {
         Response response = null;
         try {
-            /*synchronized (responses){
-                responses.wait();
-            }
-            response = responses.remove(0);    */
             response = qresponses.take();
 
         } catch (InterruptedException e) {

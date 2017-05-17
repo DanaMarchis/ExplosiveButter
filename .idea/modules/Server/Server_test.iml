@@ -13,6 +13,7 @@
     <orderEntry type="module" module-name="Model_main" />
     <orderEntry type="module" module-name="Persistence_main" />
     <orderEntry type="module" module-name="Services_main" />
+    <orderEntry type="module" module-name="Networking_main" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.10.Final" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
     <orderEntry type="library" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />

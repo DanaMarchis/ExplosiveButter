@@ -7,8 +7,8 @@ import iss.model.User;
  */
 public interface IConfServer {
 
-    public void login(User user, IConfClient client) throws ConfException;
-    public void logout(User user, IConfClient client) throws ConfException;
-    public void register(User user) throws ConfException;
+    void login(User user, IConfClient client) throws ConfException;
+    void logout(User user, IConfClient client) throws ConfException;
+    void register(User user) throws ConfException;
 
 }

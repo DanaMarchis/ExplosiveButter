@@ -3,6 +3,7 @@ package iss.networking.rpcprotocol;
 import iss.model.User;
 import iss.networking.dto.DTOUtils;
 import iss.networking.dto.UserDTO;
+import iss.networking.dto.UserDTO_up;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
@@ -92,14 +93,28 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         if (request.type() == RequestType.LOGOUT) {
             System.out.println("Logout request");
             // LogoutRequest logReq=(LogoutRequest)request;
-            UserDTO userDTO = (UserDTO) request.data();
-            User user = DTOUtils.getFromDTO(userDTO);
+            UserDTO_up userDTO = (UserDTO_up) request.data();
+            User user = DTOUtils.getFromDTO_up(userDTO);
             try {
                 server.logout(user, this);
                 connected = false;
                 return okResponse;
 
             } catch (ConfException e) {
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de la register
+        if (request.type() == RequestType.REGISTER){
+            System.out.println("Register request");
+            UserDTO userDTO = (UserDTO) request.data();
+            User user = DTOUtils.getFromDTO(userDTO);
+            try{
+                server.register(user);
+                return okResponse;
+            } catch (ConfException e) {
+//                e.printStackTrace();
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
             }
         }

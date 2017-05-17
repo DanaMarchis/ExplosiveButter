@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -21,7 +22,11 @@ import java.io.IOException;
  * Created by Dana on 16-May-17.
  */
 public class AppViewController implements IConfClient {
-    IConfServer server;
+    private IConfServer server;
+
+    //componentele fxml - MAIN PAGE
+    @FXML
+    Button buttonLogout;
 
     //componentele fxml - LOGIN PAGE
     @FXML
@@ -57,6 +62,22 @@ public class AppViewController implements IConfClient {
         this.server = server;
     }
 
+    //Alert for error
+    private void showErrorMessage(String msg){
+        Alert message = new Alert(Alert.AlertType.ERROR);
+        message.setTitle("Whoops");
+        message.setContentText(msg);
+        message.showAndWait();
+    }
+
+    //Alert for succes
+    private static void showMessage(Alert.AlertType type, String header, String msg){
+        Alert message = new Alert(type);
+        message.setHeaderText(header);
+        message.setContentText(msg);
+        message.showAndWait();
+    }
+
     //Controller LOGIN PAGE
     //la apasarea butonului Login
     @FXML
@@ -64,26 +85,18 @@ public class AppViewController implements IConfClient {
         try {
             String username = textfieldUsername.getText();
             String password = textfieldPassword.getText();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/apppage.fxml"));
-            try {
-                Parent parent = fxmlLoader.load();
-                Stage stage = new Stage();
-                ((Node) (e.getSource())).getScene().getWindow().hide();
-                User user = new User(username, password);
+            if (username.equals("") || password.equals(""))
+                throw new NullPointerException();
 
-                //se deschide fereastra principala
-                stage.setTitle("Conference Management System");
-                stage.setScene(new Scene(parent));
-                stage.show();
+            User user = new User(username, password);
+            server.login(user, this);
 
-                //server.login(user, this);
-
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        } catch (NullPointerException e1){
-            e1.printStackTrace();
-            //showErrorMessage()
+            //incarca fereastra principala
+            openNewPage(e, "/view/apppage.fxml", "Conference Management System");
+        } catch (NullPointerException e1) {
+            showErrorMessage("Empty fields");
+        } catch (IOException | ConfException e1) {
+            showErrorMessage("Invalid username or password.");
         }
     }
 
@@ -99,19 +112,25 @@ public class AppViewController implements IConfClient {
     //cand se apasa butonul de Sign Up din LOGIN PAGE => se deschide fereastra de REGISTER
     @FXML
     public void handleSignUp(ActionEvent e) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/registerpage.fxml"));
+        //deschidere REGISTER PAGE
         try {
-            Parent parent = fxmlLoader.load();
-            Stage stage = new Stage();
-            ((Node) (e.getSource())).getScene().getWindow().hide();
-
-            //se deschide fereastra pentru register
-            stage.setTitle("Register");
-            stage.setScene(new Scene(parent));
-            stage.show();
+            openNewPage(e, "/view/registerpage.fxml", "Register");
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    //deschiderea unei noi ferestre, loader = fisierul fxml, title = titlul ferestrei
+    private void openNewPage(ActionEvent e, String loader, String title ) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(loader));
+        Parent parent = fxmlLoader.load();
+        Stage stage = new Stage();
+        ((Node) (e.getSource())).getScene().getWindow().hide();
+        AppViewController appViewController = fxmlLoader.getController();
+        appViewController.setService(server);
+        stage.setTitle(title);
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     //Controller REGISTER PAGE
@@ -127,11 +146,16 @@ public class AppViewController implements IConfClient {
             User user = new User(username, password,lastName,firstName,email);
             server.register(user);
 
-            //sa fac cumva sa revina la pagina de login?
+            //register cu succes
+            showMessage(Alert.AlertType.CONFIRMATION, "Succes", "Account created.");
 
+            //deschidere LOGIN PAGE
+            openNewPage(e, "/view/loginpage.fxml", "Login");
         } catch (NullPointerException | ConfException e1){
             e1.printStackTrace();
-            //showErrorMessage()
+            showErrorMessage("Register Error.");
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
 
@@ -141,6 +165,21 @@ public class AppViewController implements IConfClient {
             buttonSignupR.setDisable(false);
         } else {
             buttonSignupR.setDisable(true);
+        }
+    }
+
+    //Controller MAIN PAGE
+    //cand se apasa butonul de logout
+    public void handleButtonLogout(ActionEvent e) {
+        try {
+            User userLogat = new User();
+            server.logout(userLogat, this);
+            //deschide LOGIN PAGE
+            openNewPage(e, "/view/loginpage.fxml", "Login");
+        } catch (ConfException e1) {
+            showErrorMessage("Logout Error.");
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
 }

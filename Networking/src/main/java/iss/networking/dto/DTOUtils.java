@@ -26,4 +26,16 @@ public class DTOUtils {
         return new UserDTO(username, password, nume, prenume, email);
     }
 
+    //    ### USER doar cu Username si Password ###
+    public static UserDTO_up getDTO_up(User user){
+        String username = user.getUsername();
+        String password = user.getPassword();
+        return new UserDTO_up(username, password);
+    }
+
+    public static User getFromDTO_up(UserDTO_up userDTO) {
+        String username = userDTO.getUsername();
+        String password = userDTO.getPassword();
+        return new User(username, password);
+    }
 }
