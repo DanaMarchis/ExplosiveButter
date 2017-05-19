@@ -6,6 +6,6 @@ package iss.services;
  */
 public interface IConfClient {
 
-//    momentan gol, aici o sa fie metodele ce o sa le apeleze worker-ul din server ca sa faca update la lista de conferinte din clientul respectiv sau alte chestii
+//    void conferencesUpdate(List<Conference> conferenceList) throws ConfException;
 
 }

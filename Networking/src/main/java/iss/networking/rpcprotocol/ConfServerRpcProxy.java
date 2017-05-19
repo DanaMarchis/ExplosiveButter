@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -23,9 +24,9 @@ public class ConfServerRpcProxy implements IConfServer {
     //connection details
     private String host;
     private int port;
-    User userLogat;
 
-    //clientul (pt fiecare client se face cate un proxy)
+    //userul logat + clientul (pt fiecare client se face cate un proxy)
+    User userLogat;
     private IConfClient client;
 
     private ObjectInputStream input;
@@ -55,8 +56,8 @@ public class ConfServerRpcProxy implements IConfServer {
         if (response.type() == ResponseType.OK) {
             System.out.println("User logat cu succes"); //s-a logat cu succes
             this.userLogat = user;
+            this.client = client;
         }
-
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
             closeConnection();
@@ -66,7 +67,8 @@ public class ConfServerRpcProxy implements IConfServer {
 
     @Override
     public void logout(User user, IConfClient client) throws ConfException {
-        UserDTO_up userDTO = DTOUtils.getDTO_up(userLogat);
+        //folosesc userLogat nu user (Dana imi trimite un user la misto, doar ca sa fie, pt ca asa e in interfata)
+        UserDTO userDTO = DTOUtils.getDTO(userLogat);
         Request req = new Request.Builder().type(RequestType.LOGOUT).data(userDTO).build();
 
         sendRequest(req);
@@ -104,6 +106,115 @@ public class ConfServerRpcProxy implements IConfServer {
             closeConnection();
             throw new ConfException(err);
         }
+    }
+
+    @Override
+    public Conference[] getAllConferences() throws ConfException {
+        Request req = new Request.Builder().type(RequestType.CONFERENCES).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+            return conferences;
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            closeConnection();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public Session[] getSessions(Conference conf) throws ConfException {
+        ConferenceDTO conferenceDTO = DTOUtils.getDTO(conf);
+        Request req = new Request.Builder().type(RequestType.SESSIONS_FOR_CONFERENCE).data(conferenceDTO).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            Session[] sessions = DTOUtils.getFromDTO((SessionDTO[]) response.data());
+            return sessions;
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            closeConnection();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public Role[] getRoles(User user) throws ConfException {
+        UserDTO userDTO = DTOUtils.getDTO(user);
+        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(userDTO).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            Role[] roles = DTOUtils.getFromDTO((RoleDTO[]) response.data());
+            return roles;
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            closeConnection();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public Conference[] getConferences(User user, Role role) throws ConfException {
+        UserRole userRole = new UserRole(user, role);
+        UserRoleDTO userRoleDTO = DTOUtils.getDTO(userRole);
+        Request req = new Request.Builder().type(RequestType.CONFERENCES_FOR_USER_AND_ROLE).data(userRoleDTO).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+            return conferences;
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            closeConnection();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public Conference[] getAllConferencesDeadline() throws ConfException {
+        Request req = new Request.Builder().type(RequestType.CONFERENCES_WITH_DEADLINE_NOT_EXPIRED).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+            return conferences;
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            closeConnection();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
     }
 
     private void closeConnection() {
