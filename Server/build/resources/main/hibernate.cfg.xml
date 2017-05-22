@@ -10,8 +10,8 @@
     <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
     <property name="connection.driver_class">org.sqlite.JDBC</property>
     <property name="connection.url">jdbc:sqlite:cms.db</property>
-
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="connection.foreign_keys">true</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
 
     <!-- Echo all executed SQL to stdout -->
     <property name="show_sql">true</property>

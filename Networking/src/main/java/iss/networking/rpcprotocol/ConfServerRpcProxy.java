@@ -1,9 +1,7 @@
 package iss.networking.rpcprotocol;
 
-import iss.model.User;
-import iss.networking.dto.DTOUtils;
-import iss.networking.dto.UserDTO;
-import iss.networking.dto.UserDTO_up;
+import iss.model.*;
+import iss.networking.dto.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;

@@ -1,6 +1,10 @@
 package iss.server.service;
 
+import iss.model.Conference;
+import iss.model.Role;
+import iss.model.Session;
 import iss.model.User;
+import iss.persistence.ConferenceRepo;
 import iss.persistence.UserRepository;
 import iss.services.ConfException;
 import iss.services.IConfClient;
@@ -19,10 +23,12 @@ import java.util.regex.Pattern;
 public class ImplementedService implements IConfServer{
 
     private UserRepository userRepo;
+    private ConferenceRepo conferenceRepo;
     private Map<String, IConfClient> loggedClients;
 
-    public ImplementedService(UserRepository userRepo) {
+    public ImplementedService(UserRepository userRepo,ConferenceRepo conferenceRepo) {
         this.userRepo = userRepo;
+        this.conferenceRepo=conferenceRepo;
         loggedClients=new ConcurrentHashMap<>();
     }
 
@@ -67,5 +73,30 @@ public class ImplementedService implements IConfServer{
         else{
             throw new ConfException("Invalid input data");
         }
+    }
+
+    @Override
+    public Conference[] getAllConferences() throws ConfException {
+        return (Conference[])conferenceRepo.getAll().toArray();
+    }
+
+    @Override
+    public Session[] getSessions(Conference conf) throws ConfException {
+        return (iss.model.Session[])conferenceRepo.getSessions(conf).toArray();
+    }
+
+    @Override
+    public Role[] getRoles(User user) throws ConfException {
+        return new Role[0];
+    }
+
+    @Override
+    public Conference[] getConferences(User user, Role role) throws ConfException {
+        return new Conference[0];
+    }
+
+    @Override
+    public Conference[] getAllConferencesDeadline() throws ConfException {
+        return new Conference[0];
     }
 }

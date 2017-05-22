@@ -1,6 +1,6 @@
 package iss.networking.dto;
 
-import iss.model.User;
+import iss.model.*;
 
 /**
  * Created by Bitten Apple on 15-May-17.
@@ -31,21 +31,21 @@ public class DTOUtils {
     public static Conference getFromDTO(ConferenceDTO conferenceDTO) {
         Integer id = conferenceDTO.getId();
         String nume = conferenceDTO.getNume();
-        String deadline_abs = conferenceDTO.getDeadlineAbs();
-        String deadline_full = conferenceDTO.getDeadlineFull();
-        String data_inc = conferenceDTO.getDataInc();
-        String data_sf = conferenceDTO.getDataSf();
-        return new Conference(nume, deadline_abs, deadline_full, data_inc, data_sf);
+        String deadline_abs = conferenceDTO.getDeadline_abs();
+        String deadline_full = conferenceDTO.getDeadline_full();
+        String data_inc = conferenceDTO.getData_inc();
+        String data_sf = conferenceDTO.getData_sf();
+        return new Conference(id, nume, deadline_abs, deadline_full, data_inc, data_sf);
     }
 
     public static ConferenceDTO getDTO(Conference conference) {
         Integer id = conference.getId();
         String nume = conference.getNume();
-        String deadline_abs = conference.getDeadlineAbs();
-        String deadline_full = conference.getDeadlineFull();
-        String data_inc = conference.getDataInc();
-        String data_sf = conference.getDataSf();
-        return new ConferenceDTO(nume, deadline_abs, deadline_full, data_inc, data_sf);
+        String deadline_abs = conference.getDeadline_abs();
+        String deadline_full = conference.getDeadline_full();
+        String data_inc = conference.getData_inc();
+        String data_sf = conference.getData_sf();
+        return new ConferenceDTO(id, nume, deadline_abs, deadline_full, data_inc, data_sf);
     }
 
     public static ConferenceDTO[] getDTO(Conference[] conferences) {
@@ -64,13 +64,28 @@ public class DTOUtils {
     }
 
 
+//    ### SALA ###
+    public static Sala getFromDTO(SalaDTO salaDTO) {
+        Integer id = salaDTO.getId();
+        String nume = salaDTO.getNume();
+        return new Sala(id, nume);
+    }
+
+    public static SalaDTO getDTO(Sala sala) {
+        Integer id = sala.getId();
+        String nume = sala.getNume();
+        return new SalaDTO(id, nume);
+    }
+
+
 //    ### SESSION ###
     public static Session getFromDTO(SessionDTO sessionDTO) {
         Integer id = sessionDTO.getId();
         String data = sessionDTO.getData();
-        String ora_inc = sessionDTO.getOraInc();
-        String ora_sf = sessionDTO.getOraSf();
-        Sala sala = sessionDTO.getSala();
+        String ora_inc = sessionDTO.getOra_inc();
+        String ora_sf = sessionDTO.getOra_sf();
+        SalaDTO salaDTO = sessionDTO.getSala();
+        Sala sala = getFromDTO(salaDTO);
         Integer pret = sessionDTO.getPret();
         return new Session(id, data, ora_inc, ora_sf, sala, pret);
     }
@@ -78,11 +93,12 @@ public class DTOUtils {
     public static SessionDTO getDTO(Session session) {
         Integer id = session.getId();
         String data = session.getData();
-        String ora_inc = session.getOraInc();
-        String ora_sf = session.getOraSf();
+        String ora_inc = session.getOra_inc();
+        String ora_sf = session.getOra_sf();
         Sala sala = session.getSala();
+        SalaDTO salaDTO = getDTO(sala);
         Integer pret = session.getPret();
-        return new SessionDTO(id, data, ora_inc, ora_sf, sala, pret);
+        return new SessionDTO(id, data, ora_inc, ora_sf, salaDTO, pret);
     }
 
     public static SessionDTO[] getDTO(Session[] sessions) {
@@ -132,15 +148,19 @@ public class DTOUtils {
 
 //    ### USERROLE ###
     public static UserRole getFromDTO(UserRoleDTO userRoleDTO) {
-        User user = userRoleDTO.getUser();
-        Role role = userRoleDTO.getRole();
+        UserDTO userDTO = userRoleDTO.getUser();
+        User user = getFromDTO(userDTO);
+        RoleDTO roleDTO = userRoleDTO.getRole();
+        Role role = getFromDTO(roleDTO);
         return new UserRole(user, role);
     }
 
     public static UserRoleDTO getDTO(UserRole userRole) {
         User user = userRole.getUser();
+        UserDTO userDTO = getDTO(user);
         Role role = userRole.getRole();
-        return new UserRoleDTO(user, role);
+        RoleDTO roleDTO = getDTO(role);
+        return new UserRoleDTO(userDTO, roleDTO);
     }
 
 }

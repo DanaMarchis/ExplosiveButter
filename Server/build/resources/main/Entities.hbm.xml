@@ -2,12 +2,48 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="iss.model">
+<hibernate-mapping >
     <class name="iss.model.User" table="Users">
         <id name="username" column="username" type="string"/>
         <property name="password" column="password" type="string"/>
         <property name="nume" column="nume" type="string"/>
         <property name="prenume" column="prenume" type="string"/>
         <property name="email" column="email" type="string"/>
+    </class>
+    <class name="iss.model.Role" table="Roles">
+        <id name="id" column="id_role" type="integer"/>
+        <property name="denumire" column="denumire" type="string"/>
+    </class>
+    <class name="iss.model.Sala" table="Sali">
+        <id name="id" column="id_sala" type="integer"/>
+        <property name="nume" column="nume" type="string"/>
+
+    </class>
+    <class name="iss.model.Conference" table="Conferences">
+        <id name="id" column="id_conference" type="integer"/>
+        <property name="nume" column="nume" type="string"/>
+        <property name="deadline_abs" column="deadline_abs" type="string"/>
+        <property name="deadline_full" column="deadline_full" type="string"/>
+        <property name="data_inc" column="data_inc" type="string"/>
+        <property name="data_sf" column="data_sf" type="string"/>
+    </class>
+    <class name="iss.model.Session" table="Sessions">
+        <id name="id" column="id_session" type="integer"/>
+        <property name="pret" column="pret" type="integer"/>
+        <property name="ora_inc" column="ora_inc" type="string"/>
+        <property name="ora_sf" column="ora_sf" type="string"/>
+        <property name="data" column="data" type="string"/>
+        <many-to-one name="sala" column="sala" class="iss.model.Sala"  cascade="save-update"/>
+    </class>
+    <class name="iss.persistence.MyTable">
+        <composite-id class="iss.persistence.MyTableId">
+            <key-property name="username"/>
+            <key-property name="id_role"/>
+            <key-property name="id_conference"/>
+            <key-property name="id_session"/>
+        </composite-id>
+        <many-to-one name="username" class="iss.model.User" insert="false" update="false"/>
+        <many-to-one name="id_role" class="iss.model.Role" insert="false" update="false"/>
+        <many-to-one name="id_conference" class="iss.model.Conference" insert="false" update="false"/>
     </class>
 </hibernate-mapping>

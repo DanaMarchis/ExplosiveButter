@@ -1,13 +1,20 @@
 package iss.server;
 
+import iss.model.Conference;
+import iss.model.Role;
+import iss.model.Sala;
 import iss.networking.utils.AbstractServer;
 import iss.networking.utils.ConfRpcConcurrentServer;
 import iss.networking.utils.ServerException;
+import iss.persistence.MyTable;
 import iss.persistence.UserRepository;
+import iss.persistence.ConferenceRepo;
 import iss.server.service.ImplementedService;
 import iss.services.ConfException;
 import iss.services.IConfServer;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -52,7 +59,11 @@ public class StartCMSServer {
     public static void main(String[] args) {
         initialize();
         UserRepository userRepo = new UserRepository(sessionFactory);
-        IConfServer serverImpl = new ImplementedService(userRepo);
+        ConferenceRepo conferenceRepo=new ConferenceRepo(sessionFactory);
+
+        
+
+        IConfServer serverImpl = new ImplementedService(userRepo,conferenceRepo);
         int confPort = defaultPort;
         System.out.println("Starting server on port: " + confPort);
         AbstractServer server = new ConfRpcConcurrentServer(confPort, serverImpl);

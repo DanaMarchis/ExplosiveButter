@@ -1,5 +1,8 @@
 package iss.services;
 
+import iss.model.Conference;
+import iss.model.Role;
+import iss.model.Session;
 import iss.model.User;
 
 /**
