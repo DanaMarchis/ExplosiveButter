@@ -7,34 +7,37 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" stylesheets="@../style/apppage.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iss.client.gui.AppViewController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0" stylesheets="@../style/apppage.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iss.client.gui.AppViewController">
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="mainTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-            <Tab text="View all conferences">
+            <Tab fx:id="tabAllConferences" text="View all conferences">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableConferencesAll" layoutX="32.0" layoutY="25.0" prefHeight="210.0" prefWidth="398.0">
+                        <TableView fx:id="tabAllConf_tableConf" layoutX="30.0" layoutY="15.0" prefHeight="250.0" prefWidth="720.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="200.0">
                            <columns>
-                              <TableColumn fx:id="columnNameCAll" prefWidth="201.0" text="Conference&#10;name&#10;" />
-                              <TableColumn fx:id="columnStartDateCAll" prefWidth="92.0" text="Start date" />
-                              <TableColumn fx:id="columnEndDateCAll" prefWidth="90.0" text="End date" />
+                              <TableColumn fx:id="tabAllConf_columnNameConf" prefWidth="505.0" text="Conference name" />
+                              <TableColumn fx:id="tabAllConf_columnStartDateConf" prefWidth="100.0" text="Start date" />
+                              <TableColumn fx:id="tabAllConf_columnEndDateConf" prefWidth="100.0" text="End date" />
                            </columns>
                         </TableView>
-                        <TableView fx:id="tableSessionsAll" layoutX="32.0" layoutY="262.0" prefHeight="210.0" prefWidth="580.0">
+                        <TableView fx:id="tabAllConf_tableSessions" layoutX="30.0" layoutY="290.0" prefHeight="250.0" prefWidth="580.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="200.0">
                            <columns>
-                              <TableColumn fx:id="columnNameSAll" prefWidth="164.0" text="Session &#10;name" />
-                              <TableColumn fx:id="columnDateSAll" prefWidth="81.0" text="Date" />
-                              <TableColumn fx:id="columnRoomSAll" prefWidth="94.0" text="Room" />
-                              <TableColumn fx:id="columnPriceSAll" prefWidth="54.0" text="Price" />
-                              <TableColumn fx:id="columnStartHourSAll" prefWidth="86.0" text="Start hour" />
-                              <TableColumn fx:id="columnEndHourSAll" prefWidth="85.0" text="End hour" />
+                              <TableColumn fx:id="tabAllConf_columnNameSes" prefWidth="164.0" text="Session &#10;name" />
+                              <TableColumn fx:id="tabAllConf_columnDateSes" prefWidth="81.0" text="Date" />
+                              <TableColumn fx:id="tabAllConf_columnRoomSes" prefWidth="94.0" text="Room" />
+                              <TableColumn fx:id="tabAllConf_columnPriceSes" prefWidth="54.0" text="Price" />
+                              <TableColumn fx:id="tabAllConf_columnStartHourSes" prefWidth="86.0" text="Start hour" />
+                              <TableColumn fx:id="tabAllConf_columnEndHourSes" prefWidth="85.0" text="End hour" />
                            </columns>
                         </TableView>
+                        <Button fx:id="tabAllConf_buttonAttend" layoutX="781.0" layoutY="432.0" mnemonicParsing="false" text="Attend" />
                      </children>
                   </AnchorPane>
               </content>
@@ -43,73 +46,110 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableConferencesMy" layoutX="32.0" layoutY="25.0" prefHeight="210.0" prefWidth="580.0">
+                        <TableView fx:id="tabMyConf_tableConf" layoutX="30.0" layoutY="15.0" prefHeight="250.0" prefWidth="580.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="200.0">
                            <columns>
-                              <TableColumn fx:id="columnNameCMy" prefWidth="201.0" text="Conference&#10;name&#10;" />
-                              <TableColumn fx:id="columnStartDateCMy" prefWidth="92.0" text="Start date" />
-                              <TableColumn fx:id="columnEndDateCMy" prefWidth="90.0" text="End date" />
-                              <TableColumn fx:id="columnDeadlineAbstractCMy" prefWidth="90.0" text="Deadline &#10;Abstract" />
-                              <TableColumn fx:id="columnDeadlineFullCMy" prefWidth="90.0" text="Deadline &#10;Full Paper" />
+                              <TableColumn fx:id="tabMyConf_columnNameConf" prefWidth="505.0" text="Conference name" />
+                              <TableColumn fx:id="tabMyConf_columnStartDateConf" prefWidth="100.0" text="Start date" />
+                              <TableColumn fx:id="tabMyConf_columnEndDateConf" prefWidth="100.0" text="End date" />
                            </columns>
                         </TableView>
-                        <TableView fx:id="tableSessionsMy" layoutX="32.0" layoutY="256.0" prefHeight="210.0" prefWidth="580.0">
+                        <TableView fx:id="tabMyConf_tableSessions" layoutX="25.0" layoutY="290.0" prefHeight="250.0" prefWidth="580.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="200.0">
                            <columns>
-                              <TableColumn fx:id="columnNameSMy" prefWidth="164.0" text="Session &#10;name" />
-                              <TableColumn fx:id="columnDateSMy" prefWidth="81.0" text="Date" />
-                              <TableColumn fx:id="columnRoomSMy" prefWidth="94.0" text="Room" />
-                              <TableColumn fx:id="columnPriceSMy" prefWidth="54.0" text="Price" />
-                              <TableColumn fx:id="columnStartHourSMy" prefWidth="86.0" text="Start hour" />
-                              <TableColumn fx:id="columnEndHourSMy" prefWidth="85.0" text="End hour" />
+                              <TableColumn fx:id="tabMyConf_columnNameSes" prefWidth="164.0" text="Session &#10;name" />
+                              <TableColumn fx:id="tabMyConf_columnDateSes" prefWidth="81.0" text="Date" />
+                              <TableColumn fx:id="tabMyConf_columnRoomSes" prefWidth="94.0" text="Room" />
+                              <TableColumn fx:id="tabMyConf_columnPriceSes" prefWidth="54.0" text="Price" />
+                              <TableColumn fx:id="tabMyConf_columnStartHourSes" prefWidth="86.0" text="Start hour" />
+                              <TableColumn fx:id="tabMyConf_columnEndHourSes" prefWidth="85.0" text="End hour" />
                            </columns>
                         </TableView>
+                        <Button fx:id="tabMyConf_buttonReview" layoutX="810.0" layoutY="378.0" mnemonicParsing="false" onAction="#tabMyConferences_handleButtonReview" text="Review" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabCallForPapers" text="Call for papers">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabCall_tableConf" layoutX="30.0" layoutY="15.0" prefHeight="250.0" prefWidth="768.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="150.0">
+                          <columns>
+                            <TableColumn fx:id="tabCall_columnNameC" prefWidth="353.0" text="Conference name&#10;" />
+                            <TableColumn fx:id="tabCall_columnStartDateC" prefWidth="101.0" text="Start &#10;date" />
+                              <TableColumn fx:id="tabCall_columnEndDateC" prefWidth="92.0" text="End &#10;date" />
+                              <TableColumn fx:id="tabCall_columnDeadlineAbstractC" prefWidth="100.0" text="Deadline &#10;Abstract" />
+                              <TableColumn fx:id="tabCall_columnDeadlineFullC" prefWidth="109.0" text="Deadline &#10;Full Paper" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tabCall_tableSessions" layoutX="30.0" layoutY="290.0" prefHeight="250.0" prefWidth="580.0">
+                          <columns>
+                            <TableColumn fx:id="tabCall_columnNameS" prefWidth="164.0" text="Session &#10;name" />
+                            <TableColumn fx:id="tabCall_columnDateS" prefWidth="81.0" text="Date" />
+                              <TableColumn fx:id="tabCall_columnRoomS" prefWidth="94.0" text="Room" />
+                              <TableColumn fx:id="tabCall_columnPriceS" prefWidth="54.0" text="Price" />
+                              <TableColumn fx:id="tabCall_columnStartHourS" prefWidth="86.0" text="Start hour" />
+                              <TableColumn fx:id="tabCall_columnEndHourS" prefWidth="85.0" text="End hour" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="tabCall_buttonSubmitAbstract" layoutX="821.0" layoutY="63.0" mnemonicParsing="false" onAction="#tabCallForPapers_handleButtonSubmitAbstract" text="Submit Abstract" />
+                        <Button fx:id="tabCall_buttonSubmitFull" layoutX="835.0" layoutY="130.0" mnemonicParsing="false" text="Submit Full" />
                      </children></AnchorPane>
             </content>
           </Tab>
             <Tab fx:id="tabReview" text="Review">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox fx:id="tabReview_comboboxQualifier" layoutX="616.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" />
+                        <Label fx:id="tabReview_labelQualifier" layoutX="473.0" layoutY="159.0" text="Qualifier" />
+                        <Button fx:id="tabReview_buttonSendReview" layoutX="660.0" layoutY="471.0" mnemonicParsing="false" text="Send review" />
+                        <Label fx:id="tabReview_labelRecommendations" layoutX="432.0" layoutY="250.0" text="Recommendations" />
+                        <TextArea fx:id="tabReview_textareaRecommendations" layoutX="609.0" layoutY="234.0" prefHeight="200.0" prefWidth="314.0" />
+                        <Button fx:id="tabReview_buttonClose" layoutX="876.0" layoutY="20.0" mnemonicParsing="false" onAction="#tabReview_handleButtonClose" />
+                        <Button fx:id="tabReview_buttonOpenAbstract" layoutX="571.0" layoutY="82.0" mnemonicParsing="false" text="Open abstract" />
+                        <Button fx:id="tabReview_buttonOpenFull" layoutX="711.0" layoutY="82.0" mnemonicParsing="false" text="Open full paper" />
+                        <Label fx:id="tabReview_labelPapers" layoutX="63.0" layoutY="65.0" text="Papers" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab fx:id="tabSubmitAbstract" text="Submit Abstract">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="tabSubmitAbstract_labelNameOfProposal" layoutX="28.0" layoutY="125.0" text="  Name of &#10;the proposal" />
+                        <Label fx:id="tabSubmitAbstract_labelKeywords" layoutX="36.0" layoutY="222.0" text="Keywords" />
+                        <Label fx:id="tabSubmitAbstract_labelTopics" layoutX="50.0" layoutY="303.0" text="Topics" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldNameOfProposal" layoutX="158.0" layoutY="134.0" prefHeight="25.0" prefWidth="192.0" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldTopics" layoutX="157.0" layoutY="302.0" prefHeight="25.0" prefWidth="194.0" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldKeywords" layoutX="158.0" layoutY="218.0" prefHeight="25.0" prefWidth="192.0" />
+                        <Button fx:id="tabSubmitAbstract_buttonDone" layoutX="232.0" layoutY="487.0" mnemonicParsing="false" text="Done" />
+                        <Label fx:id="tabSubmitAbstract_labelAuthors" layoutX="493.0" layoutY="32.0" text="Authors" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldName1" layoutX="420.0" layoutY="90.0" promptText="Name" />
+                        <TextArea fx:id="tabSubmitAbstract_textareaInfo1" layoutX="663.0" layoutY="80.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldName2" layoutX="420.0" layoutY="170.0" promptText="Name" />
+                        <TextArea fx:id="tabSubmitAbstract_textareaInfo2" layoutX="663.0" layoutY="160.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldName3" layoutX="420.0" layoutY="260.0" promptText="Name" />
+                        <TextArea fx:id="tabSubmitAbstract_textareaInfo3" layoutX="663.0" layoutY="250.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" />
+                        <TextArea fx:id="tabSubmitAbstract_textareaInfo4" layoutX="663.0" layoutY="340.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" visible="false" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldName4" layoutX="420.0" layoutY="350.0" promptText="Name" visible="false" />
+                        <Button fx:id="tabSubmitAbstract_buttonChooseAbstract" layoutX="22.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleButtonChooseAbstract" text="Choose abstract" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldChooseAbstract" disable="true" layoutX="158.0" layoutY="386.0" prefHeight="25.0" prefWidth="192.0" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldName5" layoutX="420.0" layoutY="440.0" prefHeight="32.0" prefWidth="213.0" promptText="Name" visible="false" />
+                        <TextArea fx:id="tabSubmitAbstract_textareaInfo5" layoutX="663.0" layoutY="430.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" visible="false" />
+                        <Button fx:id="tabSubmitAbstract_buttonPlus3" layoutX="902.0" layoutY="264.0" mnemonicParsing="false" onAction="#tabSubmitAbstract_handleButtonPlus3" />
+                        <Button fx:id="tabSubmitAbstract_buttonPlus4" layoutX="902.0" layoutY="354.0" mnemonicParsing="false" onAction="#tabSubmitAbstract_handleButtonPlus4" visible="false" />
+                        <Button fx:id="tabSubmitAbstract_buttonClose" layoutX="876.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleTabSubmitAbstract_buttonClose" />
+                     </children></AnchorPane>
               </content>
             </Tab>
-          <Tab fx:id="tabCallForPapers" text="Call for papers">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tableConferencesCall" layoutX="32.0" layoutY="25.0" prefHeight="210.0" prefWidth="580.0">
-                          <columns>
-                            <TableColumn fx:id="columnNameCCall" prefWidth="201.0" text="Conference&#10;name&#10;" />
-                            <TableColumn fx:id="columnStartDateCCall" prefWidth="92.0" text="Start date" />
-                              <TableColumn fx:id="columnEndDateCCall" prefWidth="90.0" text="End date" />
-                              <TableColumn fx:id="columnDeadlineAbstractCCall" prefWidth="90.0" text="Deadline &#10;Abstract" />
-                              <TableColumn fx:id="columnDeadlineFullCCall" prefWidth="90.0" text="Deadline &#10;Full Paper" />
-                          </columns>
-                        </TableView>
-                        <TableView fx:id="tableSessionsCall" layoutX="32.0" layoutY="256.0" prefHeight="210.0" prefWidth="580.0">
-                          <columns>
-                            <TableColumn fx:id="columnNameSCall" prefWidth="164.0" text="Session &#10;name" />
-                            <TableColumn fx:id="columnDateSCall" prefWidth="81.0" text="Date" />
-                              <TableColumn fx:id="columnRoomSCall" prefWidth="94.0" text="Room" />
-                              <TableColumn fx:id="columnPriceSCall" prefWidth="54.0" text="Price" />
-                              <TableColumn fx:id="columnStartHourSCall" prefWidth="86.0" text="Start hour" />
-                              <TableColumn fx:id="columnEndHourSCall" prefWidth="85.0" text="End hour" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
         </tabs>
       </TabPane>
    </center>
    <top>
       <AnchorPane prefHeight="54.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="buttonLogout" layoutX="669.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleButtonLogout" text="Log out" />
-            <ComboBox fx:id="comboboxType" layoutX="523.0" layoutY="15.0" prefHeight="25.0" prefWidth="106.0" />
-            <Label fx:id="labelLoggedInAs" layoutX="433.0" layoutY="21.0" text="Logged in as" />
+            <Button fx:id="buttonLogout" layoutX="864.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleButtonLogout" text="Log out" />
+            <ComboBox fx:id="comboboxType" layoutX="715.0" layoutY="15.0" prefHeight="25.0" prefWidth="106.0" />
+            <Label fx:id="labelLoggedInAs" layoutX="615.0" layoutY="21.0" text="Logged in as" />
          </children>
       </AnchorPane>
    </top>

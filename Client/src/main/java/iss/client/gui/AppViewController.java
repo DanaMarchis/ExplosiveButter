@@ -1,5 +1,7 @@
 package iss.client.gui;
 
+import iss.model.Conference;
+import iss.model.Session;
 import iss.model.User;
 import iss.services.ConfException;
 import iss.services.IConfClient;
@@ -10,12 +12,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -23,10 +30,78 @@ import java.io.IOException;
  */
 public class AppViewController implements IConfClient {
     private IConfServer server;
+    private Stage stage;
 
     //componentele fxml - MAIN PAGE
     @FXML
+    TabPane mainTabPane;
+    @FXML
+    Tab tabAllConferences;
+    @FXML
+    Tab tabMyConferences;
+    @FXML
+    Tab tabCallForPapers;
+    @FXML
+    Tab tabReview;
+    @FXML
+    Tab tabSubmitAbstract;
+    @FXML
     Button buttonLogout;
+
+    //TAB All Conferences
+
+    //TAB My Conferences
+    @FXML
+    TableView<Conference> tabMyConf_tableConf;
+    @FXML
+    TableView<Session> tabMyConf_tableSessions;
+
+    //TAB Call for papers
+    @FXML
+    Button buttonSubmitAbstract;
+    @FXML
+    Button buttonSubmitFull;
+
+    //TAB Review
+    @FXML
+    Button tabReview_buttonSendReview;
+    @FXML
+    ComboBox<String> tabReview_comboboxQualifier;
+    @FXML
+    Button tabReview_buttonClose;
+
+    //TAB Submit Abstract
+    @FXML
+    Button tabSubmitAbstract_buttonPlus3;
+    @FXML
+    Button tabSubmitAbstract_buttonPlus4;
+    @FXML
+    TextField tabSubmitAbstract_textfieldName1;
+    @FXML
+    TextArea tabSubmitAbstract_textareaInfo1;
+    @FXML
+    TextField tabSubmitAbstract_textfieldName2;
+    @FXML
+    TextArea tabSubmitAbstract_textareaInfo2;
+    @FXML
+    TextField tabSubmitAbstract_textfieldName3;
+    @FXML
+    TextArea tabSubmitAbstract_textareaInfo3;
+    @FXML
+    TextField tabSubmitAbstract_textfieldName4;
+    @FXML
+    TextArea tabSubmitAbstract_textareaInfo4;
+    @FXML
+    TextField tabSubmitAbstract_textfieldName5;
+    @FXML
+    TextArea tabSubmitAbstract_textareaInfo5;
+    @FXML
+    Button tabSubmitAbstract_buttonClose;
+    @FXML
+    TextField tabSubmitAbstract_textfieldChooseAbstract;
+
+    @FXML
+    Button tabSubmitAbstract_buttonChooseAbstract;
 
     //componentele fxml - LOGIN PAGE
     @FXML
@@ -53,6 +128,12 @@ public class AppViewController implements IConfClient {
     TextField textfieldFirstNameR;
     @FXML
     Button buttonSignupR;
+    @FXML
+    Button buttonCloseSignUp;
+
+    //images
+    private Image closeImage = new Image(getClass().getResourceAsStream("/images/close_button.png"));
+    private Image plusImage = new Image(getClass().getResourceAsStream("/images/plus3_button.png"));
 
     //constructor
     public AppViewController() {
@@ -60,6 +141,66 @@ public class AppViewController implements IConfClient {
 
     public void setService(IConfServer server) {
         this.server = server;
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private void initButtonCloseSignUp() {
+        //incarca imagine si tooltip pt butonul de Close din RegisterPage
+        ImageView imageButtonCloseSignUp = new ImageView(closeImage);
+        imageButtonCloseSignUp.setFitHeight(20d);
+        imageButtonCloseSignUp.setFitWidth(20d);
+        buttonCloseSignUp.setGraphic(imageButtonCloseSignUp);
+        Tooltip tooltip = new Tooltip("I don't want to sign up anymore.");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        buttonCloseSignUp.setTooltip(tooltip);
+    }
+
+    private void initButtonsTabSubmitAbstract(){
+        ImageView imageButtonPlus3 = new ImageView(plusImage);
+        imageButtonPlus3.setFitHeight(18d);
+        imageButtonPlus3.setFitWidth(18d);
+        ImageView imageButtonPlus4 = new ImageView(plusImage);
+        imageButtonPlus4.setFitHeight(18d);
+        imageButtonPlus4.setFitWidth(18d);
+        tabSubmitAbstract_buttonPlus3.setGraphic(imageButtonPlus3);
+        tabSubmitAbstract_buttonPlus4.setGraphic(imageButtonPlus4);
+
+        //init button Close
+        ImageView imageButtonClose = new ImageView(closeImage);
+        imageButtonClose.setFitHeight(18d);
+        imageButtonClose.setFitWidth(18d);
+        tabSubmitAbstract_buttonClose.setGraphic(imageButtonClose);
+        Tooltip tooltip = new Tooltip("I don't want to submit abstract anymore.");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        tabSubmitAbstract_buttonClose.setTooltip(tooltip);
+    }
+
+    private void initTabs(){
+        //set visible = false for some tabs
+        mainTabPane.getTabs().remove(tabSubmitAbstract);
+        mainTabPane.getTabs().remove(tabReview);
+    }
+
+    private void initComponentsTabReview(){
+        //init combobox
+        tabReview_comboboxQualifier.getItems().add("strong accept");
+        tabReview_comboboxQualifier.getItems().add("accept");
+        tabReview_comboboxQualifier.getItems().add("weak accept");
+        tabReview_comboboxQualifier.getItems().add("borderline paper");
+        tabReview_comboboxQualifier.getItems().add("weak reject");
+        tabReview_comboboxQualifier.getItems().add("reject");
+        tabReview_comboboxQualifier.getItems().add("strong reject");
+
+        //button close
+        ImageView imageButtonCloseReview = new ImageView(closeImage);
+        imageButtonCloseReview.setFitHeight(20d);
+        imageButtonCloseReview.setFitWidth(20d);
+        tabReview_buttonClose.setGraphic(imageButtonCloseReview);
+        Tooltip tooltip = new Tooltip("Close review");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        tabReview_buttonClose.setTooltip(tooltip);
     }
 
     //Alert for error
@@ -76,6 +217,29 @@ public class AppViewController implements IConfClient {
         message.setHeaderText(header);
         message.setContentText(msg);
         message.showAndWait();
+    }
+
+    //deschiderea unei noi ferestre, loader = fisierul fxml, title = titlul ferestrei
+    private void openNewPage(ActionEvent e, String loader, String title ) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(loader));
+        Parent parent = fxmlLoader.load();
+        Stage stage = new Stage();
+        ((Node) (e.getSource())).getScene().getWindow().hide();
+        AppViewController appViewController = fxmlLoader.getController();
+        appViewController.setService(server);
+        if (loader.equals("/view/registerpage.fxml")) {
+            appViewController.initButtonCloseSignUp();
+        }
+        else if (loader.equals("/view/apppage.fxml")) {
+            appViewController.initTabs();
+            appViewController.initButtonsTabSubmitAbstract();
+            appViewController.initComponentsTabReview();
+        }
+        stage.setTitle(title);
+        stage.setScene(new Scene(parent));
+        stage.setResizable(false);
+        stage.sizeToScene();
+        stage.show();
     }
 
     //Controller LOGIN PAGE
@@ -120,19 +284,6 @@ public class AppViewController implements IConfClient {
         }
     }
 
-    //deschiderea unei noi ferestre, loader = fisierul fxml, title = titlul ferestrei
-    private void openNewPage(ActionEvent e, String loader, String title ) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(loader));
-        Parent parent = fxmlLoader.load();
-        Stage stage = new Stage();
-        ((Node) (e.getSource())).getScene().getWindow().hide();
-        AppViewController appViewController = fxmlLoader.getController();
-        appViewController.setService(server);
-        stage.setTitle(title);
-        stage.setScene(new Scene(parent));
-        stage.show();
-    }
-
     //Controller REGISTER PAGE
     //butonul Sign Up de pe pagina de REGISTER
     @FXML
@@ -168,6 +319,16 @@ public class AppViewController implements IConfClient {
         }
     }
 
+    //revenire la LOGIN PAGE
+    public void handleCloseSignUp(ActionEvent e) {
+        try {
+            openNewPage(e, "/view/loginpage.fxml", "Login");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            showErrorMessage("Sorry. Cannot open login page.");
+        }
+    }
+
     //Controller MAIN PAGE
     //cand se apasa butonul de logout
     public void handleButtonLogout(ActionEvent e) {
@@ -181,5 +342,81 @@ public class AppViewController implements IConfClient {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    //TAB My Conferences
+    public void tabMyConferences_handleButtonReview(ActionEvent actionEvent) {
+        //se deschide tabul Submit abstract
+        mainTabPane.getTabs().add(tabReview);
+        mainTabPane.getSelectionModel().select(tabReview);
+    }
+
+    //TAB Call for papers
+    //cand se apasa butonul "Submit Abstract"
+    public void tabCallForPapers_handleButtonSubmitAbstract(ActionEvent actionEvent) {
+        //se deschide tabul Submit abstract
+        mainTabPane.getTabs().add(tabSubmitAbstract);
+        mainTabPane.getSelectionModel().select(tabSubmitAbstract);
+    }
+
+    //TAB Review
+    public void tabReview_handleButtonClose(ActionEvent actionEvent) {
+        mainTabPane.getTabs().remove(tabReview);
+        mainTabPane.getSelectionModel().select(tabMyConferences);
+
+    }
+
+    //TAB Submit Abstract
+    //apar field'urile pt urmatorul autor
+    public void tabSubmitAbstract_handleButtonPlus3(ActionEvent actionEvent) {
+        tabSubmitAbstract_buttonPlus4.setVisible(true);
+        tabSubmitAbstract_buttonPlus3.setVisible(false);
+
+        tabSubmitAbstract_textareaInfo4.setVisible(true);
+        tabSubmitAbstract_textfieldName4.setVisible(true);
+    }
+    public void tabSubmitAbstract_handleButtonPlus4(ActionEvent actionEvent) {
+        tabSubmitAbstract_buttonPlus4.setVisible(false);
+
+        tabSubmitAbstract_textareaInfo5.setVisible(true);
+        tabSubmitAbstract_textfieldName5.setVisible(true);
+    }
+
+    public void handleTabSubmitAbstract_buttonClose(ActionEvent actionEvent) {
+        mainTabPane.getTabs().remove(tabSubmitAbstract);
+        mainTabPane.getSelectionModel().select(tabCallForPapers);
+    }
+
+    //choose a file
+    private Desktop desktop = Desktop.getDesktop();
+    final FileChooser fileChooser = new FileChooser();
+
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            showErrorMessage("Error openFile");
+        }
+    }
+
+    @FXML
+    public void handleButtonChooseAbstract(ActionEvent e){
+        configureFileChooser(fileChooser);
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            tabSubmitAbstract_textfieldChooseAbstract.setText(file.getName());
+            openFile(file);
+        }
+    }
+
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("View Files");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Files", "*.*"),
+                new FileChooser.ExtensionFilter("PDF", "*.pdf"),
+                new FileChooser.ExtensionFilter("DOC", "*.docx","*.doc")
+        );
     }
 }

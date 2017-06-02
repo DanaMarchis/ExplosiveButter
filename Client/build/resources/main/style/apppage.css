@@ -2,29 +2,27 @@
 	-fx-font-family: "Times New Roman";
 	-fx-font-size: 16px;
 }
-#buttonLogout{
+#buttonLogout, #tabCall_buttonSubmitAbstract, #tabCall_buttonSubmitFull{
     -fx-font-family: "Times New Roman";
-    -fx-background-color: #eeb687;
+    -fx-background-color: #f2c8a6;
     -fx-background-radius: 10;
     -fx-background-insets: 0,1,1;
     -fx-padding: 5;
     -fx-text-fill: black;
     -fx-font-size: 16px;
 }
-#buttonLogout:hover{
+#buttonLogout:hover, #tabCall_buttonSubmitAbstract:hover, #tabCall_buttonSubmitFull:hover{
     -fx-background-color:#f5d6bc;
 }
 #borderpane {
 	-fx-background-color: #f0f3f5;
 }
 .tab-pane .tab{
-    /*-fx-background-color: #f2c8a6;*/
     -fx-background-color: #b4e4dd;
 }
 
 .tab-pane .tab:selected{
     -fx-background-color: #8fd6cc;
-    /*-fx-background-color: #eeb687;*/
 }
 
 .tab:selected .focus-indicator {
@@ -39,14 +37,175 @@
 
 .tab .tab-label {
     -fx-alignment: CENTER;
-    /*-fx-text-fill: #e99f63;*/
-
     -fx-text-fill: #1c4a44;
     -fx-font-size: 17px;
     -fx-font-family: "Times New Roman";
 }
 
 .tab:selected .tab-label {
-    /*-fx-font-weight: bold;*/
     -fx-font-size: 19px;
+}
+
+/*TAB SUBMIT ABSTRACT*/
+
+#tabSubmitAbstract_buttonPlus1, #tabSubmitAbstract_buttonPlus2, #tabSubmitAbstract_buttonPlus3, #tabSubmitAbstract_buttonPlus4, #tabSubmitAbstract_buttonPlus5{
+    -fx-background-color: #f5d7bd;
+    -fx-background-radius: 30;
+    -fx-padding: 4;
+}
+
+#tabSubmitAbstract_buttonPlus1:hover, #tabSubmitAbstract_buttonPlus2:hover, #tabSubmitAbstract_buttonPlus3:hover, #tabSubmitAbstract_buttonPlus4:hover, #tabSubmitAbstract_buttonPlus5:hover{
+    -fx-background-color: #f9e4d2;
+}
+
+#tabSubmitAbstract_labelNameOfProposal, #tabSubmitAbstract_labelKeywords, #tabSubmitAbstract_labelTopics, #tabSubmitAbstract_labelAuthors{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill:#4ba9b4;
+    -fx-font-size: 21px;
+}
+
+#tabSubmitAbstract_textfieldNameOfProposal,#tabSubmitAbstract_textfieldChooseAbstract, #tabSubmitAbstract_textfieldTopics, #tabSubmitAbstract_textfieldKeywords{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 17px;
+}
+
+#tabSubmitAbstract_textfieldName1,#tabSubmitAbstract_textfieldName2, #tabSubmitAbstract_textfieldName3, #tabSubmitAbstract_textfieldName4, #tabSubmitAbstract_textfieldName5{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 17px;
+}
+#tabSubmitAbstract_textareaInfo1, #tabSubmitAbstract_textareaInfo2, #tabSubmitAbstract_textareaInfo3, #tabSubmitAbstract_textareaInfo4, #tabSubmitAbstract_textareaInfo5{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 17px;
+}
+#tabSubmitAbstract_buttonChooseAbstract{
+    -fx-background-color: #a5d4d9;
+    -fx-font-family: "Times New Roman";
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 4;
+    -fx-text-fill: #26555a;
+    -fx-font-size: 17px;
+}
+#tabSubmitAbstract_buttonChooseAbstract:hover{
+    -fx-font-size: 19px;
+    -fx-background-color:#c9e5e8;
+}
+
+#tabSubmitAbstract_buttonDone{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #eeb687;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 8 11 8 11;
+    -fx-text-fill: black;
+    -fx-font-size: 22px;
+}
+#tabSubmitAbstract_buttonDone:hover{
+    -fx-background-color:#f5d6bc;
+}
+
+#tabSubmitAbstract_buttonClose{
+    -fx-background-color: #f2c8a6;
+    -fx-background-radius: 30;
+    -fx-padding: 4;
+}
+#tabSubmitAbstract_buttonClose:hover{
+    -fx-background-color: #f9e4d2;
+}
+
+/*TAB REVIEW*/
+#tabReview_buttonClose{
+    -fx-background-color: #f2c8a6;
+    -fx-background-radius: 30;
+    -fx-padding: 4;
+}
+#tabReview_buttonClose:hover{
+    -fx-background-color: #f9e4d2;
+}
+
+#tabReview_buttonOpenAbstract, #tabReview_buttonOpenFull{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #93ccd2;
+    -fx-background-radius: 20;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 6;
+    -fx-text-fill: #26555a;
+    -fx-font-size: 17px;
+}
+#tabReview_buttonOpenAbstract:hover, #tabReview_buttonOpenFull:hover {
+    -fx-font-size: 20px;
+    -fx-background-color: #b7dde1;
+}
+
+#tabReview_buttonSendReview{
+    -fx-font-family: "Times New Roman";
+    -fx-background-color: #eeb687;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0,1,1;
+    -fx-padding: 8;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
+#tabReview_buttonSendReview:hover{
+    -fx-background-color:#f5d6bc;
+}
+
+#tabReview_labelRecommendations, #tabReview_labelQualifier, #tabReview_labelPapers{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill:#4ba9b4;
+    -fx-font-size: 21px;
+}
+
+#tabReview_textareaRecommendations{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 15px;
+}
+
+#tabReview_comboboxQualifier{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 18px;
+}
+
+/*TAB ALL CONF*/
+.table-row-cell .table-cell {
+    -fx-font-family: "Times New Roman";
+    -fx-border-width: 3px;
+}
+.table-row-cell:selected {
+    /*-fx-background-color:#daf1ed;*/
+    -fx-background-color: #ecf8f6;
+}
+.table-row-cell:selected .text {
+    -fx-fill:#26555a;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+.table-row-cell {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 15px;
+    -fx-background-color: white;
+}
+
+.table-row-cell:empty .table-cell {
+    /*-fx-background-color: #ecf8f6;*/
+    -fx-background-color: white;
+    /*-fx-border-width: 1px;*/
+}
+
+.table-view .column-header .label{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill:#26555a;
+    -fx-font-size: 20px;
+    -fx-padding: 5;
+}
+
+
+/*TAB CALL FOR PAPERS*/
+#tabCall_tableConf .column-header .label{
+    -fx-font-size: 18px;
+}
+#tabCall_tableConf .table-row-cell:selected .text {
+    -fx-fill:#26555a;
+    -fx-font-size: 15px;
 }

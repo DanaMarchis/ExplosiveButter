@@ -35,3 +35,14 @@
     -fx-font-size: 35px;
     -fx-font-weight: bold;
 }
+
+
+#buttonCloseSignUp {
+    -fx-background-color: #f2c8a6;
+    -fx-background-radius: 30;
+    -fx-padding: 4;
+}
+
+#buttonCloseSignUp:hover{
+    -fx-background-color: #f9e4d2;
+}

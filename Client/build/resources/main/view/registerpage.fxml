@@ -25,6 +25,7 @@
             <Button fx:id="buttonSignupR" disable="true" layoutX="235.0" layoutY="434.0" mnemonicParsing="false" onAction="#handleButtonSignUpR" text="Sign up" />
             <CheckBox fx:id="checkboxTerms" layoutX="193.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleCheckboxTerms" text="By clicking on 'Sign up' above, you confirm that you accept the Terms of Use." />
             <Label fx:id="labelSignupPage" layoutX="85.0" layoutY="40.0" text="Sign up" />
+            <Button fx:id="buttonCloseSignUp" layoutX="682.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleCloseSignUp" />
          </children>
       </AnchorPane>
    </top>

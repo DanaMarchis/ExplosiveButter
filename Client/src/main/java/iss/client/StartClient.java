@@ -9,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.util.Properties;
-
 /**
  * Created by Dana on 16-May-17.
  */
@@ -39,10 +37,13 @@ public class StartClient extends Application{
 
         AppViewController appViewController = loader.getController();
         appViewController.setService(server);
+        appViewController.setStage(primaryStage);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Login");
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 }
