@@ -1,11 +1,14 @@
 package iss.client.gui;
 
 import iss.model.Conference;
+import iss.model.Sala;
 import iss.model.Session;
 import iss.model.User;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
@@ -24,6 +28,9 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
 
 /**
  * Created by Dana on 16-May-17.
@@ -49,6 +56,33 @@ public class AppViewController implements IConfClient {
     Button buttonLogout;
 
     //TAB All Conferences
+    @FXML
+    TableView<Conference> tabAllConf_tableConf;
+    @FXML
+    TableColumn<Conference, String> tabAllConf_columnNameConf;
+    @FXML
+    TableColumn<Conference, Date> tabAllConf_columnStartDateConf;
+    @FXML
+    TableColumn<Conference, Date> tabAllConf_columnEndDateConf;
+
+    @FXML
+    TableView<Session> tabAllConf_tableSessions;
+    @FXML
+    TableColumn<Session, String> tabAllConf_columnNameSes;
+    @FXML
+    TableColumn<Session, String> tabAllConf_columnDateSes;
+    @FXML
+    TableColumn<Session, Sala> tabAllConf_columnRoomSes;
+    @FXML
+    TableColumn<Session, Integer> tabAllConf_columnPriceSes;
+    @FXML
+    TableColumn<Session, String> tabAllConf_columnStartHourSes;
+    @FXML
+    TableColumn<Session, String> tabAllConf_columnEndHourSes;
+
+    ObservableList<Conference> tabAllConf_modelConf;
+    ObservableList<Session> tabAllConf_modelSes;
+
 
     //TAB My Conferences
     @FXML
@@ -61,6 +95,24 @@ public class AppViewController implements IConfClient {
     Button buttonSubmitAbstract;
     @FXML
     Button buttonSubmitFull;
+    @FXML
+    TableView<Conference> tabCall_tableConf;
+    @FXML
+    TableColumn<Conference, String> tabCall_columnNameC;
+    @FXML
+    TableColumn<Conference, String> tabCall_columnStartDateC;
+    @FXML
+    TableColumn<Conference, String> tabCall_columnEndDateC;
+    @FXML
+    TableColumn<Conference, String> tabCall_columnDeadlineAbstractC;
+    @FXML
+    TableColumn<Conference, String> tabCall_columnDeadlineFullC;
+//    @FXML
+//    TableColumn<Conference, String> tabCall_columnNameC;
+
+    ObservableList<Conference> tabCall_modelConf;
+
+
 
     //TAB Review
     @FXML
@@ -157,6 +209,72 @@ public class AppViewController implements IConfClient {
         buttonCloseSignUp.setTooltip(tooltip);
     }
 
+    public void tabAllConf_initTables(){
+        tabAllConf_columnNameConf.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabAllConf_columnStartDateConf.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
+        tabAllConf_columnEndDateConf.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
+//        tabAllConf_tableConf.getSelectionModel().selectedItemProperty().addListener(changedTableItemListener());
+//        this.tabAllConf_modelConf = FXCollections.observableArrayList(getAll());
+//        tabAllConf_tableConf.setItems(tabAllConf_modelConf);
+//        tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+
+        try {
+            this.tabAllConf_modelConf = FXCollections.observableArrayList(server.getAllConferencesDeadline());
+            tabAllConf_tableConf.setItems(tabAllConf_modelConf);
+            tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+
+//        tabAllConf_columnNameSes.setCellValueFactory(new PropertyValueFactory<Session, String>("nume"));
+    }
+
+    public void tabCall_initTables(){
+        tabCall_columnNameC.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabCall_columnStartDateC.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
+        tabCall_columnEndDateC.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
+        tabCall_columnDeadlineAbstractC.setCellValueFactory(new PropertyValueFactory<>("deadline_abs"));
+        tabCall_columnDeadlineFullC.setCellValueFactory(new PropertyValueFactory<>("deadline_full"));
+
+        try {
+            this.tabAllConf_modelConf = FXCollections.observableArrayList(server.getAllConferences());
+            tabAllConf_tableConf.setItems(tabAllConf_modelConf);
+            tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+
+//        tabAllConf_tableConf.getSelectionModel().selectedItemProperty().addListener(changedTableItemListener());
+//        this.tabCall_modelConf = FXCollections.observableArrayList(getAll());
+//        tabCall_tableConf.setItems(tabCall_modelConf);
+//        tabCall_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+    }
+
+//    private List<Conference> getAll(){
+//        Conference c1 = new Conference(1,"Forbes Women's Summit", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c2 = new Conference(2,"Grace Hopper Celebration of Women in Computing", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c3 = new Conference(3,"Social Media Week", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c4 = new Conference(4,"Funnel Network of Marketing", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c5 = new Conference(5,"Content Marketing World", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c6 = new Conference(6,"UserConf", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c7 = new Conference(7,"Social Media for Customer Service Summit", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c8 = new Conference(8,"CX Impact", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//        Conference c9 = new Conference(9,"Funnel Network of Marketing", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
+//
+//        List<Conference> conf = new ArrayList<>();
+//        conf.add(c1);
+//        conf.add(c2);
+//        conf.add(c3);
+//        conf.add(c4);
+//        conf.add(c5);
+//        conf.add(c6);
+//        conf.add(c7);
+//        conf.add(c8);
+//        conf.add(c9);
+//
+//        return conf;
+//    }
+
     private void initButtonsTabSubmitAbstract(){
         ImageView imageButtonPlus3 = new ImageView(plusImage);
         imageButtonPlus3.setFitHeight(18d);
@@ -234,6 +352,9 @@ public class AppViewController implements IConfClient {
             appViewController.initTabs();
             appViewController.initButtonsTabSubmitAbstract();
             appViewController.initComponentsTabReview();
+        } else if (loader.equals("/view/apppage.fxml")){
+            appViewController.tabAllConf_initTables();
+            appViewController.tabCall_initTables();
         }
         stage.setTitle(title);
         stage.setScene(new Scene(parent));
