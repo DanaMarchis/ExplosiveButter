@@ -7,11 +7,13 @@
 <session-factory>
 
     <property name="format_sql">true</property>
-    <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
-    <property name="connection.driver_class">org.sqlite.JDBC</property>
-    <property name="connection.url">jdbc:sqlite:cms.db</property>
+    <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://127.0.0.1:3306/cms</property>
+    <property name="hibernate.connection.username">CMS_Admin</property>
+    <property name="hibernate.connection.password">CMS_Admin</property>
     <property name="connection.foreign_keys">true</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.hbm2ddl.auto">validate</property>
 
     <!-- Echo all executed SQL to stdout -->
     <property name="show_sql">true</property>

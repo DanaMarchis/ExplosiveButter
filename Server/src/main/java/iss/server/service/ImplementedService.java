@@ -5,16 +5,15 @@ import iss.model.Role;
 import iss.model.Session;
 import iss.model.User;
 import iss.persistence.ConferenceRepo;
+import iss.persistence.RoleRepo;
 import iss.persistence.UserRepository;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -24,11 +23,13 @@ public class ImplementedService implements IConfServer{
 
     private UserRepository userRepo;
     private ConferenceRepo conferenceRepo;
+    private RoleRepo roleRepo;
     private Map<String, IConfClient> loggedClients;
 
-    public ImplementedService(UserRepository userRepo,ConferenceRepo conferenceRepo) {
+    public ImplementedService(UserRepository userRepo,ConferenceRepo conferenceRepo,RoleRepo roleRepo) {
         this.userRepo = userRepo;
         this.conferenceRepo=conferenceRepo;
+        this.roleRepo=roleRepo;
         loggedClients=new ConcurrentHashMap<>();
     }
 
@@ -87,12 +88,12 @@ public class ImplementedService implements IConfServer{
 
     @Override
     public Role[] getRoles(User user) throws ConfException {
-        return new Role[0];
+        return (Role[])roleRepo.getRoles(user).toArray();
     }
 
     @Override
     public Conference[] getConferences(User user, Role role) throws ConfException {
-        return new Conference[0];
+        return (Conference[])conferenceRepo.getAll(user,role).toArray();
     }
 
     @Override

@@ -33,17 +33,14 @@
         <property name="ora_inc" column="ora_inc" type="string"/>
         <property name="ora_sf" column="ora_sf" type="string"/>
         <property name="data" column="data" type="string"/>
-        <many-to-one name="sala" column="sala" class="iss.model.Sala"  cascade="save-update"/>
+        <many-to-one name="sala" column="sala" class="iss.model.Sala"  cascade="all"/>
     </class>
-    <class name="iss.persistence.MyTable">
+    <class name="iss.persistence.MyTable" table ="MyTable">
         <composite-id class="iss.persistence.MyTableId">
-            <key-property name="username"/>
-            <key-property name="id_role"/>
-            <key-property name="id_conference"/>
-            <key-property name="id_session"/>
+            <key-many-to-one name="user" class="iss.model.User" lazy="false"/>
+            <key-many-to-one name="rol" class="iss.model.Role" lazy="false"/>
+            <key-many-to-one name="conference" class="iss.model.Conference" lazy="false"/>
+            <key-many-to-one name="session" class="iss.model.Session" lazy="false"/>
         </composite-id>
-        <many-to-one name="username" class="iss.model.User" insert="false" update="false"/>
-        <many-to-one name="id_role" class="iss.model.Role" insert="false" update="false"/>
-        <many-to-one name="id_conference" class="iss.model.Conference" insert="false" update="false"/>
     </class>
 </hibernate-mapping>
