@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     //    ### ATTRIBUTES ###
+    private Integer id;
     private String username;
     private String password;
     private String nume;
@@ -17,14 +18,10 @@ public class User implements Serializable {
 
     //    ### CONSTRUCTORS ###
     public User() {
-        username = "";
-        password = "";
-        nume = "";
-        prenume = "";
-        email = "";
     }
 
-    public User(String username, String password, String nume, String prenume, String email) {
+    public User(Integer id, String username, String password, String nume, String prenume, String email) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.nume = nume;
@@ -32,16 +29,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-        this.nume = "";
-        this.prenume = "";
-        this.email = "";
-    }
-
 
     //    ### GETTERS ###
+    public Integer getId() {
+        return id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -64,6 +57,10 @@ public class User implements Serializable {
 
 
     //    ### SETTERS ###
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }

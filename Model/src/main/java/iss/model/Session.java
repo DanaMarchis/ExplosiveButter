@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Session implements Serializable {
 
     private Integer id;
+    private String nume;
     private String data;
     private String ora_inc;
     private String ora_sf;
@@ -17,8 +18,9 @@ public class Session implements Serializable {
     public Session() {
     }
 
-    public Session(Integer id, String data, String ora_inc, String ora_sf, Sala sala, Integer pret) {
+    public Session(Integer id, String nume, String data, String ora_inc, String ora_sf, Sala sala, Integer pret) {
         this.id = id;
+        this.nume = nume;
         this.data = data;
         this.ora_inc = ora_inc;
         this.ora_sf = ora_sf;
@@ -32,6 +34,14 @@ public class Session implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
     }
 
     public String getData() {
@@ -73,4 +83,5 @@ public class Session implements Serializable {
     public void setPret(Integer pret) {
         this.pret = pret;
     }
+
 }
