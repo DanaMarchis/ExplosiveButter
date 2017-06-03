@@ -1,7 +1,7 @@
 package iss.networking.rpcprotocol;
 
 import iss.model.*;
-import iss.networking.dto.*;
+//import iss.networking.dto.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
@@ -90,8 +90,9 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de login
         if (request.type() == RequestType.LOGIN) {
             System.out.println("Login request ..." + request.type());
-            UserDTO userDTO = (UserDTO) request.data();
-            User user = DTOUtils.getFromDTO(userDTO);
+//            UserDTO userDTO = (UserDTO) request.data();
+//            User user = DTOUtils.getFromDTO(userDTO);
+            User user = (User) request.data();
             try {
                 server.login(user, this);
                 return okResponse;
@@ -105,8 +106,9 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         if (request.type() == RequestType.LOGOUT) {
             System.out.println("Logout request");
             // LogoutRequest logReq=(LogoutRequest)request;
-            UserDTO userDTO = (UserDTO) request.data();
-            User user = DTOUtils.getFromDTO(userDTO);
+//            UserDTO userDTO = (UserDTO) request.data();
+//            User user = DTOUtils.getFromDTO(userDTO);
+            User user = (User) request.data();
             try {
                 server.logout(user, this);
                 connected = false;
@@ -120,8 +122,9 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de la register
         if (request.type() == RequestType.REGISTER){
             System.out.println("Register request");
-            UserDTO userDTO = (UserDTO) request.data();
-            User user = DTOUtils.getFromDTO(userDTO);
+//            UserDTO userDTO = (UserDTO) request.data();
+//            User user = DTOUtils.getFromDTO(userDTO);
+            User user = (User) request.data();
             try{
                 server.register(user);
                 return okResponse;
@@ -136,8 +139,9 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
             System.out.println("Conferences request ..." + request.type());
             try {
                 Conference[] conferences = server.getAllConferences();
-                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
-                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
+//                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
+//                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
+                return new Response.Builder().type(ResponseType.OK).data(conferences).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
@@ -147,12 +151,14 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de sessions for conference
         if (request.type() == RequestType.SESSIONS_FOR_CONFERENCE) {
             System.out.println("Sessions for conference request ..." + request.type());
-            ConferenceDTO conferenceDTO = (ConferenceDTO) request.data();
-            Conference conference = DTOUtils.getFromDTO(conferenceDTO);
+//            ConferenceDTO conferenceDTO = (ConferenceDTO) request.data();
+//            Conference conference = DTOUtils.getFromDTO(conferenceDTO);
+            Conference conference = (Conference) request.data();
             try {
                 Session[] sessions = server.getSessions(conference);
-                SessionDTO[] sessionDTOS = DTOUtils.getDTO(sessions);
-                return new Response.Builder().type(ResponseType.OK).data(sessionDTOS).build();
+//                SessionDTO[] sessionDTOS = DTOUtils.getDTO(sessions);
+//                return new Response.Builder().type(ResponseType.OK).data(sessionDTOS).build();
+                return new Response.Builder().type(ResponseType.OK).data(sessions).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
@@ -162,12 +168,14 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de roles for user
         if (request.type() == RequestType.ROLES_FOR_USER) {
             System.out.println("Roles for user request ..." + request.type());
-            UserDTO userDTO = (UserDTO) request.data();
-            User user = DTOUtils.getFromDTO(userDTO);
+//            UserDTO userDTO = (UserDTO) request.data();
+//            User user = DTOUtils.getFromDTO(userDTO);
+            User user = (User) request.data();
             try {
                 Role[] roles = server.getRoles(user);
-                RoleDTO[] roleDTOS = DTOUtils.getDTO(roles);
-                return new Response.Builder().type(ResponseType.OK).data(roleDTOS).build();
+//                RoleDTO[] roleDTOS = DTOUtils.getDTO(roles);
+//                return new Response.Builder().type(ResponseType.OK).data(roleDTOS).build();
+                return new Response.Builder().type(ResponseType.OK).data(roles).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
@@ -177,14 +185,16 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de conferences for user and role
         if (request.type() == RequestType.CONFERENCES_FOR_USER_AND_ROLE) {
             System.out.println("Conferences for user and role request ..." + request.type());
-            UserRoleDTO userRoleDTO = (UserRoleDTO) request.data();
-            UserRole userRole = DTOUtils.getFromDTO(userRoleDTO);
+//            UserRoleDTO userRoleDTO = (UserRoleDTO) request.data();
+//            UserRole userRole = DTOUtils.getFromDTO(userRoleDTO);
+            UserRole userRole = (UserRole) request.data();
             User user = userRole.getUser();
             Role role = userRole.getRole();
             try {
                 Conference[] conferences = server.getConferences(user, role);
-                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
-                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
+//                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
+//                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
+                return new Response.Builder().type(ResponseType.OK).data(conferences).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
@@ -196,8 +206,9 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
             System.out.println("Conferences with deadline not expired request ..." + request.type());
             try {
                 Conference[] conferences = server.getAllConferencesDeadline();
-                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
-                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
+//                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
+//                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
+                return new Response.Builder().type(ResponseType.OK).data(conferences).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();

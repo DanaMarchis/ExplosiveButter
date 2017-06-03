@@ -1,9 +1,11 @@
 package iss.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Bitten Apple on 21-May-17.
  */
-public class UserRole {
+public class UserRole implements Serializable {
 
     private User user;
     private Role role;

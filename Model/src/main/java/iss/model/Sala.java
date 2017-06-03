@@ -1,9 +1,11 @@
 package iss.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Bitten Apple on 21-May-17.
  */
-public class Sala {
+public class Sala implements Serializable {
 
     private Integer id;
     private String nume;

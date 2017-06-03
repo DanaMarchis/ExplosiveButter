@@ -1,7 +1,7 @@
 package iss.networking.rpcprotocol;
 
 import iss.model.*;
-import iss.networking.dto.*;
+//import iss.networking.dto.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
@@ -44,8 +44,9 @@ public class ConfServerRpcProxy implements IConfServer {
     public void login(User user, IConfClient client) throws ConfException {
         initializeConnection();
 
-        UserDTO userDTO = DTOUtils.getDTO(user);
-        Request req = new Request.Builder().type(RequestType.LOGIN).data(userDTO).build();
+//        UserDTO userDTO = DTOUtils.getDTO(user);
+//        Request req = new Request.Builder().type(RequestType.LOGIN).data(userDTO).build();
+        Request req = new Request.Builder().type(RequestType.LOGIN).data(user).build();
 
         sendRequest(req);
 
@@ -66,8 +67,9 @@ public class ConfServerRpcProxy implements IConfServer {
     @Override
     public void logout(User user, IConfClient client) throws ConfException {
         //folosesc userLogat nu user (Dana imi trimite un user la misto, doar ca sa fie, pt ca asa e in interfata)
-        UserDTO userDTO = DTOUtils.getDTO(userLogat);
-        Request req = new Request.Builder().type(RequestType.LOGOUT).data(userDTO).build();
+//        UserDTO userDTO = DTOUtils.getDTO(userLogat);
+//        Request req = new Request.Builder().type(RequestType.LOGOUT).data(userDTO).build();
+        Request req = new Request.Builder().type(RequestType.LOGOUT).data(userLogat).build();
 
         sendRequest(req);
 
@@ -88,8 +90,9 @@ public class ConfServerRpcProxy implements IConfServer {
     public void register(User user) throws ConfException {
         initializeConnection();
 
-        UserDTO userDTO = DTOUtils.getDTO(user);
-        Request req = new Request.Builder().type(RequestType.REGISTER).data(userDTO).build();
+//        UserDTO userDTO = DTOUtils.getDTO(user);
+//        Request req = new Request.Builder().type(RequestType.REGISTER).data(userDTO).build();
+        Request req = new Request.Builder().type(RequestType.REGISTER).data(user).build();
 
         sendRequest(req);
 
@@ -115,7 +118,8 @@ public class ConfServerRpcProxy implements IConfServer {
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+//            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+            Conference[] conferences = (Conference[]) response.data();
             return conferences;
         }
         if (response.type() == ResponseType.ERROR) {
@@ -129,15 +133,17 @@ public class ConfServerRpcProxy implements IConfServer {
 
     @Override
     public Session[] getSessions(Conference conf) throws ConfException {
-        ConferenceDTO conferenceDTO = DTOUtils.getDTO(conf);
-        Request req = new Request.Builder().type(RequestType.SESSIONS_FOR_CONFERENCE).data(conferenceDTO).build();
+//        ConferenceDTO conferenceDTO = DTOUtils.getDTO(conf);
+//        Request req = new Request.Builder().type(RequestType.SESSIONS_FOR_CONFERENCE).data(conferenceDTO).build();
+        Request req = new Request.Builder().type(RequestType.SESSIONS_FOR_CONFERENCE).data(conf).build();
 
         sendRequest(req);
 
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            Session[] sessions = DTOUtils.getFromDTO((SessionDTO[]) response.data());
+//            Session[] sessions = DTOUtils.getFromDTO((SessionDTO[]) response.data());
+            Session[] sessions = (Session[]) response.data();
             return sessions;
         }
         if (response.type() == ResponseType.ERROR) {
@@ -151,15 +157,17 @@ public class ConfServerRpcProxy implements IConfServer {
 
     @Override
     public Role[] getRoles(User user) throws ConfException {
-        UserDTO userDTO = DTOUtils.getDTO(user);
-        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(userDTO).build();
+//        UserDTO userDTO = DTOUtils.getDTO(user);
+//        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(userDTO).build();
+        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(user).build();
 
         sendRequest(req);
 
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            Role[] roles = DTOUtils.getFromDTO((RoleDTO[]) response.data());
+//            Role[] roles = DTOUtils.getFromDTO((RoleDTO[]) response.data());
+            Role[] roles = (Role[]) response.data();
             return roles;
         }
         if (response.type() == ResponseType.ERROR) {
@@ -174,15 +182,17 @@ public class ConfServerRpcProxy implements IConfServer {
     @Override
     public Conference[] getConferences(User user, Role role) throws ConfException {
         UserRole userRole = new UserRole(user, role);
-        UserRoleDTO userRoleDTO = DTOUtils.getDTO(userRole);
-        Request req = new Request.Builder().type(RequestType.CONFERENCES_FOR_USER_AND_ROLE).data(userRoleDTO).build();
+//        UserRoleDTO userRoleDTO = DTOUtils.getDTO(userRole);
+//        Request req = new Request.Builder().type(RequestType.CONFERENCES_FOR_USER_AND_ROLE).data(userRoleDTO).build();
+        Request req = new Request.Builder().type(RequestType.CONFERENCES_FOR_USER_AND_ROLE).data(userRole).build();
 
         sendRequest(req);
 
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+//            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+            Conference[] conferences = (Conference[]) response.data();
             return conferences;
         }
         if (response.type() == ResponseType.ERROR) {
@@ -203,7 +213,8 @@ public class ConfServerRpcProxy implements IConfServer {
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+//            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
+            Conference[] conferences = (Conference[]) response.data();
             return conferences;
         }
         if (response.type() == ResponseType.ERROR) {

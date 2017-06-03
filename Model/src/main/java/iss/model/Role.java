@@ -1,9 +1,11 @@
 package iss.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Bitten Apple on 21-May-17.
  */
-public class Role {
+public class Role implements Serializable {
 
     private Integer id;
     private String denumire;

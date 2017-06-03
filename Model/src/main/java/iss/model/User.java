@@ -1,9 +1,11 @@
 package iss.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Bitten Apple on 15-May-17.
  */
-public class User {
+public class User implements Serializable {
 
     //    ### ATTRIBUTES ###
     private String username;
