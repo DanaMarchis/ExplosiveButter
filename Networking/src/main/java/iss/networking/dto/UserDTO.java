@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class UserDTO implements Serializable {
 
     //    ### ATTRIBUTES ###
+    private Integer id;
     private String username;
     private String password;
     private String nume;
@@ -24,7 +25,8 @@ public class UserDTO implements Serializable {
         email = "";
     }
 
-    public UserDTO(String username, String password, String nume, String prenume, String email) {
+    public UserDTO(Integer id, String username, String password, String nume, String prenume, String email) {
+        this.id=id;
         this.username = username;
         this.password = password;
         this.nume = nume;
@@ -42,6 +44,8 @@ public class UserDTO implements Serializable {
 
 
     //    ### GETTERS ###
+    public Integer getId() {return id;}
+
     public String getUsername() {
         return username;
     }
@@ -64,6 +68,8 @@ public class UserDTO implements Serializable {
 
 
     //    ### SETTERS ###
+    public void setId(Integer id) {this.id = id;}
+
     public void setUsername(String username) {
         this.username = username;
     }

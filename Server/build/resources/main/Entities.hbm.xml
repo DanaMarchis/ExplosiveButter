@@ -4,7 +4,10 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping >
     <class name="iss.model.User" table="Users">
-        <id name="username" column="username" type="string"/>
+        <id name="id" column="id_user" type="integer">
+            <generator class="increment"></generator>
+        </id>
+        <property name="username" column="username" type="string"/>
         <property name="password" column="password" type="string"/>
         <property name="nume" column="nume" type="string"/>
         <property name="prenume" column="prenume" type="string"/>
@@ -30,6 +33,7 @@
     <class name="iss.model.Session" table="Sessions">
         <id name="id" column="id_session" type="integer"/>
         <property name="pret" column="pret" type="integer"/>
+        <property name="nume" column="nume" type="string"/>
         <property name="ora_inc" column="ora_inc" type="string"/>
         <property name="ora_sf" column="ora_sf" type="string"/>
         <property name="data" column="data" type="string"/>

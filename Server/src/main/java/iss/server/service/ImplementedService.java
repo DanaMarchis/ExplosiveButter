@@ -78,22 +78,22 @@ public class ImplementedService implements IConfServer{
 
     @Override
     public Conference[] getAllConferences() throws ConfException {
-        return (Conference[])conferenceRepo.getAll().toArray();
+        return conferenceRepo.getAll().toArray(new Conference[1]);
     }
 
     @Override
     public Session[] getSessions(Conference conf) throws ConfException {
-        return (iss.model.Session[])conferenceRepo.getSessions(conf).toArray();
+        return conferenceRepo.getSessions(conf).toArray(new Session[1]);
     }
 
     @Override
     public Role[] getRoles(User user) throws ConfException {
-        return (Role[])roleRepo.getRoles(user).toArray();
+        return roleRepo.getRoles(user).toArray(new Role[1]);
     }
 
     @Override
     public Conference[] getConferences(User user, Role role) throws ConfException {
-        return (Conference[])conferenceRepo.getAll(user,role).toArray();
+        return conferenceRepo.getAll(user,role).toArray(new Conference[1]);
     }
 
     @Override

@@ -127,6 +127,7 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
             User user = (User) request.data();
             try{
                 server.register(user);
+                connected=false;
                 return okResponse;
             } catch (ConfException e) {
 //                e.printStackTrace();

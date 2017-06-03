@@ -9,21 +9,23 @@ public class DTOUtils {
 
     //    ### USER ###
     public static User getFromDTO(UserDTO userDTO) {
+        Integer id=userDTO.getId();
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
         String nume = userDTO.getNume();
         String prenume = userDTO.getPrenume();
         String email = userDTO.getEmail();
-        return new User(username, password, nume, prenume, email);
+        return new User(id,username, password, nume, prenume, email);
     }
 
     public static UserDTO getDTO(User user) {
+        Integer id=user.getId();
         String username = user.getUsername();
         String password = user.getPassword();
         String nume = user.getNume();
         String prenume = user.getPrenume();
         String email = user.getEmail();
-        return new UserDTO(username, password, nume, prenume, email);
+        return new UserDTO(id,username, password, nume, prenume, email);
     }
 
 
@@ -81,24 +83,26 @@ public class DTOUtils {
 //    ### SESSION ###
     public static Session getFromDTO(SessionDTO sessionDTO) {
         Integer id = sessionDTO.getId();
+        String nume = sessionDTO.getNume();
         String data = sessionDTO.getData();
         String ora_inc = sessionDTO.getOra_inc();
         String ora_sf = sessionDTO.getOra_sf();
         SalaDTO salaDTO = sessionDTO.getSala();
         Sala sala = getFromDTO(salaDTO);
         Integer pret = sessionDTO.getPret();
-        return new Session(id, data, ora_inc, ora_sf, sala, pret);
+        return new Session(id, nume, data, ora_inc, ora_sf, sala, pret);
     }
 
     public static SessionDTO getDTO(Session session) {
         Integer id = session.getId();
+        String nume=session.getNume();
         String data = session.getData();
         String ora_inc = session.getOra_inc();
         String ora_sf = session.getOra_sf();
         Sala sala = session.getSala();
         SalaDTO salaDTO = getDTO(sala);
         Integer pret = session.getPret();
-        return new SessionDTO(id, data, ora_inc, ora_sf, salaDTO, pret);
+        return new SessionDTO(id, nume,data, ora_inc, ora_sf, salaDTO, pret);
     }
 
     public static SessionDTO[] getDTO(Session[] sessions) {

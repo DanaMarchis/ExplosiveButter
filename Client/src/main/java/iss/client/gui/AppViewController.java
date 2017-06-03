@@ -238,6 +238,7 @@ public class AppViewController implements IConfClient {
 
         try {
             this.tabAllConf_modelConf = FXCollections.observableArrayList(server.getAllConferences());
+
             tabAllConf_tableConf.setItems(tabAllConf_modelConf);
             tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
         } catch (ConfException e) {
@@ -352,9 +353,9 @@ public class AppViewController implements IConfClient {
             appViewController.initTabs();
             appViewController.initButtonsTabSubmitAbstract();
             appViewController.initComponentsTabReview();
-        } else if (loader.equals("/view/apppage.fxml")){
             appViewController.tabAllConf_initTables();
             appViewController.tabCall_initTables();
+        } else if (loader.equals("/view/apppage.fxml")){
         }
         stage.setTitle(title);
         stage.setScene(new Scene(parent));

@@ -8,14 +8,16 @@ import java.io.Serializable;
 public class SessionDTO implements Serializable {
 
     private Integer id;
+    private String nume;
     private String data;
     private String ora_inc;
     private String ora_sf;
     private SalaDTO sala;
     private Integer pret;
 
-    public SessionDTO(Integer id, String data, String ora_inc, String ora_sf, SalaDTO sala, Integer pret) {
+    public SessionDTO(Integer id,String nume, String data, String ora_inc, String ora_sf, SalaDTO sala, Integer pret) {
         this.id = id;
+        this.nume=nume;
         this.data = data;
         this.ora_inc = ora_inc;
         this.ora_sf = ora_sf;
@@ -30,6 +32,10 @@ public class SessionDTO implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getNume() {return nume;}
+
+    public void setNume(String nume) {this.nume = nume;}
 
     public String getData() {
         return data;
