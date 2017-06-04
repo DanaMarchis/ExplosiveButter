@@ -94,8 +94,8 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
 //            User user = DTOUtils.getFromDTO(userDTO);
             User user = (User) request.data();
             try {
-                server.login(user, this);
-                return okResponse;
+                User u = server.login(user, this);
+                return new Response.Builder().type(ResponseType.OK).data(u).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();

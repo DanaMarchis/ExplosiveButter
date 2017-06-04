@@ -10,8 +10,8 @@
     <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
     <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="connection.url">jdbc:mysql://127.0.0.1:3306/cms</property>
-    <property name="hibernate.connection.username">CMS_Admin</property>
-    <property name="hibernate.connection.password">CMS_Admin</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"></property>
     <property name="connection.foreign_keys">true</property>
     <property name="hibernate.hbm2ddl.auto">validate</property>
     

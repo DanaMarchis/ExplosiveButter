@@ -1,12 +1,12 @@
 package iss.client.gui;
 
-import iss.model.Conference;
-import iss.model.Sala;
-import iss.model.Session;
-import iss.model.User;
+import iss.model.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,12 +25,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
 
 /**
  * Created by Dana on 16-May-17.
@@ -38,6 +38,7 @@ import java.util.concurrent.locks.Condition;
 public class AppViewController implements IConfClient {
     private IConfServer server;
     private Stage stage;
+    private User userlogat;
 
     //componentele fxml - MAIN PAGE
     @FXML
@@ -54,6 +55,8 @@ public class AppViewController implements IConfClient {
     Tab tabSubmitAbstract;
     @FXML
     Button buttonLogout;
+    @FXML
+    ComboBox<String> comboboxType;
 
     //TAB All Conferences
     @FXML
@@ -72,7 +75,7 @@ public class AppViewController implements IConfClient {
     @FXML
     TableColumn<Session, String> tabAllConf_columnDateSes;
     @FXML
-    TableColumn<Session, Sala> tabAllConf_columnRoomSes;
+    TableColumn<Session, String> tabAllConf_columnRoomSes;
     @FXML
     TableColumn<Session, Integer> tabAllConf_columnPriceSes;
     @FXML
@@ -80,21 +83,40 @@ public class AppViewController implements IConfClient {
     @FXML
     TableColumn<Session, String> tabAllConf_columnEndHourSes;
 
-    ObservableList<Conference> tabAllConf_modelConf;
-    ObservableList<Session> tabAllConf_modelSes;
+    private ObservableList<Conference> tabAllConf_modelConf;
+    private ObservableList<Session> tabAllConf_modelSes;
 
 
     //TAB My Conferences
     @FXML
     TableView<Conference> tabMyConf_tableConf;
     @FXML
+    TableColumn<Conference, String> tabMyConf_columnNameConf;
+    @FXML
+    TableColumn<Conference, String> tabMyConf_columnStartDateConf;
+    @FXML
+    TableColumn<Conference, String> tabMyConf_columnEndDateConf;
+
+    @FXML
     TableView<Session> tabMyConf_tableSessions;
+    @FXML
+    TableColumn<Session, String> tabMyConf_columnNameSes;
+    @FXML
+    TableColumn<Session, String> tabMyConf_columnDateSes;
+    @FXML
+    TableColumn<Session, String> tabMyConf_columnRoomSes;
+    @FXML
+    TableColumn<Session, Integer> tabMyConf_columnPriceSes;
+    @FXML
+    TableColumn<Session, String> tabMyConf_columnStartHourSes;
+    @FXML
+    TableColumn<Session, String> tabMyConf_columnEndHourSes;
+
+    private ObservableList<Conference> tabMyConf_modelConf;
+    private ObservableList<Session> tabMyConf_modelSes;
+
 
     //TAB Call for papers
-    @FXML
-    Button buttonSubmitAbstract;
-    @FXML
-    Button buttonSubmitFull;
     @FXML
     TableView<Conference> tabCall_tableConf;
     @FXML
@@ -107,11 +129,24 @@ public class AppViewController implements IConfClient {
     TableColumn<Conference, String> tabCall_columnDeadlineAbstractC;
     @FXML
     TableColumn<Conference, String> tabCall_columnDeadlineFullC;
-//    @FXML
-//    TableColumn<Conference, String> tabCall_columnNameC;
 
-    ObservableList<Conference> tabCall_modelConf;
+    @FXML
+    TableView<Session> tabCall_tableSessions;
+    @FXML
+    TableColumn<Session, String> tabCall_columnNameS;
+    @FXML
+    TableColumn<Session, String> tabCall_columnDateS;
+    @FXML
+    TableColumn<Session, String> tabCall_columnRoomS;
+    @FXML
+    TableColumn<Session, Integer> tabCall_columnPriceS;
+    @FXML
+    TableColumn<Session, String> tabCall_columnStartHourS;
+    @FXML
+    TableColumn<Session, String> tabCall_columnEndHourS;
 
+    private ObservableList<Conference> tabCall_modelConf;
+    private ObservableList<Session> tabCall_modelSes;
 
 
     //TAB Review
@@ -198,128 +233,10 @@ public class AppViewController implements IConfClient {
         this.stage = stage;
     }
 
-    private void initButtonCloseSignUp() {
-        //incarca imagine si tooltip pt butonul de Close din RegisterPage
-        ImageView imageButtonCloseSignUp = new ImageView(closeImage);
-        imageButtonCloseSignUp.setFitHeight(20d);
-        imageButtonCloseSignUp.setFitWidth(20d);
-        buttonCloseSignUp.setGraphic(imageButtonCloseSignUp);
-        Tooltip tooltip = new Tooltip("I don't want to sign up anymore.");
-        tooltip.setFont(Font.font("Times New Roman", 16));
-        buttonCloseSignUp.setTooltip(tooltip);
-    }
-
-    public void tabAllConf_initTables(){
-        tabAllConf_columnNameConf.setCellValueFactory(new PropertyValueFactory<>("nume"));
-        tabAllConf_columnStartDateConf.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
-        tabAllConf_columnEndDateConf.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
-//        tabAllConf_tableConf.getSelectionModel().selectedItemProperty().addListener(changedTableItemListener());
-//        this.tabAllConf_modelConf = FXCollections.observableArrayList(getAll());
-//        tabAllConf_tableConf.setItems(tabAllConf_modelConf);
-//        tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
-
-        try {
-            this.tabAllConf_modelConf = FXCollections.observableArrayList(server.getAllConferencesDeadline());
-            tabAllConf_tableConf.setItems(tabAllConf_modelConf);
-            tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
-        } catch (ConfException e) {
-            e.printStackTrace();
-        }
-
-//        tabAllConf_columnNameSes.setCellValueFactory(new PropertyValueFactory<Session, String>("nume"));
-    }
-
-    public void tabCall_initTables(){
-        tabCall_columnNameC.setCellValueFactory(new PropertyValueFactory<>("nume"));
-        tabCall_columnStartDateC.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
-        tabCall_columnEndDateC.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
-        tabCall_columnDeadlineAbstractC.setCellValueFactory(new PropertyValueFactory<>("deadline_abs"));
-        tabCall_columnDeadlineFullC.setCellValueFactory(new PropertyValueFactory<>("deadline_full"));
-
-        try {
-            this.tabAllConf_modelConf = FXCollections.observableArrayList(server.getAllConferences());
-
-            tabAllConf_tableConf.setItems(tabAllConf_modelConf);
-            tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
-        } catch (ConfException e) {
-            e.printStackTrace();
-        }
-
-//        tabAllConf_tableConf.getSelectionModel().selectedItemProperty().addListener(changedTableItemListener());
-//        this.tabCall_modelConf = FXCollections.observableArrayList(getAll());
-//        tabCall_tableConf.setItems(tabCall_modelConf);
-//        tabCall_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
-    }
-
-//    private List<Conference> getAll(){
-//        Conference c1 = new Conference(1,"Forbes Women's Summit", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c2 = new Conference(2,"Grace Hopper Celebration of Women in Computing", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c3 = new Conference(3,"Social Media Week", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c4 = new Conference(4,"Funnel Network of Marketing", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c5 = new Conference(5,"Content Marketing World", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c6 = new Conference(6,"UserConf", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c7 = new Conference(7,"Social Media for Customer Service Summit", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c8 = new Conference(8,"CX Impact", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//        Conference c9 = new Conference(9,"Funnel Network of Marketing", "2017-20-01","2017-02-02", "2017-30-01","2017-30-02");
-//
-//        List<Conference> conf = new ArrayList<>();
-//        conf.add(c1);
-//        conf.add(c2);
-//        conf.add(c3);
-//        conf.add(c4);
-//        conf.add(c5);
-//        conf.add(c6);
-//        conf.add(c7);
-//        conf.add(c8);
-//        conf.add(c9);
-//
-//        return conf;
-//    }
-
-    private void initButtonsTabSubmitAbstract(){
-        ImageView imageButtonPlus3 = new ImageView(plusImage);
-        imageButtonPlus3.setFitHeight(18d);
-        imageButtonPlus3.setFitWidth(18d);
-        ImageView imageButtonPlus4 = new ImageView(plusImage);
-        imageButtonPlus4.setFitHeight(18d);
-        imageButtonPlus4.setFitWidth(18d);
-        tabSubmitAbstract_buttonPlus3.setGraphic(imageButtonPlus3);
-        tabSubmitAbstract_buttonPlus4.setGraphic(imageButtonPlus4);
-
-        //init button Close
-        ImageView imageButtonClose = new ImageView(closeImage);
-        imageButtonClose.setFitHeight(18d);
-        imageButtonClose.setFitWidth(18d);
-        tabSubmitAbstract_buttonClose.setGraphic(imageButtonClose);
-        Tooltip tooltip = new Tooltip("I don't want to submit abstract anymore.");
-        tooltip.setFont(Font.font("Times New Roman", 16));
-        tabSubmitAbstract_buttonClose.setTooltip(tooltip);
-    }
-
     private void initTabs(){
         //set visible = false for some tabs
         mainTabPane.getTabs().remove(tabSubmitAbstract);
         mainTabPane.getTabs().remove(tabReview);
-    }
-
-    private void initComponentsTabReview(){
-        //init combobox
-        tabReview_comboboxQualifier.getItems().add("strong accept");
-        tabReview_comboboxQualifier.getItems().add("accept");
-        tabReview_comboboxQualifier.getItems().add("weak accept");
-        tabReview_comboboxQualifier.getItems().add("borderline paper");
-        tabReview_comboboxQualifier.getItems().add("weak reject");
-        tabReview_comboboxQualifier.getItems().add("reject");
-        tabReview_comboboxQualifier.getItems().add("strong reject");
-
-        //button close
-        ImageView imageButtonCloseReview = new ImageView(closeImage);
-        imageButtonCloseReview.setFitHeight(20d);
-        imageButtonCloseReview.setFitWidth(20d);
-        tabReview_buttonClose.setGraphic(imageButtonCloseReview);
-        Tooltip tooltip = new Tooltip("Close review");
-        tooltip.setFont(Font.font("Times New Roman", 16));
-        tabReview_buttonClose.setTooltip(tooltip);
     }
 
     //Alert for error
@@ -351,11 +268,12 @@ public class AppViewController implements IConfClient {
         }
         else if (loader.equals("/view/apppage.fxml")) {
             appViewController.initTabs();
+            appViewController.initComboboxRol();
             appViewController.initButtonsTabSubmitAbstract();
             appViewController.initComponentsTabReview();
             appViewController.tabAllConf_initTables();
             appViewController.tabCall_initTables();
-        } else if (loader.equals("/view/apppage.fxml")){
+            appViewController.tabMyConferences_initTables();
         }
         stage.setTitle(title);
         stage.setScene(new Scene(parent));
@@ -364,6 +282,7 @@ public class AppViewController implements IConfClient {
         stage.show();
     }
 
+//-----------------------------------------------------------------------------------------------------------------
     //Controller LOGIN PAGE
     //la apasarea butonului Login
     @FXML
@@ -376,7 +295,7 @@ public class AppViewController implements IConfClient {
 
             User user = new User(username, password);
             server.login(user, this);
-
+            userlogat = user;
             //incarca fereastra principala
             openNewPage(e, "/view/apppage.fxml", "Conference Management System");
         } catch (NullPointerException e1) {
@@ -387,7 +306,7 @@ public class AppViewController implements IConfClient {
     }
 
     //cand se bifeaza checkbox-ul pentru Terms => enable/disable la butonul Sign Up
-    public void handleCheckbox(ActionEvent e) {
+    public void handleCheckbox() {
         if (buttonSignup.isDisable()) {
             buttonSignup.setDisable(false);
         } else {
@@ -405,7 +324,7 @@ public class AppViewController implements IConfClient {
             e1.printStackTrace();
         }
     }
-
+//-----------------------------------------------------------------------------------------------------------------
     //Controller REGISTER PAGE
     //butonul Sign Up de pe pagina de REGISTER
     @FXML
@@ -432,8 +351,19 @@ public class AppViewController implements IConfClient {
         }
     }
 
+    //incarca imagine si tooltip pt butonul de Close din RegisterPage
+    private void initButtonCloseSignUp() {
+        ImageView imageButtonCloseSignUp = new ImageView(closeImage);
+        imageButtonCloseSignUp.setFitHeight(20d);
+        imageButtonCloseSignUp.setFitWidth(20d);
+        buttonCloseSignUp.setGraphic(imageButtonCloseSignUp);
+        Tooltip tooltip = new Tooltip("I don't want to sign up anymore.");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        buttonCloseSignUp.setTooltip(tooltip);
+    }
+
     //cand se bifeaza checkbox-ul pentru Terms => enable/disable la butonul Sign Up
-    public void handleCheckboxTerms(ActionEvent e) {
+    public void handleCheckboxTerms() {
         if (buttonSignupR.isDisable()) {
             buttonSignupR.setDisable(false);
         } else {
@@ -451,12 +381,12 @@ public class AppViewController implements IConfClient {
         }
     }
 
+//-----------------------------------------------------------------------------------------------------------------
     //Controller MAIN PAGE
     //cand se apasa butonul de logout
     public void handleButtonLogout(ActionEvent e) {
         try {
-            User userLogat = new User();
-            server.logout(userLogat, this);
+            server.logout(userlogat, this);
             //deschide LOGIN PAGE
             openNewPage(e, "/view/loginpage.fxml", "Login");
         } catch (ConfException e1) {
@@ -466,52 +396,247 @@ public class AppViewController implements IConfClient {
         }
     }
 
+    //incarca rolurile userului logat
+    private void initComboboxRol(){
+        comboboxType.getItems().add("viewer");
+        try {
+            Role[] listRoles = server.getRoles(userlogat);
+            for (Role r : listRoles){
+                comboboxType.getItems().add(r.getDenumire());
+            }
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+        comboboxType.getSelectionModel().selectFirst();
+
+        comboboxType.getSelectionModel().selectedItemProperty().addListener((ov, oldvalue, newvalue) -> {
+            this.tabMyConferences_initTables();
+            if (oldvalue.equals("viewer")){
+                comboboxType.getItems().remove("viewer");
+            }
+        });
+    }
+
+    private Role getRol(String rol) throws ConfException {
+        for (Role r : server.getRoles(userlogat)){
+            if (r.getDenumire().equals(rol)){
+                return r;
+            }
+        }
+        return null;
+    }
+
+//-----------------------------------------------------------------------------------------------------------------
     //TAB My Conferences
-    public void tabMyConferences_handleButtonReview(ActionEvent actionEvent) {
+    public void tabMyConferences_handleButtonReview() {
         //se deschide tabul Submit abstract
         mainTabPane.getTabs().add(tabReview);
         mainTabPane.getSelectionModel().select(tabReview);
     }
 
+    private void tabMyConferences_initTables(){
+        tabMyConf_columnNameConf.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabMyConf_columnStartDateConf.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
+        tabMyConf_columnEndDateConf.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
+
+        try {
+            Role rol = getRol(comboboxType.getValue());
+            tabMyConf_tableConf.getSelectionModel().selectedItemProperty().addListener(tabMyConf_changedTableItemListener());
+
+            this.tabMyConf_modelConf = FXCollections.observableArrayList(server.getConferences(userlogat, rol));
+            tabMyConf_tableConf.setItems(tabMyConf_modelConf);
+            tabMyConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ChangeListener<Conference> tabMyConf_changedTableItemListener(){
+        return (observable, oldvalue, newvalue) -> tabMyConferences_loadSessions(newvalue);
+    }
+
+    private void tabMyConferences_loadSessions(Conference conference){
+        try {
+            tabMyConf_columnNameSes.setCellValueFactory(new PropertyValueFactory<>("nume"));
+            tabMyConf_columnDateSes.setCellValueFactory(new PropertyValueFactory<>("data"));
+            tabMyConf_columnPriceSes.setCellValueFactory(new PropertyValueFactory<>("pret"));
+            tabMyConf_columnStartHourSes.setCellValueFactory(new PropertyValueFactory<>("ora_inc"));
+            tabMyConf_columnEndHourSes.setCellValueFactory(new PropertyValueFactory<>("ora_sf"));
+            tabMyConf_columnRoomSes.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSala().getNume()));
+
+            tabMyConf_tableSessions.getItems().clear();
+
+            //aici sesiuni!!
+            tabMyConf_modelSes = FXCollections.observableArrayList(server.getSessions(conference));
+            tabMyConf_tableSessions.setItems(tabMyConf_modelSes);
+            tabMyConf_tableSessions.getSelectionModel().selectFirst();
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+    }
+
+//-----------------------------------------------------------------------------------------------------------------
+    //TAB All Conferences
+    private void tabAllConf_initTables(){
+        tabAllConf_columnNameConf.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabAllConf_columnStartDateConf.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
+        tabAllConf_columnEndDateConf.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
+
+        tabAllConf_tableConf.getSelectionModel().selectedItemProperty().addListener(tabAllConf_changedTableItemListener());
+
+        try {
+            this.tabAllConf_modelConf = FXCollections.observableArrayList(server.getAllConferences());
+            tabAllConf_tableConf.setItems(tabAllConf_modelConf);
+            tabAllConf_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ChangeListener<Conference> tabAllConf_changedTableItemListener(){
+        return (observable, oldvalue, newvalue) -> tabAllConf_loadSessions(newvalue);
+    }
+
+    private void tabAllConf_loadSessions(Conference conference){
+        tabAllConf_columnNameSes.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabAllConf_columnDateSes.setCellValueFactory(new PropertyValueFactory<>("data"));
+        tabAllConf_columnPriceSes.setCellValueFactory(new PropertyValueFactory<>("pret"));
+        tabAllConf_columnStartHourSes.setCellValueFactory(new PropertyValueFactory<>("ora_inc"));
+        tabAllConf_columnEndHourSes.setCellValueFactory(new PropertyValueFactory<>("ora_sf"));
+        tabAllConf_columnRoomSes.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSala().getNume()));
+
+        tabAllConf_tableSessions.getItems().clear();
+
+        try {
+            tabAllConf_modelSes = FXCollections.observableArrayList(server.getSessions(conference));
+            tabAllConf_tableSessions.setItems(tabAllConf_modelSes);
+            tabAllConf_tableSessions.getSelectionModel().selectFirst();
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------
     //TAB Call for papers
     //cand se apasa butonul "Submit Abstract"
-    public void tabCallForPapers_handleButtonSubmitAbstract(ActionEvent actionEvent) {
+    public void tabCallForPapers_handleButtonSubmitAbstract() {
         //se deschide tabul Submit abstract
         mainTabPane.getTabs().add(tabSubmitAbstract);
         mainTabPane.getSelectionModel().select(tabSubmitAbstract);
     }
 
-    //TAB Review
-    public void tabReview_handleButtonClose(ActionEvent actionEvent) {
-        mainTabPane.getTabs().remove(tabReview);
-        mainTabPane.getSelectionModel().select(tabMyConferences);
+    private void tabCall_initTables(){
+        tabCall_columnNameC.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabCall_columnStartDateC.setCellValueFactory(new PropertyValueFactory<>("data_inc"));
+        tabCall_columnEndDateC.setCellValueFactory(new PropertyValueFactory<>("data_sf"));
+        tabCall_columnDeadlineAbstractC.setCellValueFactory(new PropertyValueFactory<>("deadline_abs"));
+        tabCall_columnDeadlineFullC.setCellValueFactory(new PropertyValueFactory<>("deadline_full"));
 
+        tabCall_tableConf.getSelectionModel().selectedItemProperty().addListener(changedTableItemListener());
+
+        try {
+            //aici deadline
+            this.tabCall_modelConf = FXCollections.observableArrayList(server.getAllConferences());
+            tabCall_tableConf.setItems(tabCall_modelConf);
+            tabCall_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
     }
 
+    private ChangeListener<Conference> changedTableItemListener(){
+        return (observable, oldvalue, newvalue) -> tabCall_loadSessions(newvalue);
+    }
+
+    private void tabCall_loadSessions(Conference conference){
+        tabCall_columnNameS.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        tabCall_columnDateS.setCellValueFactory(new PropertyValueFactory<>("data"));
+        tabCall_columnPriceS.setCellValueFactory(new PropertyValueFactory<>("pret"));
+        tabCall_columnStartHourS.setCellValueFactory(new PropertyValueFactory<>("ora_inc"));
+        tabCall_columnEndHourS.setCellValueFactory(new PropertyValueFactory<>("ora_sf"));
+        tabCall_columnRoomS.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSala().getNume()));
+
+        tabCall_tableSessions.getItems().clear();
+
+        try {
+            tabCall_modelSes = FXCollections.observableArrayList(server.getSessions(conference));
+            tabCall_tableSessions.setItems(tabCall_modelSes);
+            tabCall_tableSessions.getSelectionModel().selectFirst();
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+    }
+
+//-----------------------------------------------------------------------------------------------------------------
+    //TAB Review
+    public void tabReview_handleButtonClose() {
+        mainTabPane.getTabs().remove(tabReview);
+        mainTabPane.getSelectionModel().select(tabMyConferences);
+    }
+
+    private void initComponentsTabReview(){
+        //init combobox
+        tabReview_comboboxQualifier.getItems().add("strong accept");
+        tabReview_comboboxQualifier.getItems().add("accept");
+        tabReview_comboboxQualifier.getItems().add("weak accept");
+        tabReview_comboboxQualifier.getItems().add("borderline paper");
+        tabReview_comboboxQualifier.getItems().add("weak reject");
+        tabReview_comboboxQualifier.getItems().add("reject");
+        tabReview_comboboxQualifier.getItems().add("strong reject");
+
+        //button close
+        ImageView imageButtonCloseReview = new ImageView(closeImage);
+        imageButtonCloseReview.setFitHeight(20d);
+        imageButtonCloseReview.setFitWidth(20d);
+        tabReview_buttonClose.setGraphic(imageButtonCloseReview);
+        Tooltip tooltip = new Tooltip("Close review");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        tabReview_buttonClose.setTooltip(tooltip);
+    }
+
+//-----------------------------------------------------------------------------------------------------------------
     //TAB Submit Abstract
     //apar field'urile pt urmatorul autor
-    public void tabSubmitAbstract_handleButtonPlus3(ActionEvent actionEvent) {
+    public void tabSubmitAbstract_handleButtonPlus3() {
         tabSubmitAbstract_buttonPlus4.setVisible(true);
         tabSubmitAbstract_buttonPlus3.setVisible(false);
-
         tabSubmitAbstract_textareaInfo4.setVisible(true);
         tabSubmitAbstract_textfieldName4.setVisible(true);
     }
-    public void tabSubmitAbstract_handleButtonPlus4(ActionEvent actionEvent) {
+    public void tabSubmitAbstract_handleButtonPlus4() {
         tabSubmitAbstract_buttonPlus4.setVisible(false);
-
         tabSubmitAbstract_textareaInfo5.setVisible(true);
         tabSubmitAbstract_textfieldName5.setVisible(true);
     }
 
-    public void handleTabSubmitAbstract_buttonClose(ActionEvent actionEvent) {
+    private void initButtonsTabSubmitAbstract(){
+        ImageView imageButtonPlus3 = new ImageView(plusImage);
+        imageButtonPlus3.setFitHeight(18d);
+        imageButtonPlus3.setFitWidth(18d);
+        ImageView imageButtonPlus4 = new ImageView(plusImage);
+        imageButtonPlus4.setFitHeight(18d);
+        imageButtonPlus4.setFitWidth(18d);
+        tabSubmitAbstract_buttonPlus3.setGraphic(imageButtonPlus3);
+        tabSubmitAbstract_buttonPlus4.setGraphic(imageButtonPlus4);
+
+        //init button Close
+        ImageView imageButtonClose = new ImageView(closeImage);
+        imageButtonClose.setFitHeight(18d);
+        imageButtonClose.setFitWidth(18d);
+        tabSubmitAbstract_buttonClose.setGraphic(imageButtonClose);
+        Tooltip tooltip = new Tooltip("I don't want to submit abstract anymore.");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        tabSubmitAbstract_buttonClose.setTooltip(tooltip);
+    }
+
+    public void handleTabSubmitAbstract_buttonClose() {
         mainTabPane.getTabs().remove(tabSubmitAbstract);
         mainTabPane.getSelectionModel().select(tabCallForPapers);
     }
 
     //choose a file
     private Desktop desktop = Desktop.getDesktop();
-    final FileChooser fileChooser = new FileChooser();
+    private final FileChooser fileChooser = new FileChooser();
 
     private void openFile(File file) {
         try {
@@ -523,7 +648,7 @@ public class AppViewController implements IConfClient {
     }
 
     @FXML
-    public void handleButtonChooseAbstract(ActionEvent e){
+    public void handleButtonChooseAbstract(){
         configureFileChooser(fileChooser);
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {

@@ -34,17 +34,18 @@ public class ImplementedService implements IConfServer{
     }
 
     @Override
-    public synchronized  void login(User user, IConfClient client) throws ConfException {
+    public synchronized User login(User user, IConfClient client) throws ConfException {
         List<User> users=userRepo.getAll();
         for(User u:users){
             if(u.getUsername().equals(user.getUsername())&&u.getPassword().equals(user.getPassword())){
                 if (loggedClients.get(user.getUsername()) != null)
                     throw new ConfException("User already logged in.");
                 loggedClients.put(user.getUsername(), client);
-                return;
+                System.out.println(u.toString());
+                return u;
             }
         }
-            throw new ConfException("Authentication failed.");
+        throw new ConfException("Authentication failed.");
     }
     @Override
     public synchronized void logout(User user, IConfClient client) throws ConfException {

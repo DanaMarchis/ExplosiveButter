@@ -37,7 +37,7 @@
         <property name="ora_inc" column="ora_inc" type="string"/>
         <property name="ora_sf" column="ora_sf" type="string"/>
         <property name="data" column="data" type="string"/>
-        <many-to-one name="sala" column="sala" class="iss.model.Sala"  cascade="all"/>
+        <many-to-one name="sala" column="sala" class="iss.model.Sala"  cascade="all" lazy="false"/>
     </class>
     <class name="iss.persistence.MyTable" table ="MyTable">
         <composite-id class="iss.persistence.MyTableId">

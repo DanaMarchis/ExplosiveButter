@@ -10,7 +10,7 @@ import iss.model.User;
  */
 public interface IConfServer {
 
-    void login(User user, IConfClient client) throws ConfException;
+    User login(User user, IConfClient client) throws ConfException;
     void logout(User user, IConfClient client) throws ConfException;
     void register(User user) throws ConfException;
     Conference[] getAllConferences() throws ConfException; //toate conferintele

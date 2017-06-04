@@ -24,7 +24,7 @@ public class ConfServerRpcProxy implements IConfServer {
     private int port;
 
     //userul logat + clientul (pt fiecare client se face cate un proxy)
-    User userLogat;
+    private User userLogat;
     private IConfClient client;
 
     private ObjectInputStream input;
@@ -41,11 +41,8 @@ public class ConfServerRpcProxy implements IConfServer {
     }
 
     @Override
-    public void login(User user, IConfClient client) throws ConfException {
+    public User login(User user, IConfClient client) throws ConfException {
         initializeConnection();
-
-//        UserDTO userDTO = DTOUtils.getDTO(user);
-//        Request req = new Request.Builder().type(RequestType.LOGIN).data(userDTO).build();
         Request req = new Request.Builder().type(RequestType.LOGIN).data(user).build();
 
         sendRequest(req);
@@ -54,14 +51,16 @@ public class ConfServerRpcProxy implements IConfServer {
 
         if (response.type() == ResponseType.OK) {
             System.out.println("User logat cu succes"); //s-a logat cu succes
-            this.userLogat = user;
+            this.userLogat = (User) response.data();
             this.client = client;
+            return userLogat;
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
             closeConnection();
             throw new ConfException(err);
         }
+        return null;
     }
 
     @Override
@@ -119,8 +118,7 @@ public class ConfServerRpcProxy implements IConfServer {
 
         if (response.type() == ResponseType.OK) {
 //            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
-            Conference[] conferences = (Conference[]) response.data();
-            return conferences;
+            return (Conference[]) response.data();
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
@@ -133,8 +131,6 @@ public class ConfServerRpcProxy implements IConfServer {
 
     @Override
     public Session[] getSessions(Conference conf) throws ConfException {
-//        ConferenceDTO conferenceDTO = DTOUtils.getDTO(conf);
-//        Request req = new Request.Builder().type(RequestType.SESSIONS_FOR_CONFERENCE).data(conferenceDTO).build();
         Request req = new Request.Builder().type(RequestType.SESSIONS_FOR_CONFERENCE).data(conf).build();
 
         sendRequest(req);
@@ -142,16 +138,13 @@ public class ConfServerRpcProxy implements IConfServer {
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-//            Session[] sessions = DTOUtils.getFromDTO((SessionDTO[]) response.data());
-            Session[] sessions = (Session[]) response.data();
-            return sessions;
+            return (Session[]) response.data();
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
             closeConnection();
             throw new ConfException(err);
         }
-
         return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
     }
 
@@ -159,7 +152,7 @@ public class ConfServerRpcProxy implements IConfServer {
     public Role[] getRoles(User user) throws ConfException {
 //        UserDTO userDTO = DTOUtils.getDTO(user);
 //        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(userDTO).build();
-        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(user).build();
+        Request req = new Request.Builder().type(RequestType.ROLES_FOR_USER).data(userLogat).build();
 
         sendRequest(req);
 
@@ -167,8 +160,7 @@ public class ConfServerRpcProxy implements IConfServer {
 
         if (response.type() == ResponseType.OK) {
 //            Role[] roles = DTOUtils.getFromDTO((RoleDTO[]) response.data());
-            Role[] roles = (Role[]) response.data();
-            return roles;
+            return (Role[]) response.data();
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
@@ -181,7 +173,7 @@ public class ConfServerRpcProxy implements IConfServer {
 
     @Override
     public Conference[] getConferences(User user, Role role) throws ConfException {
-        UserRole userRole = new UserRole(user, role);
+        UserRole userRole = new UserRole(userLogat, role);
 //        UserRoleDTO userRoleDTO = DTOUtils.getDTO(userRole);
 //        Request req = new Request.Builder().type(RequestType.CONFERENCES_FOR_USER_AND_ROLE).data(userRoleDTO).build();
         Request req = new Request.Builder().type(RequestType.CONFERENCES_FOR_USER_AND_ROLE).data(userRole).build();
@@ -192,8 +184,7 @@ public class ConfServerRpcProxy implements IConfServer {
 
         if (response.type() == ResponseType.OK) {
 //            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
-            Conference[] conferences = (Conference[]) response.data();
-            return conferences;
+            return (Conference[]) response.data();
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
@@ -214,8 +205,7 @@ public class ConfServerRpcProxy implements IConfServer {
 
         if (response.type() == ResponseType.OK) {
 //            Conference[] conferences = DTOUtils.getFromDTO((ConferenceDTO[]) response.data());
-            Conference[] conferences = (Conference[]) response.data();
-            return conferences;
+            return (Conference[]) response.data();
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();

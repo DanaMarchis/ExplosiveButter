@@ -2,7 +2,7 @@
 	-fx-font-family: "Times New Roman";
 	-fx-font-size: 16px;
 }
-#buttonLogout, #tabCall_buttonSubmitAbstract, #tabCall_buttonSubmitFull{
+#buttonLogout, #tabCall_buttonSubmitAbstract, #tabCall_buttonSubmitFull, #tabAllConf_buttonAttend, #tabMyConf_buttonReview{
     -fx-font-family: "Times New Roman";
     -fx-background-color: #f2c8a6;
     -fx-background-radius: 10;
