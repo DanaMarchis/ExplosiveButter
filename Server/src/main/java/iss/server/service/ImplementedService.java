@@ -11,6 +11,7 @@ import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -99,6 +100,10 @@ public class ImplementedService implements IConfServer{
 
     @Override
     public Conference[] getAllConferencesDeadline() throws ConfException {
-        return new Conference[0];
+        try {
+            return conferenceRepo.getAllConferencesDeadline().toArray(new Conference[1]);
+        } catch (ParseException e) {
+            throw new ConfException("Formatul datei este incorect",e);
+        }
     }
 }

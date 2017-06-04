@@ -41,7 +41,7 @@
     </class>
     <class name="iss.persistence.MyTable" table ="MyTable">
         <composite-id class="iss.persistence.MyTableId">
-            <key-many-to-one name="user" class="iss.model.User" lazy="false"/>
+            <key-many-to-one name="user" class="iss.model.User" lazy="false" />
             <key-many-to-one name="rol" class="iss.model.Role" lazy="false"/>
             <key-many-to-one name="conference" class="iss.model.Conference" lazy="false"/>
             <key-many-to-one name="session" class="iss.model.Session" lazy="false"/>
