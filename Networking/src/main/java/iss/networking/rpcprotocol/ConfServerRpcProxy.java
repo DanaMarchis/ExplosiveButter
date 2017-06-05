@@ -2,15 +2,16 @@ package iss.networking.rpcprotocol;
 
 import iss.model.*;
 //import iss.networking.dto.*;
+import iss.model.dto.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -103,7 +104,7 @@ public class ConfServerRpcProxy implements IConfServer {
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
-            closeConnection();
+//            closeConnection();
             throw new ConfException(err);
         }
     }
@@ -122,7 +123,6 @@ public class ConfServerRpcProxy implements IConfServer {
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
-            closeConnection();
             throw new ConfException(err);
         }
 
@@ -142,7 +142,6 @@ public class ConfServerRpcProxy implements IConfServer {
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
-            closeConnection();
             throw new ConfException(err);
         }
         return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
@@ -164,7 +163,6 @@ public class ConfServerRpcProxy implements IConfServer {
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
-            closeConnection();
             throw new ConfException(err);
         }
 
@@ -188,7 +186,6 @@ public class ConfServerRpcProxy implements IConfServer {
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
-            closeConnection();
             throw new ConfException(err);
         }
 
@@ -209,11 +206,145 @@ public class ConfServerRpcProxy implements IConfServer {
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
-            closeConnection();
             throw new ConfException(err);
         }
 
         return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public File getAbstract(String nume, String topic) throws ConfException {
+        Name_and_Topic name_and_topic = new Name_and_Topic(nume, topic);
+        Request req = new Request.Builder().type(RequestType.ABSTRACT).data(name_and_topic).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            return (File) response.data();
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public File getFull(String nume, String topic) throws ConfException {
+        Name_and_Topic name_and_topic = new Name_and_Topic(nume, topic);
+        Request req = new Request.Builder().type(RequestType.FULL).data(name_and_topic).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            return (File) response.data();
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public Name_and_Topic[] getNameAndTopic() throws ConfException {
+        Request req = new Request.Builder().type(RequestType.NAME_AND_TOPIC).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            return (Name_and_Topic[]) response.data();
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public void review(String name, String topic, String qualifier, String recomandarea, User userlogat) throws ConfException {
+        Review_DTOHelper review_dtoHelper = new Review_DTOHelper(name, topic, qualifier, recomandarea, userLogat);
+        Request req = new Request.Builder().type(RequestType.REVIEW).data(review_dtoHelper).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            System.out.println("review facut cu succes");
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+    }
+
+    @Override
+    public Session[] getSesiuniConferintaUserRol(Conference conferinta, User user, Role rol) throws ConfException {
+        Sesiuni_Conferinta_User_Rol_DTOHelper sesiuni_conferinta_user_rol_dtoHelper = new Sesiuni_Conferinta_User_Rol_DTOHelper(conferinta, userLogat, rol);
+        Request req = new Request.Builder().type(RequestType.SESIUNI_CONFERINTA_USER_ROL).data(sesiuni_conferinta_user_rol_dtoHelper).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            return (Session[]) response.data();
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+
+        return null; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public void attend(User user, Role rol, Conference conference, Session session) throws ConfException {
+        Attend_DTOHelper attend_dtoHelper = new Attend_DTOHelper(userLogat, rol, conference, session);
+        Request req = new Request.Builder().type(RequestType.ATTEND).data(attend_dtoHelper).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            System.out.println("attend facut cu succes");
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+    }
+
+    @Override
+    public boolean verifica(User userlogat, Session session) throws ConfException {
+        Verifica_DTOHelper verifica_dtoHelper = new Verifica_DTOHelper(userLogat, session);
+        Request req = new Request.Builder().type(RequestType.VERIFICA).data(verifica_dtoHelper).build();
+
+        sendRequest(req);
+
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            return (Boolean) response.data();
+        }
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ConfException(err);
+        }
+
+        return false; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
     }
 
     private void closeConnection() {

@@ -2,10 +2,12 @@ package iss.networking.rpcprotocol;
 
 import iss.model.*;
 //import iss.networking.dto.*;
+import iss.model.dto.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -210,6 +212,114 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
 //                ConferenceDTO[] conferenceDTOS = DTOUtils.getDTO(conferences);
 //                return new Response.Builder().type(ResponseType.OK).data(conferenceDTOS).build();
                 return new Response.Builder().type(ResponseType.OK).data(conferences).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de abstract
+        if (request.type() == RequestType.ABSTRACT) {
+            System.out.println("Abstract request ..." + request.type());
+            Name_and_Topic name_and_topic = (Name_and_Topic) request.data();
+            String nume = name_and_topic.getName();
+            String topic = name_and_topic.getTopic();
+            try {
+                File file = server.getAbstract(nume, topic);
+                return new Response.Builder().type(ResponseType.OK).data(file).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de full
+        if (request.type() == RequestType.FULL) {
+            System.out.println("Full request ..." + request.type());
+            Name_and_Topic name_and_topic = (Name_and_Topic) request.data();
+            String nume = name_and_topic.getName();
+            String topic = name_and_topic.getTopic();
+            try {
+                File file = server.getFull(nume, topic);
+                return new Response.Builder().type(ResponseType.OK).data(file).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de name and topic
+        if (request.type() == RequestType.NAME_AND_TOPIC) {
+            System.out.println("Name and topic request ..." + request.type());
+            try {
+                Name_and_Topic[] name_and_topics = server.getNameAndTopic();
+                return new Response.Builder().type(ResponseType.OK).data(name_and_topics).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de review
+        if (request.type() == RequestType.REVIEW) {
+            System.out.println("Review request ..." + request.type());
+            Review_DTOHelper review_dtoHelper = (Review_DTOHelper) request.data();
+            String name = review_dtoHelper.getName();
+            String topic = review_dtoHelper.getTopic();
+            String qualifier = review_dtoHelper.getQualifier();
+            String recomandare = review_dtoHelper.getRecomandare();
+            User user = review_dtoHelper.getUser();
+            try {
+                server.review(name, topic, qualifier, recomandare, user);
+                return new Response.Builder().type(ResponseType.OK).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de sesiuni conferinta user rol
+        if (request.type() == RequestType.SESIUNI_CONFERINTA_USER_ROL) {
+            System.out.println("Sesiuni conferinta user rol request ..." + request.type());
+            Sesiuni_Conferinta_User_Rol_DTOHelper sesiuni_conferinta_user_rol_dtoHelper = (Sesiuni_Conferinta_User_Rol_DTOHelper) request.data();
+            Conference conference = sesiuni_conferinta_user_rol_dtoHelper.getConference();
+            User user = sesiuni_conferinta_user_rol_dtoHelper.getUser();
+            Role role = sesiuni_conferinta_user_rol_dtoHelper.getRole();
+            try {
+                Session[] sessions = server.getSesiuniConferintaUserRol(conference, user, role);
+                return new Response.Builder().type(ResponseType.OK).data(sessions).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de attend
+        if (request.type() == RequestType.ATTEND) {
+            System.out.println("Attend request ..." + request.type());
+            Attend_DTOHelper attend_dtoHelper = (Attend_DTOHelper) request.data();
+            User user = attend_dtoHelper.getUser();
+            Role role = attend_dtoHelper.getRole();
+            Conference conference = attend_dtoHelper.getConference();
+            Session session = attend_dtoHelper.getSession();
+            try {
+                server.attend(user, role, conference, session);
+                return new Response.Builder().type(ResponseType.OK).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de verifica
+        if (request.type() == RequestType.VERIFICA) {
+            System.out.println("Verifica request ..." + request.type());
+            Verifica_DTOHelper verifica_dtoHelper = (Verifica_DTOHelper) request.data();
+            User user = verifica_dtoHelper.getUser();
+            Session session = verifica_dtoHelper.getSession();
+            try {
+                boolean verif = server.verifica(user, session);
+                return new Response.Builder().type(ResponseType.OK).data(verif).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
