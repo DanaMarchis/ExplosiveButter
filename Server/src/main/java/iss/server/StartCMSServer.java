@@ -62,8 +62,11 @@ public class StartCMSServer {
         RoleRepo roleRepo=new RoleRepo(sessionFactory);
         SessionRepository sessionRepository=new SessionRepository(sessionFactory);
         MyTableRepository myTableRepository=new MyTableRepository(sessionFactory);
+        PaperRepository paperRepository=new PaperRepository(sessionFactory);
+        ReviewRepository reviewRepository=new ReviewRepository(sessionFactory);
 
-        IConfServer serverImpl = new ImplementedService(userRepo,conferenceRepo,roleRepo,sessionRepository,myTableRepository);
+        IConfServer serverImpl = new ImplementedService(userRepo,conferenceRepo,roleRepo,sessionRepository,myTableRepository,
+                reviewRepository,paperRepository);
         int confPort = defaultPort;
         System.out.println("Starting server on port: " + confPort);
         AbstractServer server = new ConfRpcConcurrentServer(confPort, serverImpl);

@@ -121,7 +121,11 @@ public class ImplementedService implements IConfServer{
 
     @Override
     public File getFull(Abstract_Details abstract_details) throws ConfException {
-        return null;
+        try {
+            return new File(paperRepository.getFullDetails(abstract_details).getFilePath());
+        } catch (Exception e) {
+            throw new ConfException("error while trying to find full paper",e);
+        }
     }
 
     @Override

@@ -2,44 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec619e0c-2137-4a1e-9974-8b271abb918b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Model/build/classes/main/iss/model/UserRole.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/MyTable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/UserRole.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/build/libs/Client-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/Client/build/libs/Client-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/build/classes/main/iss/model/Session.class" afterPath="$PROJECT_DIR$/Model/build/classes/main/iss/model/Session.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/build/libs/Model-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/Model/build/libs/Model-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/ConfClientRpcWorker.class" afterPath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/ConfClientRpcWorker.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/ConfServerRpcProxy$ReaderThread.class" afterPath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/ConfServerRpcProxy$ReaderThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/ConfServerRpcProxy.class" afterPath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/ConfServerRpcProxy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/RequestType.class" afterPath="$PROJECT_DIR$/Networking/build/classes/main/iss/networking/rpcprotocol/RequestType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Networking/build/libs/Networking-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/Networking/build/libs/Networking-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Persistence/build/classes/main/iss/persistence/ConferenceRepo.class" afterPath="$PROJECT_DIR$/Persistence/build/classes/main/iss/persistence/ConferenceRepo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Persistence/build/libs/Persistence-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/Persistence/build/libs/Persistence-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/build/classes/main/iss/server/StartCMSServer.class" afterPath="$PROJECT_DIR$/Server/build/classes/main/iss/server/StartCMSServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/build/classes/main/iss/server/service/ImplementedService.class" afterPath="$PROJECT_DIR$/Server/build/classes/main/iss/server/service/ImplementedService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Services/build/classes/main/iss/services/IConfServer.class" afterPath="$PROJECT_DIR$/Services/build/classes/main/iss/services/IConfServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Services/build/libs/Services-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/Services/build/libs/Services-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/Abstract_Details.java" afterPath="$PROJECT_DIR$/Model/src/main/java/iss/model/Abstract_Details.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/Full_Details.java" afterPath="$PROJECT_DIR$/Model/src/main/java/iss/model/Full_Details.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/PC_Details.java" afterPath="$PROJECT_DIR$/Model/src/main/java/iss/model/PC_Details.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/Paper.java" afterPath="$PROJECT_DIR$/Model/src/main/java/iss/model/Paper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/Review.java" afterPath="$PROJECT_DIR$/Model/src/main/java/iss/model/Review.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/src/main/java/iss/model/Session.java" afterPath="$PROJECT_DIR$/Model/src/main/java/iss/model/Session.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Networking/src/main/java/iss/networking/rpcprotocol/ConfServerRpcProxy.java" afterPath="$PROJECT_DIR$/Networking/src/main/java/iss/networking/rpcprotocol/ConfServerRpcProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/SessionRepository.java" afterPath="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/SessionRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/build/resources/main/Entities.hbm.xml" afterPath="$PROJECT_DIR$/Server/build/resources/main/Entities.hbm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/build/resources/main/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/Server/build/resources/main/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java" afterPath="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java" afterPath="$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/main/java/iss/server/service/ImplementedService.java" afterPath="$PROJECT_DIR$/Server/src/main/java/iss/server/service/ImplementedService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/main/resources/Entities.hbm.xml" afterPath="$PROJECT_DIR$/Server/src/main/resources/Entities.hbm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/Server/src/main/resources/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Services/src/main/java/iss/services/IConfServer.java" afterPath="$PROJECT_DIR$/Services/src/main/java/iss/services/IConfServer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/Client/.gradle/" />
     <ignored path="$PROJECT_DIR$/Client/build/" />
@@ -154,13 +119,23 @@
       <file leaf-file-name="ImplementedService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/src/main/java/iss/server/service/ImplementedService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="132" column="134" lean-forward="false" selection-start-line="132" selection-start-column="134" selection-end-line="132" selection-end-column="134" />
+            <state relative-caret-position="385">
+              <caret line="126" column="51" lean-forward="false" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
               <folding>
                 <element signature="method#review#0;class#ImplementedService#0" expanded="false" />
                 <element signature="method#getSesiuniConferintaUserRol#0;class#ImplementedService#0" expanded="false" />
                 <element signature="method#attend#0;class#ImplementedService#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartCMSServer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="385">
+              <caret line="75" column="77" lean-forward="true" selection-start-line="75" selection-start-column="77" selection-end-line="75" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -180,8 +155,8 @@
       <file leaf-file-name="PaperRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="19" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="529">
+              <caret line="60" column="38" lean-forward="false" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,7 +174,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IConfServer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IConfServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Services/src/main/java/iss/services/IConfServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="416">
@@ -215,19 +190,6 @@
             <state relative-caret-position="170">
               <caret line="67" column="26" lean-forward="false" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Abstract_Details.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/src/main/java/iss/model/Abstract_Details.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="784">
-              <caret line="69" column="33" lean-forward="false" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1508#1509#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -1454,12 +1416,12 @@
         <option value="$PROJECT_DIR$/Server/src/main/resources/Entities.hbm.xml" />
         <option value="$PROJECT_DIR$/Model/src/main/java/iss/model/Paper.java" />
         <option value="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/MyTableRepository.java" />
-        <option value="$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java" />
         <option value="$PROJECT_DIR$/Services/src/main/java/iss/services/IConfServer.java" />
         <option value="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/SessionRepository.java" />
-        <option value="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java" />
         <option value="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/ReviewRepository.java" />
+        <option value="$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/iss/server/service/ImplementedService.java" />
+        <option value="$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java" />
       </list>
     </option>
   </component>
@@ -2378,7 +2340,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2585,14 +2547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="63" column="82" lean-forward="false" selection-start-line="63" selection-start-column="82" selection-end-line="63" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/MyTableRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -2669,10 +2623,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Services/src/main/java/iss/services/IConfServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/src/main/java/iss/persistence/PaperRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="19" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="19" selection-end-column="5" />
+        <state relative-caret-position="529">
+          <caret line="60" column="38" lean-forward="false" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2681,8 +2643,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/main/java/iss/server/service/ImplementedService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="132" column="134" lean-forward="false" selection-start-line="132" selection-start-column="134" selection-end-line="132" selection-end-column="134" />
+        <state relative-caret-position="385">
+          <caret line="126" column="51" lean-forward="false" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
           <folding>
             <element signature="method#review#0;class#ImplementedService#0" expanded="false" />
             <element signature="method#getSesiuniConferintaUserRol#0;class#ImplementedService#0" expanded="false" />
@@ -2691,10 +2653,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Services/src/main/java/iss/services/IConfServer.java">
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/iss/server/StartCMSServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="385">
+          <caret line="75" column="77" lean-forward="true" selection-start-line="75" selection-start-column="77" selection-end-line="75" selection-end-column="77" />
           <folding />
         </state>
       </provider>
