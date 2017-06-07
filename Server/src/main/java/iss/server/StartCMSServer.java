@@ -5,10 +5,7 @@ import iss.model.Role;
 import iss.networking.utils.AbstractServer;
 import iss.networking.utils.ConfRpcConcurrentServer;
 import iss.networking.utils.ServerException;
-import iss.persistence.MyTable;
-import iss.persistence.RoleRepo;
-import iss.persistence.UserRepository;
-import iss.persistence.ConferenceRepo;
+import iss.persistence.*;
 import iss.server.service.ImplementedService;
 import iss.services.IConfServer;
 import org.hibernate.Session;
@@ -63,8 +60,10 @@ public class StartCMSServer {
         UserRepository userRepo = new UserRepository(sessionFactory);
         ConferenceRepo conferenceRepo=new ConferenceRepo(sessionFactory);
         RoleRepo roleRepo=new RoleRepo(sessionFactory);
+        SessionRepository sessionRepository=new SessionRepository(sessionFactory);
+        MyTableRepository myTableRepository=new MyTableRepository(sessionFactory);
 
-        IConfServer serverImpl = new ImplementedService(userRepo,conferenceRepo,roleRepo);
+        IConfServer serverImpl = new ImplementedService(userRepo,conferenceRepo,roleRepo,sessionRepository,myTableRepository);
         int confPort = defaultPort;
         System.out.println("Starting server on port: " + confPort);
         AbstractServer server = new ConfRpcConcurrentServer(confPort, serverImpl);

@@ -38,6 +38,7 @@
         <property name="ora_sf" column="ora_sf" type="string"/>
         <property name="data" column="data" type="string"/>
         <many-to-one name="sala" column="sala" class="iss.model.Sala"  cascade="all" lazy="false"/>
+        <many-to-one name="conference" column="conference" class="iss.model.Conference"  cascade="all" lazy="false"/>
     </class>
     <class name="iss.persistence.MyTable" table ="MyTable">
         <composite-id class="iss.persistence.MyTableId">
@@ -46,5 +47,49 @@
             <key-many-to-one name="conference" class="iss.model.Conference" lazy="false"/>
             <key-many-to-one name="session" class="iss.model.Session" lazy="false"/>
         </composite-id>
+    </class>
+    <class name="iss.model.Full_Details" table="Full_Details">
+        <id name="id" column="id_full_details" type="integer">
+            <generator class="increment"></generator>
+        </id>
+        <property name="filePath" column="file_path" type="string"/>
+    </class>
+    <class name="iss.model.Abstract_Details" table="Abstract_Details">
+        <id name="id" column="id_abstract_details" type="integer">
+            <generator class="increment"></generator>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="keywords" column="keywords" type="string"/>
+        <property name="topics" column="topics" type="string"/>
+        <property name="detalii_autori" column="detalii_autori" type="string"/>
+        <property name="filePath" column="file_path" type="string"/>
+    </class>
+    <class name="iss.model.Paper" table="Papers">
+        <id name="id_paper" column="id_paper" type="integer">
+            <generator class="increment"></generator>
+        </id>
+        <many-to-one name="user_author" column="user_author" class="iss.model.User"  cascade="all" lazy="false"/>
+        <many-to-one name="abstract_details" column="abstract_details" class="iss.model.Abstract_Details"  cascade="all" lazy="false"/>
+        <many-to-one name="full_details" column="full_details" class="iss.model.Full_Details"  cascade="all" lazy="false"/>
+        <many-to-one name="session" column="session" class="iss.model.Session"  cascade="all" lazy="false"/>
+    </class>
+    <class name="iss.model.Review" table="Reviews">
+        <id column="id_review" type="integer">
+            <generator class="native"></generator>
+        </id>
+        <many-to-one name="user" column="user" class="iss.model.User" cascade="all" lazy="false"/>
+        <many-to-one name="paper" column="paper" class="iss.model.Paper" cascade="all" lazy="false"/>
+        <property name="qualifiers" column="qualifiers" type="string"/>
+        <property name="recommendations" column="recommendations" type="string"/>
+    </class>
+    <class name="iss.model.PC_Details" table="PC_Derails">
+        <id column="id_user" type="integer">
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <one-to-one name="user" constrained="true"/>
+        <property name="webpage" column="webpage" type="string"/>
+        <property name="affiliation" column="affiliation" type="string"/>
     </class>
 </hibernate-mapping>

@@ -7,35 +7,35 @@ import java.io.Serializable;
  */
 public class Review implements Serializable {
 
-    private Integer id_user;
-    private Integer id_paper;
+    private User user;
+    private Paper paper;
     private String qualifiers;
     private String recommendations;
 
     public Review() {
     }
 
-    public Review(Integer id_user, Integer id_paper, String qualifiers, String recommendations) {
-        this.id_user = id_user;
-        this.id_paper = id_paper;
+    public Review(User user, Paper paper, String qualifiers, String recommendations) {
+        this.user = user;
+        this.paper = paper;
         this.qualifiers = qualifiers;
         this.recommendations = recommendations;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getId_paper() {
-        return id_paper;
+    public Paper getPaper() {
+        return paper;
     }
 
-    public void setId_paper(Integer id_paper) {
-        this.id_paper = id_paper;
+    public void setPaper(Paper paper) {
+        this.paper = paper;
     }
 
     public String getQualifiers() {

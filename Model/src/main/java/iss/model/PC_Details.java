@@ -7,25 +7,25 @@ import java.io.Serializable;
  */
 public class PC_Details implements Serializable {
 
-    private Integer id;
+    private User user;
     private String webpage;
     private String affiliation;
 
     public PC_Details() {
     }
 
-    public PC_Details(Integer id, String webpage, String affiliation) {
-        this.id = id;
+    public PC_Details(User user, String webpage, String affiliation) {
+        this.user = user;
         this.webpage = webpage;
         this.affiliation = affiliation;
     }
 
-    public Integer getId() {
-        return id;
+    public User getUser() {
+        return user;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUser(User user) {
+        this.user= user;
     }
 
     public String getWebpage() {

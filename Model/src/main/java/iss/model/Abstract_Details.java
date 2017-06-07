@@ -1,5 +1,6 @@
 package iss.model;
 
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -12,16 +13,18 @@ public class Abstract_Details implements Serializable {
     private String keywords;
     private String topics;
     private String detalii_autori;
+    private String filePath;
 
     public Abstract_Details() {
     }
 
-    public Abstract_Details(Integer id, String name, String keywords, String topics, String detalii_autori) {
+    public Abstract_Details(Integer id, String name, String keywords, String topics, String detalii_autori,String filePath) {
         this.id = id;
         this.name = name;
         this.keywords = keywords;
         this.topics = topics;
         this.detalii_autori = detalii_autori;
+        this.filePath=filePath;
     }
 
     public Integer getId() {
@@ -64,4 +67,11 @@ public class Abstract_Details implements Serializable {
         this.detalii_autori = detalii_autori;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 }

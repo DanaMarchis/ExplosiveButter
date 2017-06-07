@@ -14,11 +14,12 @@ public class Session implements Serializable {
     private String ora_sf;
     private Sala sala;
     private Integer pret;
+    private Conference conference;
 
     public Session() {
     }
 
-    public Session(Integer id, String nume, String data, String ora_inc, String ora_sf, Sala sala, Integer pret) {
+    public Session(Integer id, String nume, String data, String ora_inc, String ora_sf, Sala sala, Integer pret,Conference conference) {
         this.id = id;
         this.nume = nume;
         this.data = data;
@@ -26,6 +27,7 @@ public class Session implements Serializable {
         this.ora_sf = ora_sf;
         this.sala = sala;
         this.pret = pret;
+        this.conference=conference;
     }
 
     public Integer getId() {
@@ -84,4 +86,11 @@ public class Session implements Serializable {
         this.pret = pret;
     }
 
+    public Conference getConference() {
+        return conference;
+    }
+
+    public void setConference(Conference conference) {
+        this.conference = conference;
+    }
 }

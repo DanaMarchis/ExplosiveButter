@@ -13,7 +13,7 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password"></property>
     <property name="connection.foreign_keys">true</property>
-    <property name="hibernate.hbm2ddl.auto">validate</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     
     <!-- Echo all executed SQL to stdout -->
     <property name="show_sql">true</property>

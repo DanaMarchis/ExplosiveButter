@@ -9,14 +9,14 @@ import java.io.Serializable;
 public class Full_Details implements Serializable {
 
     private Integer id;
-    private File file; //not sure this is the correct type
+    private String filePath; //not sure this is the correct type
 
     public Full_Details() {
     }
 
-    public Full_Details(Integer id, File file) {
+    public Full_Details(Integer id, String filePath) {
         this.id = id;
-        this.file = file;
+        this.filePath = filePath;
     }
 
     public Integer getId() {
@@ -27,12 +27,11 @@ public class Full_Details implements Serializable {
         this.id = id;
     }
 
-    public File getFile() {
-        return file;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
-
 }

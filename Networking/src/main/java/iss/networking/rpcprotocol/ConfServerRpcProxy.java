@@ -1,7 +1,6 @@
 package iss.networking.rpcprotocol;
 
 import iss.model.*;
-//import iss.networking.dto.*;
 import iss.model.dto.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
