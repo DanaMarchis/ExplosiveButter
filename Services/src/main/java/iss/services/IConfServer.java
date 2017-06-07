@@ -25,5 +25,6 @@ public interface IConfServer {
     Session[] getSesiuniConferintaUserRol(Conference conferinta, User user, Role rol) throws ConfException; //getSesiuni pt o conferinta, user si rol ... Asta pt tabelul din MyConferences
     void attend(User user, Role rol, Conference conference, Session session) throws ConfException; //attend .. Care primeste userul, rolul, conferinta si sesiunea si salveaza in bd in tabela MyTable
     boolean verifica(User userlogat, Paper paper) throws ConfException; //O metoda care intoarce true sau false care (momentan, cred eu ca) primeste userlogat si sesiunea ... Si verifica daca idAbstract e completat, adica nu e null sau -1.. Nu stiu exact cum se retine in bd
-
+    void submitAbstract(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException;
+    void submitFull(String filepath, Session session, User user) throws ConfException;
 }
