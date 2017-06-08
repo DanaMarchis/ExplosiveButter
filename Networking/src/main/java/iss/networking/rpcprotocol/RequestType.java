@@ -19,6 +19,8 @@ public enum RequestType {
     REVIEW,
     SESIUNI_CONFERINTA_USER_ROL,
     ATTEND,
-    VERIFICA
+    VERIFICA,
+    SUBMIT_ABSTRACT,
+    SUBMIT_FULL
 
 }

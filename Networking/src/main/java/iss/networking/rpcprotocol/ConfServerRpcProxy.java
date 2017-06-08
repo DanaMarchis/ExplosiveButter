@@ -1,16 +1,16 @@
 package iss.networking.rpcprotocol;
 
 import iss.model.*;
-import iss.model.dto.*;
+//import iss.networking.dto.*;
+import iss.networking.dto.*;
+import iss.networking.dto.File_DTO;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -212,16 +212,37 @@ public class ConfServerRpcProxy implements IConfServer {
     }
 
     @Override
-    public File getAbstract(String nume, String topic) throws ConfException {
-        Name_and_Topic name_and_topic = new Name_and_Topic(nume, topic);
-        Request req = new Request.Builder().type(RequestType.ABSTRACT).data(name_and_topic).build();
+    public File getAbstract(Abstract_Details abstract_details) throws ConfException {
+        Request req = new Request.Builder().type(RequestType.ABSTRACT).data(abstract_details).build();
 
         sendRequest(req);
 
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            return (File) response.data();
+//            return (File) response.data();
+            try {
+                String[] split = abstract_details.getFilePath().split("/");
+                String filename = split[split.length-1];
+//                String abc = new String("abc");
+                OutputStream out = new FileOutputStream("./Client/files/"+filename);
+
+                File_DTO file_dto = (File_DTO) response.data();
+                Map<Integer, byte[]> map = file_dto.getDictionary();
+
+                int i;
+                for (i=0; i<map.keySet().toArray().length; i++) {
+                    byte[] bytes = map.get(i);
+                    out.write(bytes, 0, bytes.length);
+                }
+
+                return new File("./Client/files/"+filename);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
@@ -232,16 +253,35 @@ public class ConfServerRpcProxy implements IConfServer {
     }
 
     @Override
-    public File getFull(String nume, String topic) throws ConfException {
-        Name_and_Topic name_and_topic = new Name_and_Topic(nume, topic);
-        Request req = new Request.Builder().type(RequestType.FULL).data(name_and_topic).build();
+    public File getFull(Abstract_Details abstract_details) throws ConfException {
+        Request req = new Request.Builder().type(RequestType.FULL).data(abstract_details).build();
 
         sendRequest(req);
 
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            return (File) response.data();
+//            return (File) response.data();
+            try {
+
+                File_DTO file_dto = (File_DTO) response.data();
+                Map<Integer, byte[]> map = file_dto.getDictionary();
+
+                String filename = file_dto.getFilepath();
+                OutputStream out = new FileOutputStream("./Client/files/"+filename);
+
+                int i;
+                for (i=0; i<map.keySet().toArray().length; i++) {
+                    byte[] bytes = map.get(i);
+                    out.write(bytes, 0, bytes.length);
+                }
+
+                return new File("./Client/files/"+filename);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
@@ -252,15 +292,15 @@ public class ConfServerRpcProxy implements IConfServer {
     }
 
     @Override
-    public Name_and_Topic[] getNameAndTopic() throws ConfException {
-        Request req = new Request.Builder().type(RequestType.NAME_AND_TOPIC).build();
+    public Abstract_Details[] getNameAndTopic(iss.model.Session session) throws ConfException {
+        Request req = new Request.Builder().type(RequestType.NAME_AND_TOPIC).data(session).build();
 
         sendRequest(req);
 
         Response response = readResponse();
 
         if (response.type() == ResponseType.OK) {
-            return (Name_and_Topic[]) response.data();
+            return (Abstract_Details[]) response.data();
         }
         if (response.type() == ResponseType.ERROR) {
             String err = response.data().toString();
@@ -271,8 +311,8 @@ public class ConfServerRpcProxy implements IConfServer {
     }
 
     @Override
-    public void review(String name, String topic, String qualifier, String recomandarea, User userlogat) throws ConfException {
-        Review_DTOHelper review_dtoHelper = new Review_DTOHelper(name, topic, qualifier, recomandarea, userLogat);
+    public void review(Abstract_Details abstract_details, String qualifier, String recomandarea, User userlogat) throws ConfException {
+        Review_DTOHelper review_dtoHelper = new Review_DTOHelper(abstract_details, qualifier, recomandarea, userLogat);
         Request req = new Request.Builder().type(RequestType.REVIEW).data(review_dtoHelper).build();
 
         sendRequest(req);
@@ -327,8 +367,8 @@ public class ConfServerRpcProxy implements IConfServer {
     }
 
     @Override
-    public boolean verifica(User userlogat, Session session) throws ConfException {
-        Verifica_DTOHelper verifica_dtoHelper = new Verifica_DTOHelper(userLogat, session);
+    public boolean verifica(User userlogat, Paper paper) throws ConfException {
+        Verifica_DTOHelper verifica_dtoHelper = new Verifica_DTOHelper(userLogat, paper);
         Request req = new Request.Builder().type(RequestType.VERIFICA).data(verifica_dtoHelper).build();
 
         sendRequest(req);
@@ -344,6 +384,98 @@ public class ConfServerRpcProxy implements IConfServer {
         }
 
         return false; //nu ajunge niciodata aici pt ca raspunsul e unul dintre tipurile de mai sus
+    }
+
+    @Override
+    public void submitAbstract(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException {
+
+        try {
+
+            File_DTO file_dto = new File_DTO();
+
+            File file = new File(filepath);
+            // Get the size of the file
+            long length = file.length();
+            byte[] bytes = new byte[16 * 1024];
+            InputStream in = new FileInputStream(file);
+
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+//                    out.write(bytes, 0, count);
+                file_dto.put(bytes);
+            }
+
+            Abstract_DTOHelper abstract_dtoHelper = new Abstract_DTOHelper(name, topics, keywords, filepath, detalii_autori, session, userLogat, file_dto);
+            Request req = new Request.Builder().type(RequestType.SUBMIT_ABSTRACT).data(abstract_dtoHelper).build();
+
+            sendRequest(req);
+
+            Response response = readResponse();
+
+            if (response.type() == ResponseType.OK) {
+                System.out.println("submit abstract facut cu succes");
+            }
+            if (response.type() == ResponseType.ERROR) {
+                String err = response.data().toString();
+                throw new ConfException(err);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void submitFull(String filepath, Session session, User user) throws ConfException {
+
+        try {
+
+            File_DTO file_dto = new File_DTO();
+
+            File file = new File(filepath);
+            // Get the size of the file
+            long length = file.length();
+            byte[] bytes = new byte[16 * 1024];
+            InputStream in = new FileInputStream(file);
+
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+//                    out.write(bytes, 0, count);
+                file_dto.put(bytes);
+            }
+
+            Full_DTOHelper full_dtoHelper = new Full_DTOHelper(filepath, session, userLogat, file_dto);
+            Request req = new Request.Builder().type(RequestType.SUBMIT_FULL).data(full_dtoHelper).build();
+
+            sendRequest(req);
+
+            Response response = readResponse();
+
+            if (response.type() == ResponseType.OK) {
+                System.out.println("submit full facut cu succes");
+            }
+            if (response.type() == ResponseType.ERROR) {
+                String err = response.data().toString();
+                throw new ConfException(err);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public File submitAbstractFlorin(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException {
+        return null;
+    }
+
+    @Override
+    public File submitFullFlorin(String filepath, Session session, User user) throws ConfException {
+        return null;
     }
 
     private void closeConnection() {
