@@ -170,4 +170,58 @@ public class ImplementedService implements IConfServer{
     public boolean verifica(User userlogat, Paper paper) throws ConfException {
         return false;
     }
+
+    @Override
+    public void submitAbstract(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException {
+
+    }
+
+    @Override
+    public void submitFull(String filepath, Session session, User user) throws ConfException {
+
+    }
+
+    @Override
+    public File submitAbstractFlorin(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException {
+        String[] split=filepath.split("\\.");
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("./Server/files/");
+        stringBuilder.append(user.getUsername()+""+session.getConference().getNume()+"_"+session.getNume()+"_"+name+"_abstract."+split[split.length-1]);
+        Abstract_Details abstract_details=new Abstract_Details(-1,name,keywords,topics,detalii_autori,stringBuilder.toString());
+        Paper paper=paperRepository.getPaperForUserAndSession(user,session);
+        if(paper==null) {
+            try {
+                paperRepository.saveAbstract(abstract_details);
+                paperRepository.savePaper(new Paper(-1, user, abstract_details, null, session));
+                return new File(stringBuilder.toString());
+            } catch (Exception e) {
+                throw new ConfException("error while submitting abstract", e);
+            }
+        }
+        else{
+            return new File(paper.getAbstract_details().getFilePath());
+        }
+    }
+
+    @Override
+    public File submitFullFlorin(String filepath, Session session, User user) throws ConfException {
+        String[] split=filepath.split("\\.");
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("./Server/files/");
+        stringBuilder.append(user.getUsername()+""+session.getConference().getNume()+"_"+session.getNume()+"_full."+split[split.length-1]);
+        Full_Details full_details=new Full_Details(-1,stringBuilder.toString());
+        Paper paper=paperRepository.getPaperForUserAndSession(user,session);
+        if(paper.getFull_details()==null) {
+            try {
+                paperRepository.saveFull(full_details);
+                paper.setFull_details(full_details);
+                paperRepository.updatePaper(paper);
+                return new File(stringBuilder.toString());
+            } catch (Exception e) {
+                throw new ConfException("error while submitting abstract", e);
+            }
+        }
+        else
+            return new File(stringBuilder.toString());
+    }
 }
