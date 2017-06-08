@@ -2,16 +2,15 @@ package iss.networking.rpcprotocol;
 
 import iss.model.*;
 //import iss.networking.dto.*;
-import iss.model.dto.*;
+import iss.networking.dto.*;
+import iss.networking.dto.File_DTO;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.Map;
 
 /**
  * Created by Bitten Apple on 15-May-17.
@@ -221,13 +220,28 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de abstract
         if (request.type() == RequestType.ABSTRACT) {
             System.out.println("Abstract request ..." + request.type());
-            Name_and_Topic name_and_topic = (Name_and_Topic) request.data();
-            String nume = name_and_topic.getName();
-            String topic = name_and_topic.getTopic();
+            Abstract_Details abstract_details = (Abstract_Details) request.data();
             try {
-                File file = server.getAbstract(nume, topic);
-                return new Response.Builder().type(ResponseType.OK).data(file).build();
-            } catch (ConfException e) {
+
+                File_DTO file_dto = new File_DTO();
+
+                File file = new File(abstract_details.getFilePath());
+                // Get the size of the file
+                long length = file.length();
+                byte[] bytes = new byte[16 * 1024];
+                InputStream in = new FileInputStream(file);
+
+                int count;
+                while ((count = in.read(bytes)) > 0) {
+//                    out.write(bytes, 0, count);
+                    file_dto.put(bytes);
+                }
+
+                return new Response.Builder().type(ResponseType.OK).data(file_dto).build();
+            } catch (FileNotFoundException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            } catch (IOException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
             }
@@ -236,24 +250,46 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         //daca request-ul e de full
         if (request.type() == RequestType.FULL) {
             System.out.println("Full request ..." + request.type());
-            Name_and_Topic name_and_topic = (Name_and_Topic) request.data();
-            String nume = name_and_topic.getName();
-            String topic = name_and_topic.getTopic();
+            Abstract_Details abstract_details = (Abstract_Details) request.data();
             try {
-                File file = server.getFull(nume, topic);
-                return new Response.Builder().type(ResponseType.OK).data(file).build();
+                File file = server.getFull(abstract_details);
+
+                File_DTO file_dto = new File_DTO();
+
+                String[] split = file.getPath().split("/");
+                String filename = split[split.length-1];
+
+                file_dto.setFilepath(filename);
+
+                // Get the size of the file
+                long length = file.length();
+                byte[] bytes = new byte[16 * 1024];
+                InputStream in = new FileInputStream(file);
+
+                int count;
+                while ((count = in.read(bytes)) > 0) {
+//                    out.write(bytes, 0, count);
+                    file_dto.put(bytes);
+                }
+
+                return new Response.Builder().type(ResponseType.OK).data(file_dto).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
         //daca request-ul e de name and topic
         if (request.type() == RequestType.NAME_AND_TOPIC) {
             System.out.println("Name and topic request ..." + request.type());
+            Session session = (Session) request.data();
             try {
-                Name_and_Topic[] name_and_topics = server.getNameAndTopic();
-                return new Response.Builder().type(ResponseType.OK).data(name_and_topics).build();
+                Abstract_Details[] abstract_details = server.getNameAndTopic(session);
+                return new Response.Builder().type(ResponseType.OK).data(abstract_details).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
@@ -264,13 +300,12 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
         if (request.type() == RequestType.REVIEW) {
             System.out.println("Review request ..." + request.type());
             Review_DTOHelper review_dtoHelper = (Review_DTOHelper) request.data();
-            String name = review_dtoHelper.getName();
-            String topic = review_dtoHelper.getTopic();
+            Abstract_Details abstract_details = review_dtoHelper.getAbstract_details();
             String qualifier = review_dtoHelper.getQualifier();
             String recomandare = review_dtoHelper.getRecomandare();
             User user = review_dtoHelper.getUser();
             try {
-                server.review(name, topic, qualifier, recomandare, user);
+                server.review(abstract_details, qualifier, recomandare, user);
                 return new Response.Builder().type(ResponseType.OK).build();
             } catch (ConfException e) {
                 connected = false;
@@ -316,10 +351,108 @@ public class ConfClientRpcWorker implements Runnable, IConfClient {
             System.out.println("Verifica request ..." + request.type());
             Verifica_DTOHelper verifica_dtoHelper = (Verifica_DTOHelper) request.data();
             User user = verifica_dtoHelper.getUser();
-            Session session = verifica_dtoHelper.getSession();
+            Paper paper = verifica_dtoHelper.getPaper();
             try {
-                boolean verif = server.verifica(user, session);
+                boolean verif = server.verifica(user, paper);
                 return new Response.Builder().type(ResponseType.OK).data(verif).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de submit abstract
+        if (request.type() == RequestType.SUBMIT_ABSTRACT) {
+            System.out.println("Submit abstract request ..." + request.type());
+            Abstract_DTOHelper abstract_dtoHelper = (Abstract_DTOHelper) request.data();
+            String name = abstract_dtoHelper.getName();
+            String topics = abstract_dtoHelper.getTopics();
+            String keywords = abstract_dtoHelper.getKeywords();
+            String filepath = abstract_dtoHelper.getFilepath();
+            String detalii_autor = abstract_dtoHelper.getDetalii_autor();
+            Session session = abstract_dtoHelper.getSession();
+            User user = abstract_dtoHelper.getUser();
+            File_DTO file_dto = abstract_dtoHelper.getFile_dto();
+            try {
+                File file = server.submitAbstractFlorin(name, topics, keywords, filepath, detalii_autor, session, user);
+
+                try {
+
+                    if(file.exists() && !file.isDirectory()) {
+                        // do something
+                        if(file.delete()){
+                            System.out.println(file.getName() + " is deleted!");
+                        }else{
+                            System.out.println("Delete operation is failed.");
+                        }
+                    }
+
+                    String filename = file.getPath();
+//                String abc = new String("abc");
+                    OutputStream out = new FileOutputStream("./Server/files/"+filename);
+
+                    Map<Integer, byte[]> map = file_dto.getDictionary();
+
+                    int i;
+                    for (i=0; i<map.keySet().toArray().length; i++) {
+                        byte[] bytes = map.get(i);
+                        out.write(bytes, 0, bytes.length);
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return new Response.Builder().type(ResponseType.OK).build();
+            } catch (ConfException e) {
+                connected = false;
+                return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+            }
+        }
+
+        //daca request-ul e de submit full
+        if (request.type() == RequestType.SUBMIT_FULL) {
+            System.out.println("Submit full request ..." + request.type());
+            Full_DTOHelper full_dtoHelper = (Full_DTOHelper) request.data();
+            String filepath = full_dtoHelper.getFilepath();
+            Session session = full_dtoHelper.getSession();
+            User user = full_dtoHelper.getUser();
+            File_DTO file_dto = full_dtoHelper.getFile_dto();
+            try {
+                File file = server.submitFullFlorin(filepath, session, user);
+
+                try {
+
+                    if(file.exists() && !file.isDirectory()) {
+                        // do something
+                        if(file.delete()){
+                            System.out.println(file.getName() + " is deleted!");
+                        }else{
+                            System.out.println("Delete operation is failed.");
+                        }
+                    }
+
+                    String filename = file.getPath();
+//                String abc = new String("abc");
+                    OutputStream out = new FileOutputStream("./Server/files/"+filename);
+
+                    Map<Integer, byte[]> map = file_dto.getDictionary();
+
+                    int i;
+                    for (i=0; i<map.keySet().toArray().length; i++) {
+                        byte[] bytes = map.get(i);
+                        out.write(bytes, 0, bytes.length);
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return new Response.Builder().type(ResponseType.OK).build();
             } catch (ConfException e) {
                 connected = false;
                 return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();

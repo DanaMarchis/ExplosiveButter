@@ -1,7 +1,6 @@
 package iss.services;
 
 import iss.model.*;
-import iss.model.dto.Name_and_Topic;
 
 import java.io.File;
 
@@ -27,4 +26,7 @@ public interface IConfServer {
     boolean verifica(User userlogat, Paper paper) throws ConfException; //O metoda care intoarce true sau false care (momentan, cred eu ca) primeste userlogat si sesiunea ... Si verifica daca idAbstract e completat, adica nu e null sau -1.. Nu stiu exact cum se retine in bd
     void submitAbstract(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException;
     void submitFull(String filepath, Session session, User user) throws ConfException;
+    File submitAbstractFlorin(String name, String topics, String keywords, String filepath, String detalii_autori, Session session, User user) throws ConfException; //METODA SPECIALA PENTRU FLORIN
+    File submitFullFlorin(String filepath, Session session, User user) throws ConfException;
+
 }

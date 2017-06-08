@@ -1,7 +1,6 @@
 package iss.server.service;
 
 import iss.model.*;
-import iss.model.dto.Name_and_Topic;
 import iss.persistence.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
