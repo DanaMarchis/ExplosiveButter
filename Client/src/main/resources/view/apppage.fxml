@@ -37,7 +37,9 @@
                               <TableColumn fx:id="tabAllConf_columnEndHourSes" prefWidth="98.0" text="End hour" />
                            </columns>
                         </TableView>
-                        <Button fx:id="tabAllConf_buttonAttend" layoutX="850.0" layoutY="221.0" mnemonicParsing="false" text="Attend" />
+                        <Button fx:id="tabAllConf_buttonAttend" layoutX="849.0" layoutY="149.0" mnemonicParsing="false" onAction="#tabAllConf_handleButtonAttend" text="Attend" />
+                        <TextField fx:id="tabAllConf_textfieldPay" disable="true" layoutX="811.0" layoutY="206.0" prefHeight="25.0" prefWidth="59.0" visible="false" />
+                        <Button fx:id="tabAllConf_buttonPay" layoutX="886.0" layoutY="204.0" mnemonicParsing="false" onAction="#tabAllConf_handleButtonPay" text="Pay" visible="false" />
                      </children>
                   </AnchorPane>
               </content>
@@ -63,7 +65,7 @@
                               <TableColumn fx:id="tabMyConf_columnEndHourSes" prefWidth="96.0" text="End hour" />
                            </columns>
                         </TableView>
-                        <Button fx:id="tabMyConf_buttonReview" layoutX="845.0" layoutY="221.0" mnemonicParsing="false" onAction="#tabMyConferences_handleButtonReview" text="Review" />
+                        <Button fx:id="tabMyConf_buttonReview" layoutX="845.0" layoutY="221.0" mnemonicParsing="false" onAction="#tabMyConferences_handleButtonReview" text="Review" visible="false" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -107,7 +109,13 @@
                         <Button fx:id="tabReview_buttonClose" layoutX="876.0" layoutY="20.0" mnemonicParsing="false" onAction="#tabReview_handleButtonClose" />
                         <Button fx:id="tabReview_buttonOpenAbstract" layoutX="571.0" layoutY="82.0" mnemonicParsing="false" text="Open abstract" />
                         <Button fx:id="tabReview_buttonOpenFull" layoutX="711.0" layoutY="82.0" mnemonicParsing="false" text="Open full paper" />
-                        <Label fx:id="tabReview_labelPapers" layoutX="63.0" layoutY="65.0" text="Papers" />
+                        <Label fx:id="tabReview_labelPapers" layoutX="74.0" layoutY="21.0" text="Papers" />
+                        <TableView fx:id="tabReview_tableview" layoutX="24.0" layoutY="62.0" prefHeight="463.0" prefWidth="390.0">
+                          <columns>
+                            <TableColumn fx:id="tabReview_columnName" prefWidth="216.0" text="Name of the proposal" />
+                            <TableColumn fx:id="tabReview_columnTopic" prefWidth="158.0" text="Topic" />
+                          </columns>
+                        </TableView>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -115,29 +123,33 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="tabSubmitAbstract_labelNameOfProposal" layoutX="28.0" layoutY="125.0" text="  Name of &#10;the proposal" />
-                        <Label fx:id="tabSubmitAbstract_labelKeywords" layoutX="36.0" layoutY="222.0" text="Keywords" />
-                        <Label fx:id="tabSubmitAbstract_labelTopics" layoutX="50.0" layoutY="303.0" text="Topics" />
-                        <TextField fx:id="tabSubmitAbstract_textfieldNameOfProposal" layoutX="158.0" layoutY="134.0" prefHeight="25.0" prefWidth="192.0" />
-                        <TextField fx:id="tabSubmitAbstract_textfieldTopics" layoutX="157.0" layoutY="302.0" prefHeight="25.0" prefWidth="194.0" />
-                        <TextField fx:id="tabSubmitAbstract_textfieldKeywords" layoutX="158.0" layoutY="218.0" prefHeight="25.0" prefWidth="192.0" />
+                        <Label fx:id="tabSubmitAbstract_labelNameOfProposal" layoutX="28.0" layoutY="164.0" text="  Name of &#10;the proposal" />
+                        <Label fx:id="tabSubmitAbstract_labelKeywords" layoutX="36.0" layoutY="261.0" text="Keywords" />
+                        <Label fx:id="tabSubmitAbstract_labelTopics" layoutX="50.0" layoutY="342.0" text="Topics" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldNameOfProposal" layoutX="158.0" layoutY="173.0" prefHeight="25.0" prefWidth="192.0" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldTopics" layoutX="157.0" layoutY="341.0" prefHeight="25.0" prefWidth="194.0" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldKeywords" layoutX="158.0" layoutY="257.0" prefHeight="25.0" prefWidth="192.0" />
                         <Button fx:id="tabSubmitAbstract_buttonDone" layoutX="232.0" layoutY="487.0" mnemonicParsing="false" text="Done" />
                         <Label fx:id="tabSubmitAbstract_labelAuthors" layoutX="493.0" layoutY="32.0" text="Authors" />
                         <TextField fx:id="tabSubmitAbstract_textfieldName1" layoutX="420.0" layoutY="90.0" promptText="Name" />
                         <TextArea fx:id="tabSubmitAbstract_textareaInfo1" layoutX="663.0" layoutY="80.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" />
-                        <TextField fx:id="tabSubmitAbstract_textfieldName2" layoutX="420.0" layoutY="170.0" promptText="Name" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldName2" layoutX="418.0" layoutY="170.0" prefWidth="215.0" promptText="Name" />
                         <TextArea fx:id="tabSubmitAbstract_textareaInfo2" layoutX="663.0" layoutY="160.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" />
                         <TextField fx:id="tabSubmitAbstract_textfieldName3" layoutX="420.0" layoutY="260.0" promptText="Name" />
                         <TextArea fx:id="tabSubmitAbstract_textareaInfo3" layoutX="663.0" layoutY="250.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" />
                         <TextArea fx:id="tabSubmitAbstract_textareaInfo4" layoutX="663.0" layoutY="340.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" visible="false" />
                         <TextField fx:id="tabSubmitAbstract_textfieldName4" layoutX="420.0" layoutY="350.0" promptText="Name" visible="false" />
-                        <Button fx:id="tabSubmitAbstract_buttonChooseAbstract" layoutX="22.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleButtonChooseAbstract" text="Choose abstract" />
-                        <TextField fx:id="tabSubmitAbstract_textfieldChooseAbstract" disable="true" layoutX="158.0" layoutY="386.0" prefHeight="25.0" prefWidth="192.0" />
+                        <Button fx:id="tabSubmitAbstract_buttonChooseAbstract" layoutX="22.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleButtonChooseAbstract" text="Choose abstract" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldChooseAbstract" disable="true" layoutX="158.0" layoutY="425.0" prefHeight="25.0" prefWidth="192.0" />
                         <TextField fx:id="tabSubmitAbstract_textfieldName5" layoutX="420.0" layoutY="440.0" prefHeight="32.0" prefWidth="213.0" promptText="Name" visible="false" />
                         <TextArea fx:id="tabSubmitAbstract_textareaInfo5" layoutX="663.0" layoutY="430.0" prefHeight="60.0" prefWidth="220.0" promptText="Meta-information" visible="false" />
                         <Button fx:id="tabSubmitAbstract_buttonPlus3" layoutX="902.0" layoutY="264.0" mnemonicParsing="false" onAction="#tabSubmitAbstract_handleButtonPlus3" />
                         <Button fx:id="tabSubmitAbstract_buttonPlus4" layoutX="902.0" layoutY="354.0" mnemonicParsing="false" onAction="#tabSubmitAbstract_handleButtonPlus4" visible="false" />
                         <Button fx:id="tabSubmitAbstract_buttonClose" layoutX="876.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleTabSubmitAbstract_buttonClose" />
+                        <Label fx:id="tabSubmitAbstract_labelConf" layoutX="31.0" layoutY="37.0" text="Conference" />
+                        <Label fx:id="tabSubmitAbstract_labelSes" layoutX="47.0" layoutY="102.0" text="Session" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldConf" disable="true" layoutX="158.0" layoutY="33.0" />
+                        <TextField fx:id="tabSubmitAbstract_textfieldSes" disable="true" layoutX="158.0" layoutY="98.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

@@ -86,6 +86,10 @@ public class AppViewController implements IConfClient {
     private ObservableList<Conference> tabAllConf_modelConf;
     private ObservableList<Session> tabAllConf_modelSes;
 
+    @FXML
+    Button tabAllConf_buttonPay;
+    @FXML
+    TextField tabAllConf_textfieldPay;
 
     //TAB My Conferences
     @FXML
@@ -114,6 +118,8 @@ public class AppViewController implements IConfClient {
 
     private ObservableList<Conference> tabMyConf_modelConf;
     private ObservableList<Session> tabMyConf_modelSes;
+    @FXML
+    Button tabMyConf_buttonReview;
 
 
     //TAB Call for papers
@@ -148,6 +154,8 @@ public class AppViewController implements IConfClient {
     private ObservableList<Conference> tabCall_modelConf;
     private ObservableList<Session> tabCall_modelSes;
 
+    @FXML
+    Button tabCall_buttonSubmitAbstract;
 
     //TAB Review
     @FXML
@@ -156,6 +164,14 @@ public class AppViewController implements IConfClient {
     ComboBox<String> tabReview_comboboxQualifier;
     @FXML
     Button tabReview_buttonClose;
+    @FXML
+    TableView<Abstract_Details> tabReview_tableview;
+    @FXML
+    TableColumn<Abstract_Details, String> tabReview_columnName;
+    @FXML
+    TableColumn<Abstract_Details, String> tabReview_columnTopic;
+    private ObservableList<Abstract_Details> tabReview_model;
+
 
     //TAB Submit Abstract
     @FXML
@@ -189,6 +205,10 @@ public class AppViewController implements IConfClient {
 
     @FXML
     Button tabSubmitAbstract_buttonChooseAbstract;
+    @FXML
+    TextField tabSubmitAbstract_textfieldConf;
+    @FXML
+    TextField tabSubmitAbstract_textfieldSes;
 
     //componentele fxml - LOGIN PAGE
     @FXML
@@ -414,6 +434,11 @@ public class AppViewController implements IConfClient {
             if (oldvalue.equals("viewer")){
                 comboboxType.getItems().remove("viewer");
             }
+            if (newvalue.equals("PC Member")){
+                tabMyConf_buttonReview.setVisible(true);
+            } else {
+                tabMyConf_buttonReview.setVisible(false);
+            }
         });
     }
 
@@ -467,7 +492,8 @@ public class AppViewController implements IConfClient {
             tabMyConf_tableSessions.getItems().clear();
 
             //aici sesiuni!!
-            tabMyConf_modelSes = FXCollections.observableArrayList(server.getSessions(conference));
+            Role role = getRol(comboboxType.getValue());
+            tabMyConf_modelSes = FXCollections.observableArrayList(server.getSesiuniConferintaUserRol(conference, userlogat, role));
             tabMyConf_tableSessions.setItems(tabMyConf_modelSes);
             tabMyConf_tableSessions.getSelectionModel().selectFirst();
         } catch (ConfException e) {
@@ -494,6 +520,7 @@ public class AppViewController implements IConfClient {
     }
 
     private ChangeListener<Conference> tabAllConf_changedTableItemListener(){
+        visiblePay(false);
         return (observable, oldvalue, newvalue) -> tabAllConf_loadSessions(newvalue);
     }
 
@@ -504,6 +531,8 @@ public class AppViewController implements IConfClient {
         tabAllConf_columnStartHourSes.setCellValueFactory(new PropertyValueFactory<>("ora_inc"));
         tabAllConf_columnEndHourSes.setCellValueFactory(new PropertyValueFactory<>("ora_sf"));
         tabAllConf_columnRoomSes.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSala().getNume()));
+
+        tabAllConf_tableSessions.getSelectionModel().selectedItemProperty().addListener(tabAllConf_changedTableSesItemListener());
 
         tabAllConf_tableSessions.getItems().clear();
 
@@ -516,6 +545,37 @@ public class AppViewController implements IConfClient {
         }
     }
 
+    private ChangeListener<Session> tabAllConf_changedTableSesItemListener() {
+        return (observable, oldvalue, newvalue) -> visiblePay(false);
+    }
+
+    private void visiblePay(boolean b) {
+        tabAllConf_textfieldPay.setVisible(b);
+        tabAllConf_buttonPay.setVisible(b);
+    }
+
+    public void tabAllConf_handleButtonAttend() {
+        Session session = tabAllConf_tableSessions.getSelectionModel().getSelectedItem();
+        if (tabAllConf_textfieldPay.isVisible()){
+            try {
+                Role role = getRol(comboboxType.getValue());
+                Conference conference = tabAllConf_tableConf.getSelectionModel().getSelectedItem();
+                server.attend(userlogat, role,conference, session);
+                showMessage(Alert.AlertType.INFORMATION, "Succes", "Attendance save");
+            } catch (ConfException e) {
+                showErrorMessage("Attending error");
+                e.printStackTrace();
+            }
+        } else{
+            visiblePay(true);
+            tabAllConf_textfieldPay.setText(session.getPret().toString());
+        }
+    }
+
+    public void tabAllConf_handleButtonPay() {
+        showMessage(Alert.AlertType.INFORMATION, "Succes", "Successful payment");
+    }
+
     //-----------------------------------------------------------------------------------------------------------------
     //TAB Call for papers
     //cand se apasa butonul "Submit Abstract"
@@ -523,6 +583,11 @@ public class AppViewController implements IConfClient {
         //se deschide tabul Submit abstract
         mainTabPane.getTabs().add(tabSubmitAbstract);
         mainTabPane.getSelectionModel().select(tabSubmitAbstract);
+
+        //se incarca in textfield numele conferintei si al sesiunii
+        tabSubmitAbstract_textfieldConf.setText(tabCall_tableConf.getSelectionModel().getSelectedItem().getNume());
+        tabSubmitAbstract_textfieldSes.setText(tabCall_tableSessions.getSelectionModel().getSelectedItem().getNume());
+
     }
 
     private void tabCall_initTables(){
@@ -535,8 +600,7 @@ public class AppViewController implements IConfClient {
         tabCall_tableConf.getSelectionModel().selectedItemProperty().addListener(changedTableItemListener());
 
         try {
-            //aici deadline
-            this.tabCall_modelConf = FXCollections.observableArrayList(server.getAllConferences());
+            this.tabCall_modelConf = FXCollections.observableArrayList(server.getAllConferencesDeadline());
             tabCall_tableConf.setItems(tabCall_modelConf);
             tabCall_tableConf.getSelectionModel().selectFirst(); //prima conferinta este selectata by default
         } catch (ConfException e) {
@@ -592,6 +656,21 @@ public class AppViewController implements IConfClient {
         Tooltip tooltip = new Tooltip("Close review");
         tooltip.setFont(Font.font("Times New Roman", 16));
         tabReview_buttonClose.setTooltip(tooltip);
+
+        //init table
+        tabReview_columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tabReview_columnTopic.setCellValueFactory(new PropertyValueFactory<>("topics"));
+
+        tabReview_tableview.getItems().clear();
+        try {
+            Session session = tabMyConf_tableSessions.getSelectionModel().getSelectedItem();
+            tabReview_model = FXCollections.observableArrayList(server.getNameAndTopic(session));
+            tabReview_tableview.setItems(tabReview_model);
+            tabReview_tableview.getSelectionModel().selectFirst();
+        } catch (ConfException e) {
+            e.printStackTrace();
+        }
+
     }
 
 //-----------------------------------------------------------------------------------------------------------------

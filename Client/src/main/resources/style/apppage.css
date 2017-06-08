@@ -2,7 +2,7 @@
 	-fx-font-family: "Times New Roman";
 	-fx-font-size: 16px;
 }
-#buttonLogout, #tabCall_buttonSubmitAbstract, #tabCall_buttonSubmitFull, #tabAllConf_buttonAttend, #tabMyConf_buttonReview{
+#buttonLogout, #tabCall_buttonSubmitAbstract, #tabCall_buttonSubmitFull,#tabAllConf_buttonPay, #tabAllConf_buttonAttend, #tabMyConf_buttonReview{
     -fx-font-family: "Times New Roman";
     -fx-background-color: #f2c8a6;
     -fx-background-radius: 10;
@@ -11,7 +11,7 @@
     -fx-text-fill: black;
     -fx-font-size: 16px;
 }
-#buttonLogout:hover, #tabCall_buttonSubmitAbstract:hover, #tabCall_buttonSubmitFull:hover{
+#buttonLogout:hover, #tabCall_buttonSubmitAbstract:hover, #tabCall_buttonSubmitFull:hover, #tabAllConf_buttonPay:hover, #tabMyConf_buttonReview:hover{
     -fx-background-color:#f5d6bc;
 }
 #borderpane {
@@ -58,13 +58,13 @@
     -fx-background-color: #f9e4d2;
 }
 
-#tabSubmitAbstract_labelNameOfProposal, #tabSubmitAbstract_labelKeywords, #tabSubmitAbstract_labelTopics, #tabSubmitAbstract_labelAuthors{
+#tabSubmitAbstract_labelConf, #tabSubmitAbstract_labelSes, #tabSubmitAbstract_labelNameOfProposal, #tabSubmitAbstract_labelKeywords, #tabSubmitAbstract_labelTopics, #tabSubmitAbstract_labelAuthors{
     -fx-font-family: "Times New Roman";
     -fx-text-fill:#4ba9b4;
     -fx-font-size: 21px;
 }
 
-#tabSubmitAbstract_textfieldNameOfProposal,#tabSubmitAbstract_textfieldChooseAbstract, #tabSubmitAbstract_textfieldTopics, #tabSubmitAbstract_textfieldKeywords{
+#tabSubmitAbstract_textfieldConf, #tabSubmitAbstract_textfieldSes, #tabSubmitAbstract_textfieldNameOfProposal,#tabSubmitAbstract_textfieldChooseAbstract, #tabSubmitAbstract_textfieldTopics, #tabSubmitAbstract_textfieldKeywords{
     -fx-font-family: "Times New Roman";
     -fx-font-size: 17px;
 }

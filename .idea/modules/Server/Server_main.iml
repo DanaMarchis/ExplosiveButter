@@ -4,14 +4,14 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="2b468051-5856-4fd0-960a-4ff9d99ba672" />
+          <unit-entry name="hibernate.cfg.xml" value="d3f2e7e4-e713-4086-b3dc-b5fb77e8ae50" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/../../../Server/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../../Server/build/classes/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../Server/src/main">
