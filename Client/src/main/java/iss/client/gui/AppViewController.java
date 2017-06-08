@@ -4,9 +4,10 @@ import iss.model.*;
 import iss.services.ConfException;
 import iss.services.IConfClient;
 import iss.services.IConfServer;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,7 +31,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by Dana on 16-May-17.
@@ -53,6 +53,8 @@ public class AppViewController implements IConfClient {
     Tab tabReview;
     @FXML
     Tab tabSubmitAbstract;
+    @FXML
+    Tab tabSubmitFull;
     @FXML
     Button buttonLogout;
     @FXML
@@ -163,6 +165,8 @@ public class AppViewController implements IConfClient {
     @FXML
     ComboBox<String> tabReview_comboboxQualifier;
     @FXML
+    TextArea tabReview_textareaRecommendations;
+    @FXML
     Button tabReview_buttonClose;
     @FXML
     TableView<Abstract_Details> tabReview_tableview;
@@ -170,6 +174,7 @@ public class AppViewController implements IConfClient {
     TableColumn<Abstract_Details, String> tabReview_columnName;
     @FXML
     TableColumn<Abstract_Details, String> tabReview_columnTopic;
+
     private ObservableList<Abstract_Details> tabReview_model;
 
 
@@ -202,6 +207,12 @@ public class AppViewController implements IConfClient {
     Button tabSubmitAbstract_buttonClose;
     @FXML
     TextField tabSubmitAbstract_textfieldChooseAbstract;
+    @FXML
+    TextField tabSubmitAbstract_textfieldNameOfProposal;
+    @FXML
+    TextField tabSubmitAbstract_textfieldTopics;
+    @FXML
+    TextField tabSubmitAbstract_textfieldKeywords;
 
     @FXML
     Button tabSubmitAbstract_buttonChooseAbstract;
@@ -209,6 +220,20 @@ public class AppViewController implements IConfClient {
     TextField tabSubmitAbstract_textfieldConf;
     @FXML
     TextField tabSubmitAbstract_textfieldSes;
+
+    //TAB Submit Full
+    @FXML
+    TextField tabSubmitFull_textfieldConf;
+    @FXML
+    TextField tabSubmitFull_textfieldSes;
+    @FXML
+    Button tabSubmitFull_buttonChoose;
+    @FXML
+    Button tabSubmitFull_buttonDone;
+    @FXML
+    TextField tabSubmitFull_textfieldFile;
+    @FXML
+    Button tabSubmitFull_buttonClose;
 
     //componentele fxml - LOGIN PAGE
     @FXML
@@ -237,6 +262,8 @@ public class AppViewController implements IConfClient {
     Button buttonSignupR;
     @FXML
     Button buttonCloseSignUp;
+    @FXML
+    CheckBox checkboxTerms;
 
     //images
     private Image closeImage = new Image(getClass().getResourceAsStream("/images/close_button.png"));
@@ -257,6 +284,7 @@ public class AppViewController implements IConfClient {
         //set visible = false for some tabs
         mainTabPane.getTabs().remove(tabSubmitAbstract);
         mainTabPane.getTabs().remove(tabReview);
+        mainTabPane.getTabs().remove(tabSubmitFull);
     }
 
     //Alert for error
@@ -289,11 +317,11 @@ public class AppViewController implements IConfClient {
         else if (loader.equals("/view/apppage.fxml")) {
             appViewController.initTabs();
             appViewController.initComboboxRol();
-            appViewController.initButtonsTabSubmitAbstract();
-            appViewController.initComponentsTabReview();
             appViewController.tabAllConf_initTables();
             appViewController.tabCall_initTables();
             appViewController.tabMyConferences_initTables();
+        } else if (loader.equals("/view/loginpage.fxml")){
+            appViewController.initComponentsLogin();
         }
         stage.setTitle(title);
         stage.setScene(new Scene(parent));
@@ -302,7 +330,7 @@ public class AppViewController implements IConfClient {
         stage.show();
     }
 
-//-----------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------
     //Controller LOGIN PAGE
     //la apasarea butonului Login
     @FXML
@@ -323,6 +351,14 @@ public class AppViewController implements IConfClient {
         } catch (IOException | ConfException e1) {
             showErrorMessage("Invalid username or password.");
         }
+    }
+
+    public void initComponentsLogin() {
+        BooleanBinding textFieldUsernameValid = Bindings.createBooleanBinding(() -> !textfieldUsername.getText().isEmpty(), textfieldUsername.textProperty());
+        BooleanBinding textFieldPasswordValid = Bindings.createBooleanBinding(() -> !textfieldPassword.getText().isEmpty(), textfieldPassword.textProperty());
+
+        buttonLogin.disableProperty().bind(textFieldUsernameValid.not().or(textFieldPasswordValid.not()));
+
     }
 
     //cand se bifeaza checkbox-ul pentru Terms => enable/disable la butonul Sign Up
@@ -380,6 +416,14 @@ public class AppViewController implements IConfClient {
         Tooltip tooltip = new Tooltip("I don't want to sign up anymore.");
         tooltip.setFont(Font.font("Times New Roman", 16));
         buttonCloseSignUp.setTooltip(tooltip);
+
+        BooleanBinding textFieldFirstNameValid = Bindings.createBooleanBinding(() -> !textfieldFirstNameR.getText().isEmpty(), textfieldFirstNameR.textProperty());
+        BooleanBinding textFieldLastNameValid = Bindings.createBooleanBinding(() -> !textfieldLastNameR.getText().isEmpty(), textfieldLastNameR.textProperty());
+        BooleanBinding textFieldEmailValid = Bindings.createBooleanBinding(() -> !textfieldEmailR.getText().isEmpty(), textfieldEmailR.textProperty());
+        BooleanBinding textFieldUsernameValid = Bindings.createBooleanBinding(() -> !textfieldUsernameR.getText().isEmpty(), textfieldUsernameR.textProperty());
+        BooleanBinding textFieldPasswordValid = Bindings.createBooleanBinding(() -> !textfieldPasswordR.getText().isEmpty(), textfieldPasswordR.textProperty());
+
+        checkboxTerms.disableProperty().bind(textFieldUsernameValid.not().or(textFieldPasswordValid.not()).or(textFieldFirstNameValid.not()).or(textFieldLastNameValid.not()).or(textFieldEmailValid.not()));
     }
 
     //cand se bifeaza checkbox-ul pentru Terms => enable/disable la butonul Sign Up
@@ -457,6 +501,7 @@ public class AppViewController implements IConfClient {
         //se deschide tabul Submit abstract
         mainTabPane.getTabs().add(tabReview);
         mainTabPane.getSelectionModel().select(tabReview);
+        initComponentsTabReview();
     }
 
     private void tabMyConferences_initTables(){
@@ -579,14 +624,28 @@ public class AppViewController implements IConfClient {
     //-----------------------------------------------------------------------------------------------------------------
     //TAB Call for papers
     //cand se apasa butonul "Submit Abstract"
-    public void tabCallForPapers_handleButtonSubmitAbstract() {
+    public void tabCall_handleButtonSubmitAbstract() {
         //se deschide tabul Submit abstract
         mainTabPane.getTabs().add(tabSubmitAbstract);
         mainTabPane.getSelectionModel().select(tabSubmitAbstract);
 
+        initButtonsTabSubmitAbstract();
+
         //se incarca in textfield numele conferintei si al sesiunii
         tabSubmitAbstract_textfieldConf.setText(tabCall_tableConf.getSelectionModel().getSelectedItem().getNume());
         tabSubmitAbstract_textfieldSes.setText(tabCall_tableSessions.getSelectionModel().getSelectedItem().getNume());
+    }
+
+    public void tabCall_handleButtonSubmitFull() {
+        //se deschide tabul Submit full
+        mainTabPane.getTabs().add(tabSubmitFull);
+        mainTabPane.getSelectionModel().select(tabSubmitFull);
+
+        tabSubmitFull_initComponents();
+
+        //se incarca in textfield numele conferintei si al sesiunii
+        tabSubmitFull_textfieldConf.setText(tabCall_tableConf.getSelectionModel().getSelectedItem().getNume());
+        tabSubmitFull_textfieldSes.setText(tabCall_tableSessions.getSelectionModel().getSelectedItem().getNume());
 
     }
 
@@ -670,7 +729,38 @@ public class AppViewController implements IConfClient {
         } catch (ConfException e) {
             e.printStackTrace();
         }
+    }
 
+    public void tabReview_handleButtonOpenAbstract() {
+        try {
+            Abstract_Details abstract_details = tabReview_tableview.getSelectionModel().getSelectedItem();
+            openFile(server.getAbstract(abstract_details));
+        } catch (ConfException e) {
+            showErrorMessage("Can't open abstract file");
+            e.printStackTrace();
+        }
+    }
+
+    public void tabReview_handleButtonOpenFull() {
+        try{
+            Abstract_Details abstract_details = tabReview_tableview.getSelectionModel().getSelectedItem();
+            openFile(server.getFull(abstract_details));
+        } catch (ConfException e){
+            showErrorMessage("Can't open file");
+            e.printStackTrace();
+        }
+    }
+
+
+    public void tabReview_handleButtonSendReview() {
+        try {
+            Abstract_Details abstract_details = tabReview_tableview.getSelectionModel().getSelectedItem();
+            server.review(abstract_details, tabReview_comboboxQualifier.getSelectionModel().getSelectedItem(), tabReview_textareaRecommendations.getText(), userlogat);
+            showMessage(Alert.AlertType.INFORMATION, "Succes", "Successful reviewed");
+        } catch (ConfException e) {
+            showErrorMessage("Review Error");
+            e.printStackTrace();
+        }
     }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -727,11 +817,11 @@ public class AppViewController implements IConfClient {
     }
 
     @FXML
-    public void handleButtonChooseAbstract(){
+    public void tabSubmitAbstract_handleButtonChooseAbstract(){
         configureFileChooser(fileChooser);
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
-            tabSubmitAbstract_textfieldChooseAbstract.setText(file.getName());
+            tabSubmitAbstract_textfieldChooseAbstract.setText(file.getAbsolutePath());
             openFile(file);
         }
     }
@@ -744,5 +834,73 @@ public class AppViewController implements IConfClient {
                 new FileChooser.ExtensionFilter("PDF", "*.pdf"),
                 new FileChooser.ExtensionFilter("DOC", "*.docx","*.doc")
         );
+    }
+
+    public void tabSubmitAbstract_handleButtonDone() {
+        Session session = tabCall_tableSessions.getSelectionModel().getSelectedItem();
+        String detalii_autori = "";
+        if (!tabSubmitAbstract_textfieldName1.getText().isEmpty() && !tabSubmitAbstract_textareaInfo1.getText().isEmpty()){
+            detalii_autori += tabSubmitAbstract_textfieldName1.getText()+","+tabSubmitAbstract_textareaInfo1.getText()+"|";
+        }
+        if (!tabSubmitAbstract_textfieldName2.getText().isEmpty() && !tabSubmitAbstract_textareaInfo2.getText().isEmpty()){
+            detalii_autori += tabSubmitAbstract_textfieldName2.getText()+","+tabSubmitAbstract_textareaInfo2.getText()+"|";
+        }
+        if (!tabSubmitAbstract_textfieldName3.getText().isEmpty() && !tabSubmitAbstract_textareaInfo3.getText().isEmpty()){
+            detalii_autori += tabSubmitAbstract_textfieldName3.getText()+","+tabSubmitAbstract_textareaInfo3.getText()+"|";
+        }
+        if (!tabSubmitAbstract_textfieldName4.getText().isEmpty() && !tabSubmitAbstract_textareaInfo4.getText().isEmpty()){
+            detalii_autori += tabSubmitAbstract_textfieldName4.getText()+","+tabSubmitAbstract_textareaInfo4.getText()+"|";
+        }
+        if (!tabSubmitAbstract_textfieldName5.getText().isEmpty() && !tabSubmitAbstract_textareaInfo5.getText().isEmpty()){
+            detalii_autori += tabSubmitAbstract_textfieldName5.getText()+","+tabSubmitAbstract_textareaInfo5.getText()+"|";
+        }
+
+        try {
+            server.submitAbstract(tabSubmitAbstract_textfieldNameOfProposal.getText(), tabSubmitAbstract_textfieldTopics.getText(), tabSubmitAbstract_textfieldKeywords.getText(), tabSubmitAbstract_textfieldChooseAbstract.getText(), detalii_autori, session, userlogat );
+            showMessage(Alert.AlertType.INFORMATION, "Succes", "Successful submitted");
+        } catch (ConfException e) {
+            showErrorMessage("Submit abstract error");
+            e.printStackTrace();
+        }
+    }
+//-------------------------------------------------------------------------------------------------------------------------------
+    //TAB Submit Full
+    public void handleTabSubmitFull_buttonClose() {
+        mainTabPane.getTabs().remove(tabSubmitFull);
+        mainTabPane.getSelectionModel().select(tabCallForPapers);
+    }
+
+    private void tabSubmitFull_initComponents(){
+        //init button Close
+        ImageView imageButtonClose = new ImageView(closeImage);
+        imageButtonClose.setFitHeight(18d);
+        imageButtonClose.setFitWidth(18d);
+        tabSubmitFull_buttonClose.setGraphic(imageButtonClose);
+        Tooltip tooltip = new Tooltip("I don't want to submit paper anymore.");
+        tooltip.setFont(Font.font("Times New Roman", 16));
+        tabSubmitFull_buttonClose.setTooltip(tooltip);
+
+        BooleanBinding tabSubmitFull_textfieldFileValid = Bindings.createBooleanBinding(() -> !tabSubmitFull_textfieldFile.getText().isEmpty(), tabSubmitFull_textfieldFile.textProperty());
+        tabSubmitFull_buttonDone.disableProperty().bind(tabSubmitFull_textfieldFileValid.not());
+    }
+
+    public void tabSubmitFull_handleButtonChoose() {
+        configureFileChooser(fileChooser);
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            tabSubmitFull_textfieldFile.setText(file.getAbsolutePath());
+            openFile(file);
+        }
+    }
+
+    public void tabSubmitFull_handleButtonDone() {
+        try {
+            Session session = tabCall_tableSessions.getSelectionModel().getSelectedItem();
+            server.submitFull(tabSubmitFull_textfieldFile.getText(), session, userlogat );
+            showMessage(Alert.AlertType.INFORMATION, "Succes", "Successful submitted");
+        } catch (ConfException e) {
+            showErrorMessage("Submit full error");
+            e.printStackTrace();
+        }
     }
 }

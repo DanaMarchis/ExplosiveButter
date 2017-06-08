@@ -64,7 +64,18 @@
     -fx-font-size: 21px;
 }
 
+#tabSubmitFull_labelConf, #tabSubmitFull_labelSes{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill:#4ba9b4;
+    -fx-font-size: 21px;
+}
+
 #tabSubmitAbstract_textfieldConf, #tabSubmitAbstract_textfieldSes, #tabSubmitAbstract_textfieldNameOfProposal,#tabSubmitAbstract_textfieldChooseAbstract, #tabSubmitAbstract_textfieldTopics, #tabSubmitAbstract_textfieldKeywords{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 17px;
+}
+
+#tabSubmitFull_textfieldConf, #tabSubmitFull_textfieldSes, #tabSubmitFull_textfieldFile{
     -fx-font-family: "Times New Roman";
     -fx-font-size: 17px;
 }
@@ -77,7 +88,7 @@
     -fx-font-family: "Times New Roman";
     -fx-font-size: 17px;
 }
-#tabSubmitAbstract_buttonChooseAbstract{
+#tabSubmitAbstract_buttonChooseAbstract, #tabSubmitFull_buttonChoose{
     -fx-background-color: #a5d4d9;
     -fx-font-family: "Times New Roman";
     -fx-background-radius: 10;
@@ -86,12 +97,12 @@
     -fx-text-fill: #26555a;
     -fx-font-size: 17px;
 }
-#tabSubmitAbstract_buttonChooseAbstract:hover{
+#tabSubmitAbstract_buttonChooseAbstract:hover, #tabSubmitFull_buttonChoose:hover{
     -fx-font-size: 19px;
     -fx-background-color:#c9e5e8;
 }
 
-#tabSubmitAbstract_buttonDone{
+#tabSubmitAbstract_buttonDone, #tabSubmitFull_buttonDone{
     -fx-font-family: "Times New Roman";
     -fx-background-color: #eeb687;
     -fx-background-radius: 10;
@@ -100,16 +111,16 @@
     -fx-text-fill: black;
     -fx-font-size: 22px;
 }
-#tabSubmitAbstract_buttonDone:hover{
+#tabSubmitAbstract_buttonDone:hover, #tabSubmitFull_buttonDone:hover{
     -fx-background-color:#f5d6bc;
 }
 
-#tabSubmitAbstract_buttonClose{
+#tabSubmitAbstract_buttonClose, #tabSubmitFull_buttonClose{
     -fx-background-color: #f2c8a6;
     -fx-background-radius: 30;
     -fx-padding: 4;
 }
-#tabSubmitAbstract_buttonClose:hover{
+#tabSubmitAbstract_buttonClose:hover, #tabSubmitFull_buttonClose:hover{
     -fx-background-color: #f9e4d2;
 }
 

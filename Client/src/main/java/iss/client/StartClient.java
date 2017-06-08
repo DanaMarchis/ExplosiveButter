@@ -19,7 +19,6 @@ public class StartClient extends Application{
     private static IConfServer server;
 
     public static void main(String[] args) {
-
         String serverIP=defaultServer;
         int serverPort=defaultPort;
         System.out.println("Using server IP "+serverIP);
@@ -38,6 +37,7 @@ public class StartClient extends Application{
         AppViewController appViewController = loader.getController();
         appViewController.setService(server);
         appViewController.setStage(primaryStage);
+        appViewController.initComponentsLogin();
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
